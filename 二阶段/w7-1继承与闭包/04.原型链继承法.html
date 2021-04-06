@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>04.原型链继承法</title>
+</head>
+
+<body>
+    <h1>04.原型链继承法</h1>
+    <script>
+        // 04.原型链继承法
+        
+        function User(username,password=123456){console.log('父类')
+            // 给实例添加属性
+            this.username = username;
+            this.password = password;
+
+            // 如果是一样的属性/方法，不建议写在对象实例中，而是写在原型中
+            // this.type = 'user';
+            // this.login = ()=>{
+            //     this.isLogin = true;
+            // },
+            // this.logout = ()=>{
+            //     this.isLogin =  false;
+            // },
+            // this.changePassword = (password)=>{
+            //     this.password = password
+            // }
+        }
+
+        // User.prototype.login = function(){
+            
+        // }
+        // User.prototype.logout = function(){
+
+        // }
+        // User.prototype.changePassword = function(){
+
+        // }
+
+        // 原型中的属性和方法，被所有实例共享（内存中只有一份）
+        User.prototype = {
+            type:'user',
+            login(){
+                this.isLogin = true;
+            },
+            logout(){
+                this.isLogin =  false;
+            },
+            changePassword(password){
+                this.password = password
+            }
+        }
+        
+
+        // const user1 = new User('laoxie');
+        // const user2 = new User('jingjing');
+        // const user3 = new User('tiantian');
+        // console.log('user1=',user1);
+        // console.log('user2=',user2);
+        // console.log('user3=',user3);
+
+
+        function Vip(username,password=654321){
+            // 给window添加属性
+            // User(username,password)
+
+            // 给其他实例添加属性
+            // new User(username,password)
+
+            // 调用User函数，并把User的this执行这里的this
+            // 相当于给当前this添加属性
+            User.call(this,username,password)
+        }
+
+        // 原型链继承法
+        // > 核心：拿父类(User)实例来充当子类(Vip)原型对象
+        Vip.prototype = new User;
+        Vip.prototype.type = 'vip';
+
+        const vip1 = new Vip('jingjing');
+        // const vip2 = new Vip('tiantian');
+        console.log('vip1=',vip1);
+    </script>
+</body>
+
+</html>

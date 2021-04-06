@@ -17,3 +17,52 @@
         username.toUpperCase();
         username.length;// 8
     ```
+    * 类型
+        * Number
+        * String
+        * Boolean
+        * Array
+        * Function
+        * Date
+        * RegExp
+        * ...
+    * 扩展内置原型对象
+        > 原则：判断不存在时才添加
+    * 重置原型对象：一次性扩展多个方法
+        > 避免覆盖原始属性/方法
+        ```js
+            if(!Date.prototype.formatDate){
+                Date.prototype.formatDate = function(){}
+            }
+            if(!Date.prototype.fromNow){
+                Date.prototype.fromNow = function(){}
+            }
+            // ...
+
+            // 重置原型对象
+            Date.prototype = {
+                formatDate(){},
+                fromNow(){},
+                //...
+                ...Date.prototype,
+            }
+        ```
+        * Object.assign(target,obj1,obj2,...,objN)
+
+* 继承方式
+    * 原型链继承法
+        > 核心：拿父类实例来充当子类原型对象
+    * 借用构造函数法
+        > 核心：借父类的构造函数来增强子类实例，相当于把父类的实例属性复制一份给子类实例
+        * Fn.call/Fn.apply
+    * 组合继承(最常用的继承方式)
+        * 继承属性：借用构造函数法
+        * 继承方法：原型链继承法
+        * 缺点（原型链继承法的缺点）：
+            1. 在原型对象中生成多余的属性
+            2. 多次执行父类构造函数
+    * 原型式继承(原型链继承法升级版)
+        > 核心：先创建了一个临时性的构造函数，然后将传入的对象作为这个构造函数的原型，最后返回了这个临时构造函数的一个新实例
+    * 寄生组合继承法（完美解决方案）
+        * 继承属性：借用构造函数法
+        * 继承方法：原型式继承法

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>03.重置原型对象</title>
+</head>
+
+<body>
+    <h1>03.重置原型对象</h1>
+    <script>
+        // 03.重置原型对象
+        Date.prototype = {
+            formatDate() { },
+            fromNow() { },
+            //...
+            ...Date.prototype,
+        }
+
+        // Object.assign(target,obj1,obj2,...,objN), jQuery.extends()
+        Object.assign(Date.prototype, {
+            formatDate() { },
+            fromNow() { },
+        });
+
+        // Object.assign()的使用
+        let jj = { username: 'jingjing', password: 123, age: 36,score:{en:85,math:70,cn:86} };
+        let obj1 = { gender: '女', age: 37 }
+        Object.assign(jj, obj1, { gender: '不详', money: 1000000, username: 'jingjing plus' });
+
+        console.log('jj=', jj);
+
+        // 利用Object.assign()实现拷贝：（浅拷贝）
+        let jjmm = Object.assign({},jj);
+
+        // 浅拷贝
+        let jjjj = {...jj};
+
+        // 深拷贝
+        // * 递归复制
+        // * JSON.stringify()/JSON.parse()
+        let jjBrother = JSON.parse(JSON.stringify(jj));
+        console.log('jjBrother',jjBrother);
+    </script>
+</body>
+
+</html>

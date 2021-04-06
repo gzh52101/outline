@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>04.原型链继承法</title>
+</head>
+
+<body>
+    <h1>04.原型链继承法</h1>
+    <script>
+        // 04.原型链继承法
+        
+        function User(username,password=123456){console.log('父类')
+            // 给实例添加属性
+            this.username = username;
+            this.password = password;
+
+        }
+
+        // 原型中的属性和方法，被所有实例共享（内存中只有一份）
+        User.prototype = {
+            type:'user',
+            login(){
+                this.isLogin = true;
+            },
+            logout(){
+                this.isLogin =  false;
+            },
+            changePassword(password){
+                this.password = password
+            }
+        }
+
+        function Vip(username,password=654321){
+            User.call(this,username,password)
+        }
+
+        // 原型链继承法
+        // > 核心：拿父类(User)实例来充当子类(Vip)原型对象
+        // Vip.prototype = new User;
+
+        // 原型式继承
+        // > 核心：先创建了一个临时性的构造函数（F），然后将传入的对象(o)作为这个构造函数的原型，最后返回了这个临时构造函数的一个新实例
+        function inherit(o){
+            function F(){}
+            F.prototype = o;
+            return new F();
+        }
+        Vip.prototype = inherit(User.prototype)
+
+        Vip.prototype.type = 'vip';
+
+        const vip1 = new Vip('jingjing');
+        // const vip2 = new Vip('tiantian');
+        console.log('vip1=',vip1);
+    </script>
+</body>
+
+</html>
