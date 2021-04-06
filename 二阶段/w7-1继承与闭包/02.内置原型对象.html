@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>内置原型对象</title>
+</head>
+<body>
+    <h1>内置原型对象</h1>
+    <script>
+        let username = '  jing jing ';
+        username.toUpperCase();// JINGJING
+        username.length;// 8
+        username.trim();// 去掉首尾空格
+
+        console.dir(username.__proto__);
+
+        // 扩展内置原型对象
+        // * 添加方法
+        // * 解决兼容问题
+        // String.prototype.trim 在IE低版本浏览器中无法使用
+        if(!String.prototype.trim){
+            String.prototype.trim = function(){
+                // 这里如何获取字符串实例
+                return  this.replace(/(^\s+)|(\s+$)/g,'')
+            }
+        }
+
+        username.trim()
+        'xxx'.trim()
+
+        // 日期格式化
+        let d = new Date();
+
+        // 练习：封装一个方法formatDate()，把日期格式化成以下格式：2021-04-06
+        d.formatDate();//
+        
+        // 复杂版
+        d.formatDate('YYYY-MM-DD');// 2021-04-06
+        d.formatDate('YYYY-MM-DD hh:mm:ss');// 2021-04-06 10:37:02
+    </script>
+</body>
+</html>
