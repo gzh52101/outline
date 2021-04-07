@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>05.call&apply的使用</title>
+</head>
+
+<body>
+    <h1>05.call&apply的使用</h1>
+    <button>按钮1</button>
+    <button>按钮2</button>
+    <button>按钮3</button>
+    <button>按钮4</button>
+    <button>按钮5</button>
+    <script>
+        /**
+         * 05.call&apply的使用
+            1. 会执行前面的函数
+            2. 把函数内的this执行第一个参数
+         */
+        const btns = document.querySelectorAll('button');
+
+        // ['按钮1','按钮2','按钮3','按钮4','按钮5']
+        let result = [];
+        for(let i=0;i<btns.length;i++){
+            result[i] = btns[i].innerText;
+        }
+
+        // const result2 = btns.map(item=>item.innerText);
+        // Array.prototype.map(function(){}); // 直接执行map方法导致this指向Array.prototype
+        // const result2 = Array.prototype.map.apply(btns,[function(item){}])
+        const result2 = Array.prototype.map.call(btns,function(item){
+            return item.innerText;
+        })
+
+        console.log('result2=',result2);
+
+        let nums = [20,1,2,46,32,4,41,7,9,89,12]
+        const result3 = Math.max.apply(null,nums);
+        console.log('result3=',result3);
+
+        /** 
+         * 判断数据类型
+         *  1. typeof
+         *  2. Array.isArray()
+         *  3. isNaN()
+         *  4. jQuery.type(); 
+         *  5. Object.prototype.toString()
+         */ 
+        function type(data){
+            return Object.prototype.toString.call(data).slice(8,-1).toLowerCase();
+        }
+    </script>
+</body>
+
+</html>

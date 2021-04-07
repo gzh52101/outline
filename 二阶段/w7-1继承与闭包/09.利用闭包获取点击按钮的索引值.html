@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>利用闭包获取点击按钮的索引值</title>
+</head>
+
+<body>
+    <h1>利用闭包获取点击按钮的索引值</h1>
+    <button>按钮1</button>
+    <button>按钮2</button>
+    <button>按钮3</button>
+    <button>按钮4</button>
+    <button>按钮5</button>
+
+    <script>
+        /**
+         * 利用闭包获取点击按钮的索引值
+            
+         */
+        let btns = document.querySelectorAll('button');
+
+        // var i;
+        for(var i=0;i<btns.length;i++){
+            // let i;
+            // btns[i].idx = i;
+            btns[i].onclick = (function(i){
+                // var idx = i
+                function handleClick(){
+                    console.log('i=',i)
+                }
+                return handleClick;
+            })(i);
+        }
+        // var i =5;
+        // {
+        //     btns[0].onclick = function(){
+        //         console.log('i=',i);
+        //     }
+        // }
+        // {
+        //     btns[1].onclick = function(){
+        //         console.log('i=',i);
+        //     }
+        // }
+        // ...
+
+        // {
+        //     let i=0
+        //     btns[i].onclick = function(){
+        //         console.log('i=',i);
+        //     }
+        // }
+        // {
+        //     let i=1
+        //     btns[i].onclick = function(){
+        //         console.log('i=',i);
+        //     }
+        // }
+        // ....
+
+        
+    </script>
+</body>
+
+</html>

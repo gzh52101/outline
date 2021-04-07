@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>07.ES6类继承</title>
+</head>
+
+<body>
+    <h1>07.ES6类继承</h1>
+    <script>
+        /**
+         * 07.ES6类继承
+            * 类： class
+            * 继承: extends
+         */
+
+         class Popover{
+            // 静态方法
+            //  注意：ES6只支持静态方法，不支持静态属性
+             static show(){
+                console.log('hello show')
+             }
+
+             static myname = 'pop';
+
+             constructor(){
+                 // 在这里定义属性（写在实例上）
+                 this.type = 'popover';
+             }
+
+             // 在这里定义方法（写在原型上）
+             init(){
+
+             }
+
+             drag(){
+
+             }
+
+             open(){
+                
+             }
+
+             close(){
+
+             }
+         }
+
+        //  Popover.show =  function(){}
+
+         const pop1 = new Popover();
+
+         console.log('pop1=',pop1);
+
+         // 继承
+         class Confirm extends Popover{
+             // 如果继承自某个类，并实现了自己的constructor，则必须在constructor中调用super()，只有调用super后才能使用this
+            constructor(){
+                super();// super()意思是调用父类，等效于：Popover.call(this)
+                this.type = 'confirm'
+            }
+
+            init(){
+
+            }
+         }
+
+         const conf1 = new Confirm()
+         console.log('conf1',conf1);
+
+         class Ad extends Popover{
+
+         }
+        
+    </script>
+</body>
+
+</html>

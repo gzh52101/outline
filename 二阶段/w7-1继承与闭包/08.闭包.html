@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>08.闭包</title>
+</head>
+
+<body>
+    <h1>08.闭包</h1>
+    <script>
+        /**
+         * 08.闭包
+            * 变量访问规则：使用就近原则在作用域链中查找
+                * 只能往外找，不能往里找
+                * 正常情况下，无法在外部操作函数内部变量
+         */
+
+         let num = 10;
+
+        function test(){
+            let qty = 20;
+            console.log(qty);
+        }
+        // test(); // 20
+        // test(); // 20
+        // test(); // 20
+
+         function show(){
+             var qty = 20;
+
+             // 定义一个函数add
+             function add(){
+                 qty++;
+                 console.log(qty);
+             }
+             // 并返回add函数，这时，在js中就形成了一个闭包，add称为闭包函数
+             return add;
+         }
+
+        //  show()(); // 21;
+        //  show()(); // 21;
+        //  show()(); // 21;
+
+         const res = show();
+         res();// 21
+         res();// 22
+         res();// 23
+
+
+        // 垃圾回收机制（自动：判断变量是否还有用，自动清除没用的变量）
+        //  * 引用计数法：判断变量是否被其他引用
+        //  * 标记清除法：给变量添加标记
+
+        
+    </script>
+</body>
+
+</html>

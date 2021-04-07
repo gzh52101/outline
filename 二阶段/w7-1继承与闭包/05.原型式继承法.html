@@ -22,6 +22,7 @@
 
         // 原型中的属性和方法，被所有实例共享（内存中只有一份）
         User.prototype = {
+            constructor:User,
             type:'user',
             login(){
                 this.isLogin = true;
@@ -49,7 +50,8 @@
             F.prototype = o;
             return new F();
         }
-        Vip.prototype = inherit(User.prototype)
+        // Vip.prototype = inherit(User.prototype)
+        Vip.prototype = Object.create(User.prototype)
 
         Vip.prototype.type = 'vip';
 
