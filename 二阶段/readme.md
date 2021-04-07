@@ -87,9 +87,50 @@
         * 原型式继承法
             * 封装：inherit()
             * ES5: Object.create()
-        * ES6类继承
-            * 实例属性
-            * 原型方法
-            * 静态方法（类方法）
+### 知识点
+* ES6类继承
+    * 实例属性
+    * 原型方法
+    * 静态方法（类方法）
+        ```js
+            function User(){
+
+            }
+            User.hello = function(){}
+
+            User.hello();
+        ```
 
 * call&apply的使用
+* 闭包
+    > 闭包是指有权访问另一函数作用域中的变量的函数
+    * 特点
+        * 函数嵌套
+        * 返回内部函数
+    * 垃圾回收机制
+        * 自动
+        * 回收方式
+            * 引用计数（IE6）
+            * 标记清除
+    
+* Gulp
+    * 环境安装
+        * NodeJS
+        * npm
+    * gulp安装
+        * 全局安装：npm install -g gulp
+            > 一台电脑只需要安装一次，gulp -v 查询安装是否成功
+            * 全局安装gulp是为了执行gulp任务
+        * 本地安装：npm install gulp
+            > 每个项目都需要安装一次
+            * 本地安装为了在gulpfile.js文件中使用gulp
+    * 使用步骤
+        1. 在根目录下创建`gulpfile.js`文件
+            * gulpfile.js就是一个nodejs模块
+        2. 创建任务
+        3. 运行任务
+            > gulp 任务名
+
+* NodeJS模块：commonJS规范
+    1. 安装： npm install
+    2. 引用: require()
