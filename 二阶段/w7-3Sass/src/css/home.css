@@ -1,1 +1,163 @@
-body{font-size:16px;font-family:Arial, Helvetica, sans-serif;color:#fc0}.datalist{font-size:14px}.datalist h4{font-size:21px}
+@charset "UTF-8";
+body {
+  font-size: 16px;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #58bc58;
+}
+
+.datalist {
+  font-size: 14px;
+}
+
+.datalist h4 {
+  font-size: 21px;
+}
+
+.box {
+  font-size: 12px;
+  width: 33.33333%;
+}
+
+main {
+  font-size: 12px;
+}
+
+.border-top {
+  border-top: 1px solid #ccc;
+}
+
+h1 {
+  font-size: 37 px;
+}
+
+h2 {
+  font-size: 22 px;
+}
+
+h3 {
+  font-size: 17 px;
+}
+
+h4 {
+  font-size: 14.5 px;
+}
+
+h5 {
+  font-size: 13 px;
+}
+
+h6 {
+  font-size: 12 px;
+}
+
+.content {
+  padding: 10px;
+}
+
+h3 {
+  font-size: 1.2em;
+}
+
+#content article h1 {
+  color: #333;
+}
+
+#content article p {
+  margin-bottom: 1.4em;
+}
+
+#content article p::before {
+  content: '￥';
+}
+
+#content aside {
+  background-color: #EEE;
+}
+
+.content {
+  padding: 15px;
+}
+
+.content p {
+  margin-bottom: 1.4em;
+  font-size: 16px;
+}
+
+.content p::before {
+  content: '￥';
+}
+
+.content p code {
+  padding: 5px;
+  background-color: #efefef;
+  border: 1px solid #ddd;
+}
+
+.article {
+  padding: 15px;
+  padding: 20px;
+}
+
+.article p {
+  margin-bottom: 1.4em;
+  font-size: 16px;
+}
+
+.article p::before {
+  content: '￥';
+}
+
+.article p code {
+  padding: 5px;
+  background-color: #efefef;
+  border: 1px solid #ddd;
+}
+
+@media only screen and (max-width: 680px) {
+  font-size: 12px;
+}
+
+@media only screen and (max-width: 790px) {
+  font-size: 14px;
+}
+
+.content2, .article2 {
+  padding: 15px;
+}
+
+.content2 p, .article2 p {
+  margin-bottom: 1.4em;
+  font-size: 16px;
+}
+
+.content2 p::before, .article2 p::before {
+  content: '￥';
+}
+
+.content2 p code, .article2 p code {
+  padding: 5px;
+  background-color: #efefef;
+  border: 1px solid #ddd;
+}
+
+.article2 {
+  padding: 20px;
+}
+
+.datalist, .mybox {
+  padding: 10px;
+  margin: 20px;
+}
+
+.datalist {
+  font-size: 16px;
+  padding: 12px;
+}
+
+.leng {
+  width: 490px;
+}
+
+.green {
+  background-color: #58bc58;
+}

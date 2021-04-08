@@ -217,3 +217,33 @@
     * 注释
     * 变量
         > 以$开头
+        * 全局变量
+        * 局部变量
+            > 在局部修改全局变量：!global;
+        * 默认变量
+        * 特殊用法
+
+* sass编译
+    * 依赖
+        * gulp-sass
+        * node-sass/sass
+    ```js
+        function buildSass(){
+             gulp.src('./src/sass/*.scss')
+            .pipe(sass({outputStyle:''}))
+            .pipe(gulp.dest('./src/css'))
+        }
+        gulp.task('buildSass',(done)=>{
+            //gulp.src('./src/sass/*.scss')
+            //.pipe(sass({outputStyle:''}))
+            //.pipe(gulp.dest('./src/css'))
+            buildSass();
+            done();
+        })
+
+        // 监听
+        gulp.task('default',()=>{
+            gulp.watch('./src/sass/*.scss',gulp.series('buildSass'))
+
+        })
+    ```

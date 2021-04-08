@@ -1,3 +1,7 @@
+// $mainColor:#f90;
+
+@import 'var';
+
 // 全局变量
 $mainFontSize:16px;
 
@@ -5,14 +9,184 @@ body{
     font-size:$mainFontSize;
     // 设置字体
     font-family: Arial, Helvetica, sans-serif;
-    color:#fc0;
+    color:$mainColor;
 }
 
 .datalist{
     // 局部变量
     $mainFontSize:14px;
+
     font-size:$mainFontSize;
     h4{
         font-size:$mainFontSize*1.5;
     }
+}
+
+.box{
+    // 在局部修改全局变量
+    $mainFontSize:12px !global;
+
+    font-size:$mainFontSize;
+
+    width:$width3
+}
+
+main{
+    font-size:$mainFontSize;
+}
+
+// 变量特殊用法（用在选择器或属性名上）
+$direction:top;
+
+//应用于class和属性
+.border-#{$direction}{
+    border-#{$direction}:1px solid #ccc;
+}
+
+// 循环：给h1-h6添加字体大小
+// @for $var from <start> through <end>//（包含end值）
+// @for $var from <start> to <end>//（不包含en值）
+@for $i from 1 through 6{
+    h#{$i}{
+        font-size:(30/$i+7)px
+    }
+}
+// @for $i from 1 to 7{
+
+// }
+
+// 多值变量
+// list类型: 类似于js中的数组
+$pd: 5px 10px 20px 30px;
+.content{
+    padding:nth($pd,2);
+}
+// map类型：类似于js中的对象
+$headings: (h1: 2em, h2: 1.5em, h3: 1.2em);
+h3{font-size:map-get($headings,h3)}
+
+// 嵌套
+// #content article h1 { color: #333 }
+// #content article p { margin-bottom: 1.4em }
+// #content article p::before{content:'￥'}
+// #content aside { background-color: #EEE }
+
+#content {
+    article {
+        h1 { color: #333 }
+        p { 
+            margin-bottom: 1.4em;
+            &::before{content:'￥'}
+         }
+    }
+    aside { background-color: #EEE }
+}
+
+// 代码复用
+// .content{padding:15px;}
+// .content p { 
+//     margin-bottom: 1.4em;
+//     font-size:16px;
+// }
+// .content p code{padding:5px;background-color: #efefef;border:1px solid #ddd;}
+// .content p::before{content:'￥'}
+
+// .article{padding:20px}
+// .article p { 
+//     margin-bottom: 1.4em;
+//     font-size:16px;
+// }
+// .article p code{padding:5px;background-color: #efefef;border:1px solid #ddd;}
+// .article p::before{content:'￥'}
+
+// @mixin定义
+@mixin content{
+    padding:15px;
+    p { 
+        margin-bottom: 1.4em;
+        font-size:16px;
+        &::before{content:'￥'}
+        code{padding:5px;background-color: #efefef;border:1px solid #ddd;}
+    }
+}
+
+.content{
+    // mixin的使用
+    @include content;
+}
+.article{
+    @include content;
+    padding:20px;
+}
+
+// @media only screen and ( max-width: 680px ){
+//     font-size:12px;
+// }
+// @media only screen and ( max-width: 790px ){
+//     // 很多代码
+// }
+// @media only screen and ( max-width: 1000px ){
+//     // 很多代码
+// }
+// @media only screen and ( max-width: 1200px ){
+//     // 很多代码
+// }
+
+@mixin max-screen($res){
+    @media only screen and ( max-width: $res )
+    {
+      @content; // 很多代买
+    }
+  }
+@include max-screen(680px){
+    font-size:12px;
+}
+@include max-screen(790px){
+    font-size:14px;
+}
+
+// 继承
+.content2{
+    padding:15px;
+    p { 
+        margin-bottom: 1.4em;
+        font-size:16px;
+        &::before{content:'￥'}
+        code{padding:5px;background-color: #efefef;border:1px solid #ddd;}
+    }
+}
+.article2{
+    @extend .content2;
+    padding:20px;
+}
+
+// 占位符
+%pm{
+    padding:10px;
+    margin:20px;
+}
+
+.datalist{
+    @extend %pm;
+    font-size:16px;
+    padding:12px;
+}
+.mybox{
+    @extend %pm;
+}
+
+// 自定函数：与参数默认值
+@function widthFn($n:10) {  
+    $oneWidth: 10px;  
+    $twoWidth: 40px;  
+    @return $n * $twoWidth + ($n - 1) * $oneWidth;  
+}  
+
+.leng {   
+    width: widthFn();  
+} 
+
+// 内置函数：
+.green{
+    background-color: $mainColor;
 }

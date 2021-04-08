@@ -1,0 +1,17 @@
+@import 'var';
+
+@for $i from 1 to 11{
+    
+    .box#{$i}{
+       
+        width:100px;
+        height:100px;
+        border:5px solid $mainColor;
+        @if $i%2 == 0 {
+            background-color: lighten($mainColor,percentage($i*3/100));
+        }@else {
+            background-color: lighten(#f90,percentage($i*3/100));
+        }
+        
+    }
+}

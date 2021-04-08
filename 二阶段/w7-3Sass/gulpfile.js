@@ -6,7 +6,7 @@ gulp.task('buildSass',(done)=>{
     //匹配文件
     gulp.src('./src/sass/*.scss')
     // outputStyle参数：nested(默认），expanded：展开，compact：单行，compressed：压缩
-    .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
+    .pipe(sass({outputStyle: 'expanded'}).on('error', sass.logError))
     .pipe(gulp.dest('./src/css'))
 
     // 表示任务处理完成
