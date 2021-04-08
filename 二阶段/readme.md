@@ -134,3 +134,86 @@
 * NodeJS模块：commonJS规范
     1. 安装： npm install
     2. 引用: require()
+
+* 修改镜像源
+    > npm config set registry=https://registry.npm.taobao.org/
+
+## day7-4
+
+### 复习
+* 闭包
+    * 垃圾回收机制
+    * 变量常驻内存
+    * 形成条件
+        * 函数嵌套
+        * 返回函数
+    * 应用
+* Gulp: 构建工具
+    * 环境
+        * NodeJS
+        * npm
+    * 安装
+        * 全局安装：为了在命令行使用
+        * 局部安装：为了在gulpfile中使用
+    * 使用步骤
+        1. 在根目录中创建gulpfile.js
+        2. 创建任务
+        3. 执行任务
+    * gulp API
+        * gulp.task()
+        * gulp.src(globs)
+        * gulp.dest()
+
+### 知识点
+* css预解析器
+    * sass      功能强大
+    * less      入门简单
+    * stylus    综合sass和less的特点
+```css
+    // <div class="list"><h4>标题</h4><ul><li></li></ul></div>
+    .list{
+        font-size:16px;
+        padding:10px;
+        margin:10px;
+    }
+    .list h4{font-size:20px;border-bottom:2px soild #ddd;}
+    .list li{padding-left:10px;border-bottom:1px dotted #ddd}
+
+     .datalist{
+        font-size:14px;
+        padding:10px;
+        margin:10px;
+    }
+    .datalist h4{font-size:20px;}
+    .datalist li{padding-left:10px;border-bottom:1px dotted #ddd}
+
+    h1{font-size:30px}
+    h2{font-size:26px}
+    h3{font-size:20px}
+    h4{font-size:18px}
+    h5{font-size:16px}
+    h6{font-size:14px}
+
+    // sass
+    $pd:10px;
+    .list{
+        font-size:16px;
+        padding:$pd;
+        margin:10px;
+        h4{
+            font-size:20px;
+        }
+        li{padding-left:10px;border-bottom:1px dotted #ddd}
+    }
+
+    .datalist{ @extends .list}
+
+    // 循环
+
+```
+
+* sass语法
+    > 兼容所有css语法
+    * 注释
+    * 变量
+        > 以$开头

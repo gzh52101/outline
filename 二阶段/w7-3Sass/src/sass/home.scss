@@ -1,0 +1,18 @@
+// 全局变量
+$mainFontSize:16px;
+
+body{
+    font-size:$mainFontSize;
+    // 设置字体
+    font-family: Arial, Helvetica, sans-serif;
+    color:#fc0;
+}
+
+.datalist{
+    // 局部变量
+    $mainFontSize:14px;
+    font-size:$mainFontSize;
+    h4{
+        font-size:$mainFontSize*1.5;
+    }
+}
