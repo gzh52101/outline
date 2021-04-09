@@ -200,9 +200,7 @@
         font-size:16px;
         padding:$pd;
         margin:10px;
-        h4{
-            font-size:20px;
-        }
+        h4{font-size:20px;}
         li{padding-left:10px;border-bottom:1px dotted #ddd}
     }
 
@@ -213,7 +211,7 @@
 ```
 
 * sass语法
-    > 兼容所有css语法
+    > 兼容所有css语法，在css中融入编程思想
     * 注释
     * 变量
         > 以$开头
@@ -222,6 +220,24 @@
             > 在局部修改全局变量：!global;
         * 默认变量
         * 特殊用法
+    * 函数
+        * 自定义函数
+            > @function
+        * 内置函数
+    * mixin
+        > @mixin
+    * 继承： 
+        > @extend
+    * 循环
+        * @for from xx to xxx
+        * @for from xx through xxx
+    * 条件
+        * @if
+        * @else
+        * @else if
+    * 运算
+    * 嵌套
+        > &
 
 * sass编译
     * 依赖
