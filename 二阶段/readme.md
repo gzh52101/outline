@@ -263,3 +263,66 @@
 
         })
     ```
+
+## day7-5
+
+### 面试题
+* 如何让声明a变量，让(a==1&&a==2&&a==3)条件成立
+
+### 知识点
+* SVN: 集中式版本管理工具(服务器挂了，SVN无法使用)
+* git：分布式版本管理工具（服务器挂了，git依然可以使用）
+    * 安装
+    * 配置
+        ```js
+            git config --global user.name "Your Name"
+            git config --global user.email "email@example.com"
+        ```
+    * 
+* 版本管理工具(git/svn) 与 代码托管服务器(github/gitee/gitlap)
+* git核心术语
+    * 仓库：Repository
+        > .git就是git仓库
+        * 本地仓库
+        * 公共仓库（远程仓库）
+    * 工作区：Working Directory
+        > .git所在的目录
+    * 暂存区: stage/index
+    * 版本库: Repository
+
+* 创建仓库(仓库初始化)
+    > git init
+* git使用步骤
+    * 本地仓库操作
+        1. 添加修改删除文件
+        2. 添加到暂存区: 
+            * git add <文件>
+            * git add <文件夹>
+            * git add .
+        3. 提交到版本库
+            > 把暂存区中的文件提交到版本库
+            * git commit -m "备注"
+    * 远程仓库操作
+        1. 创建远程仓库
+            > 得到远程仓库地址
+        2. 关联本地仓库与远程仓库
+            * 添加远程仓库：git remote add origin <url>
+                > 删除远程仓库：git remote remove origin
+            * 克隆：git clone <url>
+        3. 推送与拉取
+            * 推送：把本地仓库代码推送到远程仓库
+                > git push origin master （git push 远程仓库名 分支名）
+            * 拉取：把远程仓库的代码拉取到本地仓库并合并代码
+                * git pull origin master
+                * git fetch/git merge
+
+    * 远程仓库url
+        * https
+            * 每次提交都需要输入用户密码
+            * 速度不如ssh快
+        * ssh
+            * 需要配置公钥到github账号
+        
+
+* git 常用命令
+    * git status    查看仓库状态

@@ -81,7 +81,8 @@ gulp.task('default',()=>{
         // 代理其他服务器(既能实现自动刷新，也能保持其他服务器的特性)
         // proxy:'http://localhost:3000',
 
-        port:2101,
+        port:2
+        101,
 
         // 监听文件修改，当监听的文件有修改时，自动刷新页面
         files:['./dist/**/*.html','./dist/css/*.css']
