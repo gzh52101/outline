@@ -326,3 +326,47 @@
 
 * git 常用命令
     * git status    查看仓库状态
+
+
+## day7-6
+
+### 复习
+* 版本管理工具
+    * SVN   集中式
+    * git   分布式
+* git核心术语
+    * 仓库
+        * 暂存区
+        * 版本库
+    * 工作区
+* git使用
+    * git init
+        > .git文件夹
+    * git使用
+        * 本地仓库操作
+            1. 增加修改删除操作
+            2. git add: 把**修改**添加到暂存区
+            3. git commit: 把暂存区文件提交到版本库
+        * 远程仓库操作
+            > github,gitlap（本地部署：在本地创建一个类似与github的服务器）,gitee,....
+            * 创建
+            * 关联本地仓库
+                * git remote
+            * 推送
+                * git push
+            * 拉取与合并
+                * git pull
+            * 克隆
+                * git clone
+
+### 知识点
+
+* 版本回退
+    * git reset
+        * git reset --hard
+        * 参数
+            * --hard:工作区、暂存区、版本库的文件同时回退
+            * --mixed（默认）：暂存区、版本库的文件回退
+            * --soft：仅仅回退版本库中的文件
+    * git log
+* HEAD  ： 最新版本指针
