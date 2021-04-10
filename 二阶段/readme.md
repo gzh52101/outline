@@ -363,10 +363,22 @@
 
 * 版本回退
     * git reset
-        * git reset --hard
+        * git reset --hard [commitid]
         * 参数
             * --hard:工作区、暂存区、版本库的文件同时回退
             * --mixed（默认）：暂存区、版本库的文件回退
             * --soft：仅仅回退版本库中的文件
     * git log
-* HEAD  ： 最新版本指针
+    * git reflog
+* HEAD： 最新版本指针
+* 过滤清单: .gitignore
+    * package.json
+
+* 分支
+    * 创建：git branch <分支名>
+    * 切换：git checkout <分支名>
+        > 创建并切换：git checkout -b <分支名>
+    * 合并：
+        * 合并本地分支：git merge <分支名>
+        * 合并远程分支：git merge origin/分支名
+    * 删除：git branch -d <分支名>
