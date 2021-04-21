@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>图片上传</title>
+</head>
+<body>
+    <h1>图片上传</h1>
+    <!-- <form action="/api/upload/avatar" method="post" enctype="multipart/form-data">
+        <input type="file" name="avatar" />
+        <button type="submit">表单上传</button>
+     </form> -->
+     
+    <!-- <input type="file" id="avatar" />
+    <button id="btnUpload">ajax上传</button> -->
+    <input type="file" id="goods" multiple />
+    <button id="btnUpload">商品上传</button>
+    <script>
+        /**
+         * FormData
+         * 可以写入文本数据,也可以写入文件数据
+         * 常用方法
+         *  - set(key,value)
+         *  - get(key)
+         *  - append(key,value)
+         */
+        const btnUpload = document.querySelector('#btnUpload');
+        const avatar = document.querySelector('#avatar');
+        const goods = document.querySelector('#goods');
+
+        
+        const xhr = new XMLHttpRequest();
+        xhr.onload = function(){
+            console.log('success')
+        }
+
+        btnUpload.onclick = function(){
+            const fdata = new FormData();
+            fdata.set('username','laoxie');
+
+            // 头像上传
+            // fdata.set('avatar',avatar.files[0])
+            // console.log('fdata',fdata.get('username'))
+            // xhr.open('post','/api/upload/avatar',true);
+
+            // 商品上传
+            for(let i=0;i<goods.files.length;i++){
+                fdata.append('goods',goods.files[i])
+            }
+            xhr.open('post','/api/upload/goods',true);
+
+            xhr.send(fdata)
+        }
+    </script>
+</body>
+</html>

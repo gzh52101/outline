@@ -131,6 +131,9 @@
         * 分类
             * 内置中间件: express自带的中间件
                 * express.static()
+                * express.Router()
+                * express.urlencoded()
+                * express.json()
             * 自定义中间
                 * 参数: `(req,res,next)=>{}`
             * 第三方中间
@@ -148,4 +151,13 @@
         * patch     改(部分修改)
         * delete    删
 * 路由
-    * 动态路由
+    * 获取请求参数
+        * 动态路由: `req.params`
+        * url参数: `req.query`
+        * 请求体:
+            > 通过请求体发送的数据,必须通过对应的中间件处理
+            * x-www-form-urlencode: express.urlencode()
+            * json: express.json
+            * ...
+    * 图片上传
+        * multer
