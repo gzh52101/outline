@@ -14,3 +14,5 @@ exports.sum = sum;
 exports.div = function(){
     console.log('div')
 };
+
+const type = 'tools';

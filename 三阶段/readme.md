@@ -62,10 +62,90 @@
         
 
 * 内置模块
-
+    * http
+    * path
+    * url
+    * fs
 
 * mime类型
     > 每一种文件都对应有一个mime类型
     * text/plain    纯文本
     * text/html     html
     ...
+
+## day1-2
+
+### 复习
+* Node: ECMAScript
+    > 2009推出的服务端语言
+* REPL
+* 请求（requst）与响应（response）
+    * url参数
+    * 请求头与请求体
+    * 响应头与响应体
+* 模块化开发
+    > 每个模块具有独立作用域，要使用模块中的变量，必须导出
+    * 优点
+        * 复用
+        * 分工
+        * 更新迭代
+    * 规范
+        * commonJS      NodeJS（后端，同步）
+        * ESModule      ES6（前端，同步）
+        * AMD           require.js（前端，异步）
+        * CMD           sea.js（前端，异步）
+    * 使用
+        * 引入
+            > 引入模块
+            * commonJS: `require()`
+            * ESMoudle: `import`
+            * AMD/CMD: `require()`
+        * 导出
+            > 暴露接口
+            * commonJS: `module.exports` 与 `exports`
+            * ESModule: `export`
+            * AMD/CMD: `define()`
+    * 分类
+        * 内置模块（原生模块）
+        * 自定义模块
+        * 第三方模块
+* 静态资源服务器
+    > 静态资源: 图片，js，css，html，字体等文件
+    * 依赖模块
+        * http
+        * url
+        * path
+        * fs
+    * mime类型
+        > 服务告诉浏览响应的内容类型(响应头：Content-Type)
+
+## 知识点
+
+* express/koa
+    * 中间件（middleware）
+        * 定义：是一个函数
+        * 使用中间件：`use([path],middleware...)`
+            ```js
+                app.use(function(){})
+            ```
+        * 分类
+            * 内置中间件: express自带的中间件
+                * express.static()
+            * 自定义中间
+                * 参数: `(req,res,next)=>{}`
+            * 第三方中间
+* 浏览器缓存
+    * 强制缓存: 200 from cache
+        > 缓存时间未过期,浏览器直接从本地获取
+    * 协商缓存: 304
+        > 缓存时间已过,浏览器发请求到服务器进行询问,如果服务的文件没有修改,则返回304,浏览器直接从本地获取(如果服务器文件有修改,服务器返回新的文件,状态码为200)
+* RESTful规范
+    > 要求使用不同的**请求类型**和**路径**实现相应的接口功能
+    * 请求类型
+        * get       查
+        * post      增
+        * put       改(全改)
+        * patch     改(部分修改)
+        * delete    删
+* 路由
+    * 动态路由
