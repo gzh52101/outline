@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SSR与BSR</title>
+</head>
+<body>
+    <h1>SSR与BSR</h1>
+    <h3>商品列表</h3>
+    <div class="goodslist"></div>
+    <script>
+        const goodslist = document.querySelector('.goodslist');
+
+        // BSR
+        const xhr = new XMLHttpRequest
+        xhr.onload = function(){
+            const data = JSON.parse(xhr.responseText);
+            let ul = document.createElement('ul')
+            
+            ul.innerHTML = data.map(item=>{
+                return  `<li data-id="${item.id}">
+                    <h4>${item.name}</h4>
+                    <img src="${item.imgurl}" />
+                    <p class="price">价格：${item.price}</p>
+                </li>`
+            }).join('')
+            goodslist.appendChild(ul);
+        }
+
+        xhr.open('get','http://localhost:2101/api/goodslist',true)
+        xhr.send()
+
+        // SSR
+        
+    </script>
+</body>
+</html>

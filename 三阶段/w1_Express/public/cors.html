@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>跨域解决方案之CORS</title>
+</head>
+<body>
+    <h1>跨域解决方案之CORS</h1>
+    <script>
+        const xhr = new XMLHttpRequest
+        xhr.onload = function(){
+            console.log('data=',xhr.responseText);
+        }
+        xhr.open('get','http://localhost:2101/api/goods',true)
+        xhr.setRequestHeader('Token','xxxx')
+        xhr.send()
+    </script>
+</body>
+</html>

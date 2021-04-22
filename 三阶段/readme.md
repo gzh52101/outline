@@ -201,7 +201,36 @@
     * 为什么存在跨域限制
     * 解决方案
         * JSONP
-        * CORS
+        * CORS: Cross Origin Resource Sharing
+            > 需要目标服务求授权（通过响应头）才能跨域访问数据
+            * Access-Control-Allow-Origin
+                * 单域名
+                * `*`
+            * Access-Control-Allow-Methods
+            * Access-Control-Allow-Headers
         * 代理
+            * http-proxy-middleware
         * iframe
         * postMessage
+    * 复杂跨域
+* 过滤器
+    > 用于控制接口访问权限
+
+* 页面渲染模式
+    * 客户端渲染： BSR
+        > 通过ajax请求数据到前端遍历生成html结构再渲染到页面（页面开始是空页面）
+        * 优点
+            * 局部刷新
+            * 用户体验
+            * 用户交互
+    * 服务器渲染： SSR
+        > 页面结构和内容在服务器生成后再返回给前端渲染
+        * 优点
+            * SEO搜索引擎优化
+            * 速度较快
+* 爬虫
+    * 分析html结构
+
+* 作业：
+    1. 爬取一个网站的数据到本地json文件（包括图片）
+    2. 编写接口, 包含CRUD
