@@ -1,6 +1,8 @@
 const express = require('express');
 const multer = require('multer');
 const path = require('path');
+const fs = require('fs');
+
 const router = express.Router();
 
 // 1.简单上传：设置上传文件路径(目录不存在会自动创建)
@@ -9,12 +11,22 @@ const router = express.Router();
 // 2. 控制上传细节
 // 配置上传参数
 let storage = multer.diskStorage({
-    // destination: function (req, file, cb) {
-    //   cb(null, './uploads/');
-    // },
+    destination: function (req, file, cb) {
+        let uploadPath = `../public/uploads/${file.fieldname}`
+        // 如路径不存在,则自动创建
+        try{
+            fs.accessSync(uploadPath)
+        }catch(err){
+            fs.mkdirSync(uploadPath,{
+                recursive:true
+            })
+        }
+
+        cb(null, uploadPath);
+    },
 
     // 上传文件保存目录，只有一层目录时可自动创建
-    destination:'../public/uploads/avatar',
+    // destination:'../public/uploads/avatar',
 
     // 格式化文件名
     filename: function (req, file, cb) {
@@ -27,7 +39,17 @@ let storage = multer.diskStorage({
 })
 
 // 设置文件保存目录
-let uploadMiddleware = multer({storage});
+let uploadMiddleware = multer({
+    storage,
+    fileFilter(req, file, cb){
+        let ext = path.extname(file.originalname);
+        const allow = ['.png','.gif','.jpg'].includes(ext);
+        cb(null,allow)
+    },
+    limits:{
+        fileSize:1024*1024*2
+    }
+});
 
 // /api/upload/avatar
 router.post('/avatar',uploadMiddleware.single('avatar'),(req,res)=>{

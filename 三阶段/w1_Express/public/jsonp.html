@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>跨域解决方案之JSONP</title>
+</head>
+<body>
+    <h1>跨域解决方案之JSONP</h1>
+    <button class="btnJsonp">jsonp</button>
+    <!-- <script src="http://localhost:2101/api/jsonp"></script> -->
+    <script>
+        // jsonp核心:
+        // 1. 定义一个**全局函数**,用户接收数据并处理
+        // 2. 传递**全局函数名**给后端
+        (function(){
+            const btnJsonp = document.querySelector('.btnJsonp')
+            window.getUser = function(data){
+                console.log('data=',data);
+                
+                document.body.removeChild(script);
+            }
+            // getUser(data)
+            let script
+            btnJsonp.onclick = function (){
+                script = document.createElement('script');
+                script.src = 'http://localhost:2101/api/jsonp?callback=getUser';
+        
+                document.body.appendChild(script);
+            }
+        })()
+
+        
+
+    </script>
+</body>
+</html>

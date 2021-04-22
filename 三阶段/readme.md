@@ -161,3 +161,47 @@
             * ...
     * 图片上传
         * multer
+
+## day1-3
+
+### 复习
+* express / koa
+    * 中间件Middleware
+        * 内置中间件
+        * 自定义中间件
+        * 第三方中间件
+    * 处理请求参数
+        * url参数: req.query
+        * 动态路由: req.params
+        * 请求体: 
+            * req.body
+            * req.file
+            * req.files
+        * 请求头: req.get()
+    * RESTful接口规范
+        * 请求类型
+        * 请求地址
+    * 模块化路由
+        * express.Router()
+* 浏览器缓存
+    * 协商缓存: 304
+    * 强制缓存: 200 from cache
+* formData  
+
+* 学习要求
+    * 查看文档的能力
+        * 技术文档
+        * 需求文档
+    * 查找问题的能力
+    * 解决问题的能力
+    * 描述问题的能力
+
+### 知识点
+* 跨域
+    * 为什么存在跨域限制
+    * 解决方案
+        * JSONP
+        * CORS
+        * 代理
+        * iframe
+        * postMessage

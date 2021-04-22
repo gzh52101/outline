@@ -12,11 +12,14 @@
         <input type="file" name="avatar" />
         <button type="submit">表单上传</button>
      </form> -->
-     
-    <!-- <input type="file" id="avatar" />
-    <button id="btnUpload">ajax上传</button> -->
-    <input type="file" id="goods" multiple />
-    <button id="btnUpload">商品上传</button>
+    <div>
+        <input type="file" id="avatar" />
+        <button id="btnAvatar">头像上传</button>
+    </div>
+    <div>
+        <input type="file" id="goods" multiple />
+        <button id="btnUpload">商品上传</button>
+    </div>
     <script>
         /**
          * FormData
@@ -27,6 +30,7 @@
          *  - append(key,value)
          */
         const btnUpload = document.querySelector('#btnUpload');
+        const btnAvatar = document.querySelector('#btnAvatar');
         const avatar = document.querySelector('#avatar');
         const goods = document.querySelector('#goods');
 
@@ -40,16 +44,21 @@
             const fdata = new FormData();
             fdata.set('username','laoxie');
 
-            // 头像上传
-            // fdata.set('avatar',avatar.files[0])
-            // console.log('fdata',fdata.get('username'))
-            // xhr.open('post','/api/upload/avatar',true);
-
             // 商品上传
             for(let i=0;i<goods.files.length;i++){
                 fdata.append('goods',goods.files[i])
             }
             xhr.open('post','/api/upload/goods',true);
+            xhr.send(fdata)
+        }
+        btnAvatar.onclick = function(){
+            const fdata = new FormData();
+            fdata.set('username','laoxie');
+
+            // 头像上传
+            fdata.set('avatar',avatar.files[0])
+            xhr.open('post','/api/upload/avatar',true);
+
 
             xhr.send(fdata)
         }
