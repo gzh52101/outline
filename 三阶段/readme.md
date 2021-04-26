@@ -230,7 +230,32 @@
             * 速度较快
 * 爬虫
     * 分析html结构
+    * request
+    * cheerio
 
 * 作业：
     1. 爬取一个网站的数据到本地json文件（包括图片）
     2. 编写接口, 包含CRUD
+
+
+## day 1-4
+
+###  知识点
+* mock数据
+    > json-server
+* nodeJS包管理工具
+    * npm
+        * npm install
+        * npm uninstall
+        * npm init
+        * npm list
+        * npm login
+        * npm publish
+    * cnmp
+    * yarn
+        * 安装： yarn add <模块名>
+        * 安装依赖： yarn/yarn install
+        * 卸载： yarn remove <模块名>
+    * npm脚本
+        * 添加添加：添加到package.json中的scripts
+        * 运行脚本：npm run <脚本名称>

@@ -14,7 +14,10 @@ const permision = require('../filter/permision')
 const router = express.Router();
 
 // 格式化请求体数据
-router.use(express.urlencoded(),express.json());
+// extended:true : 使用qs第三方模块格式化参数
+// extended:false: 使用querystring内置模块格式化参数
+router.use(express.urlencoded({extended:true}),express.json());
+
 router.use(cors);
 router.use(permision);
 
