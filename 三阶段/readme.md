@@ -258,4 +258,53 @@
         * 卸载： yarn remove <模块名>
     * npm脚本
         * 添加添加：添加到package.json中的scripts
-        * 运行脚本：npm run <脚本名称>
+        * 运行脚本：
+            * npm run <脚本名称>
+            * yarn <脚本名称>
+
+* mongoDB
+    * 数据库
+        * use NAME
+        * show dbs
+    * 集合
+    * 文档
+        * 增
+            * insertOne(document)
+            * insertMany([document1,document2,...])
+        * 删
+            * deleteOne(query)
+            * deleteMany(query)
+        * 改
+            * updateOne(query,{$操作符:data})
+            * updateMany(query,{$操作符:data})
+        * 查
+            * find(query)
+            * findOne(query)
+        * 过滤/排序
+            * skip()        跳过
+            * limit()       限制数量
+            * sort()
+        * 操作符
+            * $set          修改为某个值
+        * 查询条件
+
+    ```
+        // 分页
+        page=1,size=10
+        mysql: select * from user order by age desc limit (page-1)*size,size
+        mongo: db.user.find().sort({age:-1}).skip((page-1)*size).limit(size)
+
+    ```
+
+* 数据库对比
+```
+            mysql               mongoDB
+数据库      database            database
+表/集合     table               collection
+数据        row                 document
+```
+
+* 在NodeJS中使用mongoDB
+    * 驱动
+        * mongodb
+        * mongoose
