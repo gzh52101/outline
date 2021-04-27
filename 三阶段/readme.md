@@ -286,8 +286,13 @@
             * sort()
         * 操作符
             * $set          修改为某个值
+            * $inc          在原值的基础上修改
+                * {$inc:{qty:1}}
+            * $rename
+                * {$rename:{qty:'view'}}
         * 查询条件
-
+            * {username:'laoxie',age:18}
+            * {$or:[{username:'laoxie'},{age:{$gt:18}}]}
     ```
         // 分页
         page=1,size=10
@@ -297,14 +302,30 @@
     ```
 
 * 数据库对比
-```
-            mysql               mongoDB
-数据库      database            database
-表/集合     table               collection
-数据        row                 document
-```
+    ```
+                    mysql               mongoDB
+        数据库      database            database
+        表/集合     table               collection
+        数据        row                 document
+    ```
+* 在NodeJS中使用mySQL
+    * 驱动（第三方模块）：mysql
 
 * 在NodeJS中使用mongoDB
     * 驱动
         * mongodb
         * mongoose
+    * 增删改查的封装
+        * insert()
+        * remove()
+        * update()
+        * find()
+
+## day1-5
+
+### 知识点
+* UI框架
+    * bootstrap
+    * lay-ui
+* 统一前后端数据交互格式
+    > json格式：{code:200,data:[],msg:'success'},{code:400,data:[],msg:'fail'},{code:200,data:[{},{}],msg:'success'}
