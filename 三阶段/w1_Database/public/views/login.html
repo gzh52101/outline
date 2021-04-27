@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>用户注册</title>
+    <title>用户登录</title>
     <link rel="stylesheet" href="../assets/layui/css/layui.css">
     <style>
       .container{padding:15px;}
@@ -15,7 +15,7 @@
 </head>
 <body>
     <div class="container">
-        <h1>用户注册</h1>
+        <h1>用户登录</h1>
         <!-- <form class="layui-form" action="" lay-filter="example"> -->
             <div class="layui-form-item">
               <label class="layui-form-label">用户名</label>
@@ -33,7 +33,7 @@
            
             <div class="layui-form-item">
               <div class="layui-input-block">
-                <button type="submit" class="layui-btn btnReg" lay-submit="" lay-filter="demo1">免费注册</button>
+                <button type="submit" class="layui-btn btnLogin" lay-submit="" lay-filter="demo1">登录</button>
               </div>
             </div>
           <!-- </form> -->
@@ -42,46 +42,29 @@
       <script src="../js/request.js"></script>
       <script>
           (()=>{
-            const btnReg = document.querySelector('.btnReg');
+            const btnLogin = document.querySelector('.btnLogin');
             const username = document.querySelector('[name=username]');
             const password = document.querySelector('[name=password]');
 
-            let valid = true;
             
-            btnReg.onclick = async function(){
-                if(!valid){
-                  alert('表单校验失败')
-                  return;
-                }
+            btnLogin.onclick = async function(){
                 const _username = username.value;
                 const _password = password.value;
                 // request('/reg',{method:'post'})
-                const result = await request.post('/reg',{username:_username,password:_password})
+                const result = await request.get('/login',{username:_username,password:_password})
 
-                console.log('result=',result)
-                if(result.code === 200){
-                  location.href = 'login.html';
-                }else if(result.code === 400){
-                  alert('注册失败')
+                if(result.code === 401){
+                    alert('用户名或密码失败')
+                }else if(result.code === 200){
+                  // 把用户信息保存在本地
+                  localStorage.setItem('userInfo',JSON.stringify(result.data));
+                  location.href = 'mine.html'
                 }
+                
 
             }
 
-            // 校验用户名是否存在
-            username.onchange = async function(){
-              const _username = username.value;
-              const result = await request.get('/reg/check',{username:_username})
-              console.log('result',result);
-              if(result.code === 400){
-                username.classList.remove('valid')
-                username.classList.add('invalid')
-                valid = false;
-              }else{
-                username.classList.remove('invalid')
-                username.classList.add('valid')
-                valid = true;
-              }
-            }
+            
           })()
       </script>
 </body>

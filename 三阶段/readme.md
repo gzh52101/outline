@@ -327,5 +327,28 @@
 * UI框架
     * bootstrap
     * lay-ui
+* 封装
+    
 * 统一前后端数据交互格式
     > json格式：{code:200,data:[],msg:'success'},{code:400,data:[],msg:'fail'},{code:200,data:[{},{}],msg:'success'}
+
+* 加密解密
+    > 为了数据安全
+    * 加密类型
+        * 单向加密
+            * md5
+            * sha1
+            * sha256
+            * sha512
+        * 双向加密
+            * 对称加密
+                > 加密解密公用一把钥匙
+                * 算法
+            * 非对称加密
+                * 公钥
+                * 私钥
+                * 算法：RSA
+            * http(s): ssl
+
+* token 令牌
+    
