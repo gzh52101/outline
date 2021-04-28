@@ -16,6 +16,7 @@
     "multer": "^1.4.2"
   },
   "dependencies": {
+    "jsonwebtoken": "^8.5.1",
     "mongodb": "^3.6.6",
     "mysql": "^2.18.1"
   }

@@ -350,5 +350,27 @@
                 * 算法：RSA
             * http(s): ssl
 
+## day1-6
+
+### 面试题
+* 项目中的优化方式
+    * 性能优化  PO
+    * 用户体验优化 UEO
+    * 搜索引擎优化 SEO
+* 事件对象中target与currentTarget的区别
+* 事件是如何传播的
+    * 事件冒泡
+    * 事件捕获
+    * 事件源对象target
+
+### 知识点
+
 * token 令牌
+    * 篡改
+    * 有效期
+
+* jsonwebtoken模块
+    * 生成token: jwt.sign(data,key,options)
+    * 校验token: jwt.verify(token,key)
     
+

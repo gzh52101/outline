@@ -1,6 +1,8 @@
 const express = require('express');
 // const mysql = require('mysql');
 const query = require('../db/mysql');
+const { formatData } = require('../utils');
+const token = require('../utils/token')
 const router = express.Router();
 
 
@@ -38,6 +40,17 @@ router.get('/',async (req,res)=>{
 
 
 });
+
+router.get('/verify',(req,res)=>{
+    // 从请求头中获取token
+    const authorization = req.get('Authorization');
+    const result = token.verify(authorization);
+    if(result){
+        res.send(formatData())
+    }else{
+        res.send(formatData({code:401}))
+    }
+})
 
 // 新增用户
 router.post('/',(req,res)=>{

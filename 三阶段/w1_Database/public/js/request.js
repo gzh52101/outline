@@ -1,12 +1,14 @@
 const baseUrl = 'http://localhost:2101/api';
-function request(url,{method='get',data={}}={}){
+function request(url,{method='get',data={},headers={}}={}){
     return new Promise((resolve,reject)=>{
         url = baseUrl + url;
         method = method.toLocaleLowerCase();
     
         let params = [];
-        for(let key in data){
-            params.push(`${key}=${data[key]}`);  // [key=value,key=value,key=value]
+        if(data){
+            for(let key in data){
+                params.push(`${key}=${data[key]}`);  // [key=value,key=value,key=value]
+            }
         }
         params = params.join('&'); // key=value&key=value&key=value
     
@@ -33,8 +35,15 @@ function request(url,{method='get',data={}}={}){
         }
         xhr.open(method,url,true)
     
+        // 设置请求头
         if(['post','patch','put'].includes(method)){
             xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded')
+        }
+
+        if(headers){
+            for(let key in headers){
+                xhr.setRequestHeader(key,headers[key])
+            }
         }
     
         xhr.send(params)
@@ -42,18 +51,18 @@ function request(url,{method='get',data={}}={}){
     })
 }
 
-request.get = function(url,data){
-    return request(url,{method:'get',data});
+request.get = function(url,data,options={}){
+    return request(url,{method:'get',data,...options});
 }
-request.post = function(url,data){
-    return request(url,{method:'post',data});
+request.post = function(url,data,options={}){
+    return request(url,{method:'post',data,...options});
 }
-request.put = function(url,data){
-    return request(url,{method:'put',data});
+request.put = function(url,data,options={}){
+    return request(url,{method:'put',data,...options});
 }
-request.patch = function(url,data){
-    return request(url,{method:'patch',data});
+request.patch = function(url,data,options={}){
+    return request(url,{method:'patch',data,...options});
 }
-request.delete = function(url,data){
-    return request(url,{method:'delete',data});
+request.delete = function(url,data,options={}){
+    return request(url,{method:'delete',data,...options});
 }
