@@ -8,7 +8,7 @@ router.get('/',async (req,res)=>{
     const {page=1,size=10} = req.query;
     const skip = (page-1)*size;
     const limit = size*1;
-    const result = await mongo.find(colName,{},{skip,limit})
+    const result = await mongo.find(colName,{},{skip,limit,projection:{price:0}})
     res.send(result);
 })
 

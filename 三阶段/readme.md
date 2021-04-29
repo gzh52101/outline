@@ -372,5 +372,40 @@
 * jsonwebtoken模块
     * 生成token: jwt.sign(data,key,options)
     * 校验token: jwt.verify(token,key)
+* mongoDB的导入导出
+    * mongoimport
+    * mongoexport
+* mongoDB备份恢复
+    * mongodump
+    * mongorestore
     
 
+## day1-7
+
+### 面试题
+* getElementsByClassName()与querySelectorAll()区别
+    * 原型链不同
+    * NodeList与HTMLCollection（动态）
+* 在项目中出现git代码冲突如何解决
+    * code review
+### 知识点
+* ObjectId
+* 联表查询：aggregation聚合查询
+    > 需求：通过goods表中的addUser字段获取相应user表中的数据
+    * 主表：goods
+    * 关联表: user
+    ```js
+        col.aggregate([
+            // {$match:{_id:id}}
+            {
+                $lookup:{
+                    from:'user',
+                    localField:'addUser',
+                    foreignField:'username',
+                    as:'user'
+                }
+            }
+        ])
+
+    ```
+* 过滤字段：projection

@@ -1,6 +1,7 @@
 const express = require('express');
 // const mysql = require('mysql');
-const query = require('../db/mysql');
+// const query = require('../db/mysql');
+const mongo = require('../db/mongo')
 const { formatData } = require('../utils');
 const token = require('../utils/token')
 const router = express.Router();
@@ -15,17 +16,22 @@ const router = express.Router();
 // });
 
 
-
 // 查询数据库：connection.query()
+
+const colName = 'user';
 
 // 获取所有用户
 router.get('/',async (req,res)=>{
+    const {page=1,size=10} = req.query;
+    const skip = (page-1)*size;
+    const limit = size*1;
+
     // 读取数据库，查询所有用户，并响应给前端
-    const sql = `select * from user`;
+    // const sql = `select * from user`;
 
-    const result = await query(sql);
+    // const result = await query(sql);
 
-    res.send(result);
+    // res.send(result);
 
     // // 连接数据库
     // connection.connect();
@@ -38,7 +44,11 @@ router.get('/',async (req,res)=>{
     //     connection.end();
     // })
 
+    const result = await mongo.find(colName,{},{skip,limit,projection:{password:0}});
 
+    res.send(formatData({
+        data:result
+    }))
 });
 
 router.get('/verify',(req,res)=>{
@@ -70,10 +80,20 @@ router.post('/',(req,res)=>{
 
 // })
 
-router.get('/:id',(req,res)=>{
+router.get('/:id',async (req,res)=>{
     // 通过id查询用户信息，并响应给前端
+    const {id} = req.params;
+    const result = await mongo.find(colName,{_id:id},{projection:{password:0}})
     
-    res.send()
+    res.send(formatData({
+        data:result[0]
+    }))
+})
+
+router.delete('/',async (req,res)=>{
+    const {ids} = req.query; // ['id1','id2','id3']
+    await mongo.remove(colName,{_id:{$in:ids}})
+
 })
 
 // 删除用户

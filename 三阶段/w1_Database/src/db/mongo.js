@@ -1,5 +1,5 @@
 const {MongoClient} = require('mongodb');
-
+const {formatId} = require('../utils')
 //1.连接mongoDB
 // MongoClient.connect("mongodb://localhost:27017", async function(err, client) {
 //     // client: 客户端
@@ -60,6 +60,11 @@ exports.remove = async function(colName,query){
     const {client,db} = await connect();
     const col = db.collection(colName);
 
+    // id->ObjectId
+    if(query?._id){
+        query._id = formatId(query._id)
+    }
+
     let result;
     try{
         await col.deleteMany(query)
@@ -75,6 +80,12 @@ exports.remove = async function(colName,query){
 exports.update = async function(colName,query,data){
     const {client,db} = await connect();
     const col = db.collection(colName);
+
+    // id->ObjectId
+    if(query?._id){
+        query._id = formatId(query._id)
+    }
+
     let result;
     try{
         await col.updateMany(query,data);
@@ -88,10 +99,21 @@ exports.update = async function(colName,query,data){
 }
 // update('user',{username:'laoxie'},{$inc:{age:19}})
 
-exports.find = async function(colName,query,{skip,limit,sort}={}){
+exports.find = async function(colName,query,{skip,limit,sort,projection}={}){
     const {client,db} = await connect();
-    const col = db.collection(colName)
-    let result = col.find(query)
+    const col = db.collection(colName);
+
+    // id->ObjectId
+    // if(typeof query?._id === 'string'){ // 该写法等效于：query && query._id
+    //     query._id = ObjectId(query._id)
+    // }
+    if(query?._id){
+        query._id = formatId(query._id)
+    }
+
+    let result = col.find(query,{
+        projection
+    })
 
     if(sort !== undefined){
         result = result.sort(sort)

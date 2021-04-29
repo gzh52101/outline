@@ -1,5 +1,6 @@
 const crypto = require('crypto');
 const {key} = require('../config')
+const {ObjectId} = require('mongodb');
 
 exports.formatData = function({code=200,data=[],msg='success'}={}){
     if(code === 400 && msg=='success'){
@@ -22,4 +23,31 @@ exports.formatPassword = function(password){
 
     password = hash.digest('hex');
     return password;
+}
+
+exports.formatId = function formatId(id) {
+
+    // ['xxxx','xxxx','xxxx']
+    if (Array.isArray(id)) {
+        console.log('array')
+        return id.map(item => {
+            console.log('item=',item,typeof item);
+            return formatId(item)
+        })
+    }
+
+    // {$in:['xxxx','xxxx','xxxx']}
+    if (typeof id === 'object') {
+        let res = {}
+        for (let key in id) {
+            res[key] = formatId(id[key])
+        }
+        return res;
+    }
+
+    if (/^[a-fA-F0-9]{24}$/.test(id)) {
+        console.log('string');
+        return ObjectId(id)
+    }
+    return id;
 }
