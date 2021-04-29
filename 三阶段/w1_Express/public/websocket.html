@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebSocket</title>
+</head>
+<body>
+    <h1>WebSocket</h1>
+    <input type="text" id="msg"/>
+    <button id="btnSend">发送</button>
+    <button id="btnConnect">连接</button>
+    <button id="btnClose">断开</button>
+    <div class="status"></div>
+    <ul class="msglist"></ul>
+    <script>
+        const msg = document.querySelector('#msg')
+        const btnSend = document.querySelector('#btnSend')
+        const btnClose = document.querySelector('#btnClose')
+        const btnConnect = document.querySelector('#btnConnect')
+        const msglist = document.querySelector('.msglist')
+        const wsStatus = document.querySelector('.status')
+
+
+        let ws;
+
+        btnConnect.onclick = function(){
+            ws = new WebSocket('ws://localhost:1001');
+
+            ws.onopen = function(){
+                wsStatus.innerHTML = '连接成功'
+                changeStatus(true);
+            }
+            ws.onclose = function(){
+                wsStatus.innerHTML = '与服务器断开连接'
+                ws = null;
+                changeStatus(false);
+            }
+
+            ws.onerror = function(){
+                console.log("服务错误");
+                ws = null;
+            }
+
+            ws.onmessage = function(event){
+                const li = document.createElement('li');
+                li.innerHTML = '服务器：' + event.data;
+                msglist.appendChild(li);
+            }
+        }
+
+        
+
+        btnSend.onclick = function(){
+            if(!ws){
+                alert('请连接服务器')
+                return;
+            }
+            const _msg = msg.value;
+            const li = document.createElement('li');
+            li.innerHTML = '我：' + _msg;
+            msglist.appendChild(li);
+            ws.send(_msg)
+        }
+
+        // 关闭连接
+        btnClose.onclick = function(){
+            if(!ws){
+                alert('连接已断开');
+                return;
+            }
+            ws.close();
+        }
+
+        function changeStatus(status){
+            // status=true  连接状态
+            // status=false 关闭状态
+            if(status){
+                btnConnect.disabled = true;
+                btnSend.disabled = false;
+                btnClose.disabled = false;
+            }else{
+                btnSend.disabled = true;
+                btnClose.disabled = true;
+                btnConnect.disabled = false;
+            }
+        }
+    </script>
+</body>
+</html>

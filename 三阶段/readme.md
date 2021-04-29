@@ -388,6 +388,46 @@
     * NodeList与HTMLCollection（动态）
 * 在项目中出现git代码冲突如何解决
     * code review
+* 如何取消ajax请求
+    ```js
+        xhr = new XMLHttpRequest();
+        xhr.onload = function(){}
+        xhr.open('get',url,true)
+        xhr.send()
+
+        // 在合适的位置调用abort()
+        // xhr.abort();
+    ```
+* Promise封装ajax请求
+    ```js
+        function request(callback){
+            //return new Promise((resolve,reject)=>{
+                let xhr = new XMLHttpRequest();
+                xhr.onload = function(){
+                    resolve(xhr.responseText)
+                    callback(xhr.responseText)
+                }
+                xhr.open('get',url,true)
+                xhr.send()
+
+            //})
+        }
+        request().then(function(){}).catch().finally()
+        await request();
+        request(function(data){
+
+        });
+        arr.map(function(item,idx,arr){})
+    ```
+* js中的基本数据类型（值类型）
+    * Number
+    * String
+    * Boolean
+    * Null
+    * Undefined
+    * Symbol
+    * BigInt    ES9推出新的数据类型
+    
 ### 知识点
 * ObjectId
 * 联表查询：aggregation聚合查询
@@ -409,3 +449,39 @@
 
     ```
 * 过滤字段：projection
+
+
+
+* http(s)
+    * 只能客户端主动发起请求，服务端被动响应
+    * 短连接：请求并响应后与服务器断开连接
+    * 同源策略限制
+
+* WebSocket: 长连接(轮询)
+    * 客户端（浏览器）
+        > WebSocket
+        * 连接
+            ```js
+                new WebSocket(url)
+            ```
+        * 方法
+            * send()    给服务器发送消息
+            * close()   断开与服务器的连接
+        * 事件
+            * open    当与服务器连接成功后触发该事件
+            * close     当与服务器断开连接时触发该事件
+            * message   当接收到服务器发来的消息时触发该事件
+            * error
+    * 服务端
+        * 常用模块
+            * ws
+            * socket.io
+        * 创建socket服务器
+            * 服务器事件
+                * connection    当客户端连接服务器时触发该事件，并传递client客户端对象
+            * 客户端
+                * 方法
+                    * send()    发送消息给客户端
+                * 事件
+                    * message   接收到客户端消息时触发该事件
+                    * close     当与客户端断开时触发该事件

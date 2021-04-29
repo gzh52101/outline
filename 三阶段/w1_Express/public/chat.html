@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>H52101班级聊天系统</title>
+    <style>
+		ul{list-style: none;padding:0;margin:0;}
+		.msg-list{position:relative;width:600px;margin:0 auto;}
+		.msg-list ul{padding:10px;min-height:200px;max-height:400px;overflow-y:auto;border:1px solid #ddd;}
+		.msg-list li{float:left;clear:both;margin:10px 0;padding:5px;line-height:2;border-radius:5px;background-color:#efefef;}
+		.msg-list li.active{float:right;background-color:#58bc58;color:#fff;}
+		.msg-list textarea{display:block;min-height:50px;margin:10px 0;width:100%;box-sizing: border-box;}
+		.status{display:none;position: absolute;left:50px;bottom:0;right:0;padding:5px 10px;text-align:center;color:#999;}
+		.login{text-align:right;}
+	</style>
+</head>
+<body>
+    <h1>H52101班级聊天系统</h1>
+    <div id="autoAnswer" class="msg-list">
+		<div class="login">
+			<input type="text" name="username" id="username">
+			<button class="btn-login">进入</button>
+			<button class="btn-logout">退出</button>
+		</div>
+		<ul>
+		</ul>
+		<textarea></textarea>
+		<button class="btn-send">提交</button>
+		<div class="status"></div>
+	</div>
+    <script>
+        (()=>{
+            let autoAnswer = document.querySelector('#autoAnswer');
+			let login = autoAnswer.querySelector('.login');
+			let username = login.children[0];
+
+			let msglist = autoAnswer.querySelector('ul');
+			let msg = autoAnswer.querySelector('textarea');
+			let btnSend = autoAnswer.querySelector('.btn-send');
+			let status = autoAnswer.querySelector('.status');
+
+			let socket;
+            let chatList = [];
+            /**
+                确定发送消息格式
+                {
+                    type:2
+                    data:{username,content,time}
+                }
+
+                type:
+					0:退出登录
+					1:登录成功
+					2:发送消息
+            */
+
+            login.onclick = (e)=>{
+                // 进入聊天室
+                const _username = username.value;
+                if(e.target.className === 'btn-login'){
+                    if(_username.trim()===''){
+                        alert('请输入用户名')
+                        return;
+                    }
+
+                    socket = new WebSocket('ws://localhost:2101');
+
+                    // 监听事件
+                    socket.onopen = function(){
+                        console.log('连接成功')
+                        const data = JSON.stringify({
+                            type:1,
+                            data:{username:_username,time:new Date()}
+                        })
+                        socket.send(data)
+                    }
+
+                    socket.onclose = function(){
+                        console.log('close')
+                        
+                    }
+
+
+                    // 处理接收消息
+                    socket.onmessage = function(e){
+                        const data = JSON.parse(e.data);
+                        switch(data.type){
+                            case 0:
+                                changeStatus(`${data.data.username}退出聊天室`);
+                                break;
+                            case 1:
+                                changeStatus(`${data.data.username}进入聊天室`);
+                                break;
+                            case 2:
+                                chatList.push(data.data);
+                                render();
+                                break;
+
+                        }
+                    }
+                }else if(e.target.className === 'btn-logout'){
+                    console.log('logout')
+                    const data = JSON.stringify({
+                        type:0,
+                        data:{username:_username,time:new Date()}
+                    })
+                    socket.send(data);
+                    socket.close()
+                }
+            }
+
+            // 发送消息
+            btnSend.onclick = function(){
+                const _msg = msg.value;
+                const data = {
+                    type:2,
+                    data:{username:username.value,content:_msg,time:new Date()}
+                }
+                socket.send(JSON.stringify(data));
+            }
+
+            function changeStatus(msg){
+                status.style.display = 'block';
+                status.innerHTML = msg;
+            }
+
+
+            function render(){
+                msglist.innerHTML = chatList.map(item=>{
+                    return `<li class="${item.username === username.value ? 'active' : ''}">
+                        <h4>${item.username}: </h4>
+                        <div>${item.content}</div>
+                        <time>${item.time}</time>
+                    </li>`
+                }).join('');
+
+                // 把最后一个li滚动到可视区域
+                msglist.lastElementChild.scrollIntoView();
+            }
+
+        })()
+    </script>
+</body>
+</html>
