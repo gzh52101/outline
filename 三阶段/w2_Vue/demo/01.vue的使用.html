@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue的使用</title>
+    <script src="./js/vue.js"></script>
+</head>
+<body>
+    <h1>Vue的使用</h1>
+    <div id="app">
+        <!-- View（视图层） -->
+        <!-- 关联视图层后，实例中所有的属性都可以写在视图当中 -->
+        <p>用户名：<strong>{{username}}</strong></p>
+        <p>密码：{{password}}</p>
+    </div>
+    <script>
+        /**
+             * MVC分层
+                * M: Model      数据层
+                * V: View       视图层
+                * C: Controller 控制层 
+            
+            * MVVM
+                * M: Model
+                * V: View
+                * VM: ViewModel
+        */
+        // Model（数据层）
+       const myData = {
+           username:'jingjing',
+           password:123456
+       }
+        // 创建一个Vue实例
+        // ViewModel（控制层）
+        const vm = new Vue({
+            // 配置参数
+            el:'#app',// 把实例与视图层进行关联
+
+            // 数据
+            data:myData, // 把实例与数据层进行关联
+        });
+
+        console.log('vm',vm);
+    </script>
+</body>
+</html>

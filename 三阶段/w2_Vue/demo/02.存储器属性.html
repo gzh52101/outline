@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>02.存储器属性</title>
+</head>
+<body>
+    <h1>02.存储器属性getter & setter</h1>
+    <p>用户名：<strong id="username"></strong></p>
+    <script>
+        const username = document.querySelector('#username');
+
+        let nickname = 'alias';
+        let age = 20;
+        const user = {
+            // username:'jingjing',
+
+            // getter: 读取属性时执行这个函数（可监听数据读取操作）
+            get username(){
+                console.log('getter')
+                return nickname
+            },
+
+            // setter：修改属性时执行这个函数（可监听数据修改操作）
+            set username(newValue){
+                console.log('setter',newValue)
+                nickname = newValue;
+                // 操作视图
+                username.innerText = newValue
+            },
+            password:12345
+        }
+        
+        username.innerText = user.username;
+
+        Object.defineProperty(user,'age',{
+            // 值属性
+            // configurable:true,
+            // enumerable:true,
+            // writable:false,
+            // value:18
+
+            // 存储器属性
+            configurable:true,
+            enumerable:true,
+            get(){
+                console.log('age getter')
+                return age;
+            },
+            set(newValue){
+                console.log('age setter')
+                age = newValue;
+            }
+        })
+    </script>
+</body>
+</html>

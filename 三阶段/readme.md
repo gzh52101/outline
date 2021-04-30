@@ -485,3 +485,117 @@
                 * 事件
                     * message   接收到客户端消息时触发该事件
                     * close     当与客户端断开时触发该事件
+
+## day2-1
+
+### 面试题
+* jsonp的原理
+* 紧急bug修复流程:hotfix
+    * 发版: main/master
+    * 提bug
+
+### 复习
+* MongoDB
+    * ObjectId
+    * 联表查询
+    * 字段过滤
+        ```js
+            // mongo
+            db.user.find({},{password:0})
+
+            // mongodb驱动
+            db.collection('user').find({},{projection:{password:0}})
+        ```
+* websocket
+    * 轮询
+    * 心跳包:判断客户端是否存活(与服务器是否断开)
+    * 服务端
+        * 事件
+        * 方法
+    * 客户端
+        * 事件
+        * 方法
+
+### 知识点
+* Vue版本
+    * 开发版与生产版
+    * 完整版
+        > 完整班 = 运行时版+编译器
+    * 编译器
+    * 运行时版
+* 分层
+    * MVC
+    * MVVM
+* Vue的使用
+    ```js
+        const vm = new Vue({
+            // 关联视图层
+            el:'#app',
+
+            // 关联数据层
+            data, 
+        })
+
+    ```
+* 存储器属性（getter&setter）
+    > 本身没有自己的值，一般用于代理其他属性
+    ```js
+        const user = {
+
+            // getter: 读取属性时执行这个函数（可监听数据读取操作）
+            get username(){
+                console.log('getter')
+                return nickname
+            },
+
+            // setter：修改属性时执行这个函数（可监听数据修改操作）
+            set username(newValue){
+                console.log('setter',newValue)
+                nickname = newValue;
+                // 操作视图
+                username.innerText = newValue
+            },
+        }
+
+
+        Object.defineProperty(user,'age',{
+            // 值属性
+            // configurable:true,
+            // enumerable:true,
+            // writable:false,
+            // value:18
+
+            // 存储器属性
+            configurable:true,
+            enumerable:true,
+            get(){
+                console.log('age getter')
+                return age;
+            },
+            set(newValue){
+                console.log('age setter')
+                age = newValue;
+            }
+        })
+
+    ```
+
+* 数据绑定
+    > 数据层中的数据写入视图层
+    * 单向绑定
+        > 原理：setter
+        * {{}}              用于绑定到元素内容
+        * v-bind:attr       用于绑定到元素属性
+    * 双向绑定
+        > 原理：单向+事件
+        * v-model
+            > 替代方案：v-bind:value + v-on:input
+
+* 响应式属性
+    > 原理：getter & setter
+    Vue在实例化时会遍历数据层（data）中所有属性，并通过Object.defineProperty()方法把它们设置为存储器属性（getter & setter），并写入Vue实例
+
+* 指令
+    * v-bind:属性名
+    * v-model
+    * v-on:事件名
