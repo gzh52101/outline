@@ -493,6 +493,11 @@
 * 紧急bug修复流程:hotfix
     * 发版: main/master
     * 提bug
+* script
+    * type  text/javascript
+    * src
+    * defer
+    * async
 
 ### 复习
 * MongoDB
@@ -585,6 +590,9 @@
     * 单向绑定
         > 原理：setter
         * {{}}              用于绑定到元素内容
+        * v-text
+        * v-html
+            > 使用v-html显示内容一定要确保数据来源可靠，防止xss攻击（跨域脚本攻击）
         * v-bind:attr       用于绑定到元素属性
     * 双向绑定
         > 原理：单向+事件
@@ -595,7 +603,23 @@
     > 原理：getter & setter
     Vue在实例化时会遍历数据层（data）中所有属性，并通过Object.defineProperty()方法把它们设置为存储器属性（getter & setter），并写入Vue实例
 
-* 指令
+* 指令（自定义html属性）
     * v-bind:属性名
     * v-model
     * v-on:事件名
+    * v-for
+    * v-show    显示/隐藏(频繁显示隐藏的操作建议使用v-show)
+    * v-if      销毁/创建
+        * v-else
+        * v-else-if
+    * v-html
+    * v-text
+
+* 节点的频繁操作对页面性能的影响
+    > 在web应用中，节点操作不可避免，但可以减少操作数量
+    * 结论：节点操作越多性能越慢
+    * Vue对节点的处理方案
+        * 虚拟DOM
+        * diff算法
+    * 页面操作思维转变：节点操作 -> 数据操作
+        

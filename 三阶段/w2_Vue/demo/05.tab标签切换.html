@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>tab标签切换</title>
+    <link rel="stylesheet" href="./css/bootstrap.css">
+</head>
+<body>
+    <h1>05.tab标签切换</h1>
+    <div id="app">
+        <ul class="nav nav-tabs m-3">
+            <li class="nav-item" v-for="(item,idx) in tabs" v-on:click="changeTab(idx)">
+                <!-- <a class="nav-link" v-bind:class="idx===current ? 'active' : ''"  href="#">{{item.name}}</a> -->
+                <!-- <a v-bind:class="{'nav-link':true,active:idx===current}"  href="#">{{item.name}}</a> -->
+                <a v-bind:class="['nav-link',idx===current ? 'active' : '']"  href="#">{{item.name}}</a>
+              </li>
+        </ul>
+        <div class="tab-content">
+            <div class="content p-3" v-for="(item,idx) in tabs" v-if="idx===current">
+                {{item.content}}
+            </div>
+        </div>
+    </div>
+      <script src="./js/vue.js"></script>
+      <script>
+          const vm = new Vue({
+            el:'#app',
+
+            data:{
+                tabs:[{
+                    name:'laoxie',
+                    content:'喜欢写代码'
+                },{
+                    name:'jingjing',
+                    content:'喜欢打王者'
+                },{
+                    name:'tiantian',
+                    content:'喜欢大保健'
+                }],
+                current:2
+            },
+            methods:{
+                changeTab(idx){
+                    console.log('idx',idx)
+                    this.current = idx;
+                }
+            }
+          })
+      </script>
+</body>
+</html>

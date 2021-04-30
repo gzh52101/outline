@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>06.单向数据绑定</title>
+    <link rel="stylesheet" href="./css/bootstrap.css">
+</head>
+<body>
+    <h1>06.单向数据绑定</h1>
+    <div id="app">
+        <p>双花括号：{{className}}</p>
+        v-text：<span v-text="className">v-text</span><br/>
+        v-html：<span v-html="className">v-html</span>
+    </div>
+      <script src="./js/vue.js"></script>
+      <script>
+          const vm = new Vue({
+            el:'#app',
+
+            data:{
+                className:'GZ-H5-<strong>2101</strong>'
+            }
+            
+          })
+      </script>
+</body>
+</html>
