@@ -623,3 +623,66 @@
         * diff算法
     * 页面操作思维转变：节点操作 -> 数据操作
         
+## day2-2
+
+### 面试题
+* 常见状态码有哪些
+    * 200+
+        * 200
+        * 201
+    * 300+
+        * 301
+        * 302
+        * 304
+    * 400+      客户端错误
+        * 401
+        * 402
+        * 403
+        * 404
+    * 500+      服务端错误
+
+### 复习
+* Vue
+    * 架构模式（分层）
+        * MVC   
+            * M: Model数据层
+            * V: View视图层
+            * C: Controller控制层
+        * MVP
+            * M: Model
+            * V: View
+            * P: Presenter
+        * MVVM
+            * M: Model
+            * V: View
+            * VM: ViewModel
+* Vue的使用
+    ```js
+        const vm = new Vue({
+            el:'#app',
+            data:{
+                a:10,
+                b:20,
+                c:{
+                    type:'响应式属性'
+                }
+            }
+        })
+        // vm.a;// 10
+        // vm.b;//20
+    ```
+* 响应式属性
+    > Vue在实例化时会遍历data中所有属性(包括子属性)，对象通过Object.defineProperty()方法把它们设置为存储器属性（getter & setter），数组写到特定的原型中，并写入Vue实例
+    * 设置响应式属性的方式
+        * 设置初始值
+        * 对象属性：Vue.set(target,key,value)
+            > target对象不能是 Vue 实例，或者 Vue 实例的根数据对象
+        * 数组变更方法
+            > 原理：原型链，以下方法是Vue修改过的方法，在方法内处理视图更新
+            * push()
+            * pop()
+            * unshift()
+            * shift()
+            * splice()
+            * sort()
+            * reverse()

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>07.响应式属性</title>
+    <link rel="stylesheet" href="./css/bootstrap.css">
+</head>
+<body>
+    <h1>07.响应式属性</h1>
+    <div id="app">
+        <p>a：{{a}}</p>
+        <p>b：{{b}}</p>
+        <p>c：{{c}}</p>
+        <p>d：{{d}}</p>
+        
+    </div>
+      <script src="./js/vue.js"></script>
+      <script>
+          const vm = new Vue({
+            el:'#app',
+
+            data:{
+                a:10,
+                b:20,
+                c:{
+                    type:'响应式属性'
+                },
+                d:['laoxie','jingjing']
+            }
+            
+          })
+
+          
+          // 设置响应式属性：会触发视图更新(异步)
+        //   Vue.set(vm.c,'psw','123456');
+        //   Vue.set(vm,'test','test');// 报错，不能给Vue实例添加响应式属性
+        //   Vue.set(vm._data,'test','test');// 报错，不能给根数据属性添加响应式属性
+        //   Vue.set(vm.$data,'test','test');// 报错，不能给根数据属性添加响应式属性
+
+          // 设置普通属性：不是响应式属性，不触发视图更新
+        //   vm.c.name = 'hello';
+      </script>
+</body>
+</html>
