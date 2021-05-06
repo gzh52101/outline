@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>08.todolist待办事项</title>
+    <link rel="stylesheet" href="./css/bootstrap.css">
+</head>
+<body>
+    <h1>08.todolist待办事项</h1>
+    <div id="app" class="container-fluid mt-3">
+        <div class="input-group">
+            <input type="text" ref="input" class="form-control" v-model="todo" @keyup.ctrl.enter="addItem">
+            <button class="btn btn-primary" type="button" @click="addItem">添加</button>
+          </div>
+        <table class="table table-striped" ref="table">
+            <thead>
+                <tr>
+                    <th><input type="checkbox" v-model="checkAll" />全选</th>
+                    <th>#</th>
+                    <th>待办事项</th>
+                    <th>添加时间</th>
+                    <th>是否完成</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="(item,idx) in list" :class="{'table-primary':item.checked}" @click="item.checked=!item.checked">
+                    <td><input type="checkbox" v-model="item.checked" /></td>
+                    <td>{{idx+1}}</td>
+                    <td>{{item.todo}}</td>
+                    <td>{{item.addtime}}</td>
+                    <td>{{item.complete ? '是' : '否'}}</td>
+                    <td>
+                        <div class="btn-group btn-group-sm">
+
+                            <button class="btn btn-outline-primary" @click.stop="completeItem(item.id)">完成</button>
+                            <button class="btn btn-outline-danger" @click.stop="removeItem(idx)">删除</button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="6">
+                        待办事项：{{list.length}}，完成：{{completeList.length}}，未完成：{{unCompleteList.length}}
+                    </td>
+                </tr>
+            </tfoot>
+          </table>
+          result:{{result}} <br>
+          result2:{{result2()}}
+    </div>
+      <script src="./js/vue.js"></script>
+      <script>
+        //   Vue.config.keyCodes.a = 65;
+
+          const vm = new Vue({
+              el:'#app',
+              data:{
+                list: [{
+                    id: 1,
+                    todo: '定个小目标睡一整天',
+                    complete: true,
+                    checked:true,
+                    addtime: Date.now()
+                }, {
+                    id: 2,
+                    todo: '赚他一个亿津巴布韦币',
+                    complete: false,
+                    checked:true,
+                    addtime: Date.now() + 3600
+                }, {
+                    id: 3,
+                    todo: '迎娶白富美，达到人生巅峰',
+                    complete: false,
+                    checked:false,
+                    addtime: Date.now() + 360 * 1000
+                }],
+                todo:'',
+                a:10,
+                b:20,
+                c:30,
+                // checkAll:false,
+              },
+            //   watch:{
+            //     // 监听实例下所有属性（包括子属性）
+            //     checkAll:function(newValue,oldValue){
+            //         this.list.forEach(item=>{
+            //             item.checked = newValue;
+            //         })
+            //     }
+            //   },
+            computed:{
+                // 这里的属性与data在同一命名空间，同样会写入Vue实例
+                // getter（默认）
+                // checkAll(){
+                //     return this.list.every(item=>item.checked);
+                // }
+                checkAll:{
+                    // 被动：checkAll的值有list中的数据来决定
+                    get(){
+                        return this.list.every(item=>item.checked);
+                    },
+                    // 主动：用户修改checkAll的值会影响list中数据的checked值
+                    set(newValue){
+                        this.list.forEach(item=>{
+                            item.checked = newValue;
+                        })
+                    }
+                },
+                completeList(){
+                    // console.log('computed.completeList')
+                    return this.list.filter(item=>item.complete);
+                },
+                unCompleteList(){
+                    return this.list.filter(item=>!item.complete);
+                },
+                result(){
+                    console.log('computed.result')
+                    return this.a + this.b;
+                }
+            },
+              methods:{
+                //   keyAddItem(e){
+                //     if(e.keyCode === 13){
+                //         this.addItem();
+                //     }
+                //   },
+                  addItem(){
+                      // method中的方法this指向实例
+                    let item = {
+                        id: Math.ceil(Math.random()*10000),
+                        todo: this.todo,
+                        complete: false,
+                        checked:false,
+                        addtime: Date.now()
+                    }
+
+                    this.list.unshift(item);
+
+                    // 清空并自动获得焦点
+                    this.todo = '';
+
+                    // document.querySelector('#input').focus() 等效于以下用法
+                    this.$refs.input.focus();
+                  },
+                  removeItem(idx){
+                      this.list.splice(idx,1)
+                  },
+                  completeItem(id){console.log('complete.once')
+                    this.list.forEach(item=>{
+                        if(item.id === id){
+                            item.complete = true;
+                        }
+                    })
+                  },
+                  result2(){
+                      console.log('method.result2')
+                      return this.a+this.b;
+                  }
+              }
+          })
+      </script>
+</body>
+</html>

@@ -640,8 +640,17 @@
         * 403
         * 404
     * 500+      服务端错误
+* get、post、put、patch、delete请求类型的区别
+* formData
+    > form-urlencoded
+    * 常用方法
+        * set()/append()
+        * get()/getAll()
+        * delete()
+        * has()
 
-### 复习
+
+### 知识点
 * Vue
     * 架构模式（分层）
         * MVC   
@@ -665,7 +674,8 @@
                 b:20,
                 c:{
                     type:'响应式属性'
-                }
+                },
+                d:['data1','data2']
             }
         })
         // vm.a;// 10
@@ -675,7 +685,7 @@
     > Vue在实例化时会遍历data中所有属性(包括子属性)，对象通过Object.defineProperty()方法把它们设置为存储器属性（getter & setter），数组写到特定的原型中，并写入Vue实例
     * 设置响应式属性的方式
         * 设置初始值
-        * 对象属性：Vue.set(target,key,value)
+        * 对象属性：Vue.set(target,key,value) / vm.$set()
             > target对象不能是 Vue 实例，或者 Vue 实例的根数据对象
         * 数组变更方法
             > 原理：原型链，以下方法是Vue修改过的方法，在方法内处理视图更新
@@ -686,3 +696,34 @@
             * splice()
             * sort()
             * reverse()
+    * 删除响应式属性
+        * Vue.delete() / vm.$delete()
+
+    * 搞懂以下问题：
+        * 响应式属性的原理？
+        * Vue是如何实现响应式属性的？
+
+* 指令
+    * v-on
+        * 简写：`@`
+        * 修饰符
+        * 传参
+    * 列表循环
+        * v-for
+    * v-bind
+        * 简写：`:`
+        * class/style增强：支持对象与数组
+
+* 配置参数
+    * el
+    * data
+    * methods
+    * watch     监听属性
+        > 可监听实例下所有属性，包括子属性
+    * computed  计算属性
+        > 原理：getter（默认） & setter
+        * 特点：缓存
+            > 当依**赖的数据**发生改变时，会重新计算，否则从缓存中获取
+
+* ref
+    > 给标签元素添加ref属性，指向标签对应的节点
