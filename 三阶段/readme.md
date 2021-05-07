@@ -742,6 +742,20 @@
     * v-model.lazy = v-bind:value + v-on:change
 * 为什么在Vue中只有push,pop,shift,splice,sort等方法才具响应特性
     > 原型链继承
+* 项目中常用的性能优化有哪些
+    * 合并压缩
+    * 服务器压缩
+    * 懒加载
+    * 图片优化
+        * 品质优化
+        * base64 编码
+    * 事件委托
+    * 虚拟 DOM
+    * SSR
+    * 按需加载
+        > UI 框架按需加载
+    * 防抖节流
+    * 缓存
 
 ### 复习
 * 配置参数
@@ -763,6 +777,16 @@
     * 修饰符
 
 ### 知识点
+* 实例属性
+    * vm.$el
+    * vm.$data/vm._data
+    * vm.$options
+    * vm.$refs
+* 实例方法
+    * vm.$set()
+    * vm.$delete()
+    * vm.$watch()
+    * vm.$mount()
 * Vue全局方法
     * Vue.set()
     * Vue.delete()
@@ -782,3 +806,66 @@
             > 可在任意地方使用
         * 局部组件: components配置参数 
             > 只能在定义局部组件所在的组件中使用
+    * 组件要求
+        * 只能有一个根元素
+        * data只能是函数类型
+        * 注册时可以是驼峰和kebab-case，使用时必须使用小写且不能与内置标签同名
+    * 组件配置参数
+        > 没有el, data为函数，其他与Vue实例基本一致
+        * template
+    * 组件层级结构
+        * 父组件: vm.$parent
+        * 子组件: vm.$children
+        * 跟组件：vm.$root
+
+        > 要求：
+        * 学会从父组件获取子组件数据
+        * 学会从子组件获取父组件数据
+
+* 模块化开发
+    * 规范
+        * commonJS      nodeJS
+        * ESModule      ES6
+        * AMD           require.js
+        * CMD           sea.js
+    * 导入导出
+        * commonJS  
+            * require()
+            * module.exports
+        * ESModule
+            * import
+            * export
+        * AMD/CMD
+            * require()
+            * define()
+* ESModule
+    > 模块对象：ESModule把每一个文件当作一个模块
+    * 导入:import
+        * 默认导入：导入模块对象中的default属性
+        * 特定导入：导入模块对象中的特定属性
+        ```js
+            // xx为变量，url为模块地址（相对路径或绝对路径），必须为静态引入
+            import xx from <url>
+
+            import {xx} from <url>
+        ```
+    * 导出:export
+        > export后只能跟：function、class、var、let、const、default、{}
+        ```js
+            export function getUser(){}
+        ```
+* Vue版本
+    * 环境版本
+        * 开发版本：development
+        * 生产版本: production
+    * 构建版本
+        * 完整版
+            > 完整版 = 运行时版+编译器
+        * 运行时版：runtime
+            > 删除编译器后的版本（编译器：把template的内容编译到render函数中）
+* Vue单文件组件
+    * html结构
+    * js代码
+    * css样式
+* render渲染函数
+    > render: createElement => vNode

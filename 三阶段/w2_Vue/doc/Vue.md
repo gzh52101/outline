@@ -64,8 +64,8 @@ Vue.js 是一个基于MVVM模式的一套渐进式框架。它是以数据驱动
 
 ## 安装和引入
 
->* 开发环境：development
-* 生产环境：production
+> * 开发环境：development
+> * 生产环境：production
 
 * script标签
 * cdn
