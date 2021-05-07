@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>09.v-bind的使用</title>
+    <link rel="stylesheet" href="./css/bootstrap.css">
+</head>
+<body>
+    <h1>09.v-bind的使用</h1>
+    <div id="app">
+       <p v-bind:username="username">用户名：{{username}}</p>
+       <p :username="username" class="item" :class="{user:visibility}" :style="{color:'#f00',fontSize:'26px'}">用户名：{{username}}</p>
+       <p v-bind="score">无参数绑定</p>
+       <p v-for="(item,k,idx) in age" v-bind:[`age`+k]="item">动态参数{{k}}:{{item}}:{{idx}}</p>
+       <button @click="visibility=!visibility">{{visibility}}</button>
+    </div>
+      <script src="./js/vue.js"></script>
+      <script>
+          /**
+           * v-bind 
+            * class & style
+            * 无参数绑定: 一般用于对象，相当于把对象的每个属性绑定到属性中
+            * 动态参数绑定
+           */
+        new Vue({
+            el:'#app',
+            data:{
+                username:'laoxie',
+                visibility:true,
+                age:{
+                    wai:18,
+                    real:22,
+                    nei:26
+                },
+                score:{
+                    english:100,
+                    math:120,
+                    chinese:140
+                }
+            }
+        })
+      </script>
+</body>
+</html>

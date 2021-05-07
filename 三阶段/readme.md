@@ -648,7 +648,7 @@
         * get()/getAll()
         * delete()
         * has()
-
+* computed与methods的区别
 
 ### 知识点
 * Vue
@@ -710,9 +710,15 @@
         * 传参
     * 列表循环
         * v-for
+        * v-for遍历对象
     * v-bind
         * 简写：`:`
         * class/style增强：支持对象与数组
+            ```js
+                <div class="list" v-bind:class="{box:true}">
+            ```
+        * 无参数绑定
+        * 动态参数绑定
 
 * 配置参数
     * el
@@ -727,3 +733,52 @@
 
 * ref
     > 给标签元素添加ref属性，指向标签对应的节点
+
+## day2-3
+
+### 面试题
+* v-model替代方案
+    * v-model = v-bind:value + v-on:input
+    * v-model.lazy = v-bind:value + v-on:change
+* 为什么在Vue中只有push,pop,shift,splice,sort等方法才具响应特性
+    > 原型链继承
+
+### 复习
+* 配置参数
+    * watch
+        ```js
+            data:{
+                a:10,
+                c:{
+                    type:'letter'
+                }
+            },
+            watch:{
+                a:function(n,o){},
+                'c.type':function(n,o){}
+            }
+        ```
+    * computed
+        > 缓存
+    * 修饰符
+
+### 知识点
+* Vue全局方法
+    * Vue.set()
+    * Vue.delete()
+    * Vue.component()
+* 封装的好处
+    * 复用
+    * 更新迭代
+* 模块化
+* 组件Component
+    > 组件化开发，组件就是一个Vue的实例
+    * 好处：开发效率
+        * 代码复用
+        * 更新迭代
+        * 分工
+    * 定义组件
+        * 全局组件：Vue.component(name,options)
+            > 可在任意地方使用
+        * 局部组件: components配置参数 
+            > 只能在定义局部组件所在的组件中使用

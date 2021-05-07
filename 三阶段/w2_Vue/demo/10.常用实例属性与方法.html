@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>10.常用实例属性与方法</title>
+    <link rel="stylesheet" href="./css/bootstrap.css">
+</head>
+<body>
+    <h1>10.常用实例属性与方法</h1>
+    <div id="app">
+      <p>Username:{{username}}</p>
+
+      <button id="btn">立即体验</button>
+    </div>
+      <script src="./js/vue.js"></script>
+      <script>
+          /**
+           * vm 为 Vue的实例，包含很多常用的属性与方法
+                * 属性
+                    * vm.$el
+                    * vm.$data/vm._data
+                    * vm.$refs   
+                    * vm.$options  实例化Vue时的配置参数
+                * 方法
+                    * $set()/$delete    设置/删除响应式属性
+                    * $mount()          挂载
+           */   
+
+          const vm = new Vue({
+              // 配置参数
+              //   el:'#app', // vm.$el
+              data:{     // vm.$data,vm._data
+                  username:'jingjing',
+                  password:1234
+              },
+              computed:{
+                  upper(){
+                      return this.username.toUpperCase()
+                  }
+              },
+              watch:{
+                  username:function(n,o){
+                      console.log('watch=',n,o)
+                  }
+              },
+              methods:{
+                  getPassword(){
+                      return this.password
+                  }
+              }
+          })
+
+          // 外部设置监听
+          vm.$watch('username',function(n,o){
+            console.log('$watch=',n,o)
+          })
+
+          document.querySelector('#app').onclick = function(){
+              vm.$mount('#app')
+          }
+      </script>
+</body>
+</html>

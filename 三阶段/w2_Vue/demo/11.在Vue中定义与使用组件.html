@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>11.在Vue中定义与使用组件</title>
+</head>
+<body>
+    <h1>11.在Vue中定义与使用组件</h1>
+    <div id="app">
+        <laoxie>
+        </laoxie>
+        <laoxie></laoxie>
+        <jingjing></jingjing>
+        <jingjing></jingjing>
+    </div>
+    <template id="laoxie">
+        <div>
+            <p>Name：{{name}}</p>
+            <myheader></myheader>
+        </div>
+    </template>
+    <template id="jingjing">
+        <div>
+            <p>UserName：{{name}}</p>
+        </div>
+    </template>
+    <template id="myheader">
+        <div>
+            <p>{{name}}</p>
+        </div>
+    </template>
+    <script src="./js/vue.js"></script>
+    <script>
+        // 1. 组件是一个Vue的实例
+        // 2. 定义组件就相当于创建一个自定义标签
+        // 定义全局组件
+        const myheader = {
+            data(){
+                return {
+                    name:'header'
+                }
+            },
+            template:'#myheader'
+        }
+        
+        Vue.component('laoxie',{
+            // 配置参数
+            // data配置只能为函数形式
+            data:function(){
+                return {
+                    name:'laoxie'
+                }
+            },
+            template:`#laoxie`,
+
+            // 局部组件：只能在laoxie组件中使用
+            components:{
+                myheader,
+            }
+        })
+
+        Vue.component('jingjing',{
+            // 配置参数
+            // data配置只能为函数形式
+            data:function(){
+                return {
+                    name:'jingjing'
+                }
+            },
+            template:`#jingjing`
+        })
+
+        const vm = new Vue({
+            el:'#app',
+            data:{
+                title:'组件化开发'
+            },
+
+            // 在Vue实例中，如果不提供template，Vue会获取el.outerHTML作为template
+            // template:'<div>template</div>'
+
+            // components:{
+            //     // 组件名称：配置参数
+            //     tiantian:{
+            //         data(){
+            //             return {}
+            //         },
+
+            //     }
+            // }
+        });
+
+
+    </script>
+</body>
+</html>
