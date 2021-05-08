@@ -1,23 +1,26 @@
 <template>
   <!-- 这里的代码在编译阶段由webpack处理 -->
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
+    <!-- <img alt="Vue logo" src="./assets/logo.png"> -->
     <!-- <HelloWorld msg="Welcome to Your Vue.js App"/> -->
     <!-- <hello-world></hello-world> -->
     Hello H5 2101
-    <Parent/>
+    <!-- <Parent/> -->
+    <TodoList/>
   </div>
 </template>
 
 <script>
 // import HelloWorld from './components/HelloWorld.vue'
 import Parent from './components/Parent.vue'
+import TodoList from './components/TodoList/TodoList.vue'
 
 export default {
   name: 'App',
   components: {
     // HelloWorld,
-    Parent
+    Parent,
+    TodoList
   },
   // template:'<div>test</div>',
   // render(createElement){
