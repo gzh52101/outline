@@ -794,7 +794,6 @@
 * 封装的好处
     * 复用
     * 更新迭代
-* 模块化
 * 组件Component
     > 组件化开发，组件就是一个Vue的实例
     * 好处：开发效率
@@ -869,3 +868,60 @@
     * css样式
 * render渲染函数
     > render: createElement => vNode
+    * el
+    * template
+    * render
+
+## day2-4
+
+### 面试题
+* cookie,sessionStorage,localStorage大小限制，存满后如何处理
+    * 大小
+        * cookie: 4k
+        * sessionStorage/localStorage: 5M
+    * 满后如何处理
+        * 划分多个子域名
+        * webSQL        类似于mySQL
+            ```js
+                // 1. 创建/获取数据库（无则创建）
+                const db = openDatabase('chart',1)
+
+                // 2. 创建事务
+                db.transaction(function (tx) {
+                    // 3. CRUD
+                    tx.executeSql(sql)
+                }
+            ```
+        * indexDB       类似于MongoDB
+            ```js
+                // 1. 创建/获取数据库（无则创建）
+                const db = indexedDB.open('goods',1)
+                // 2. 创建集合
+                db.createObjectStore('chart',{
+                    keyPath:"id",
+                    autoIncrement:true
+                })
+                // 3. 创建事务对象
+                var t = db.transaction(["chart"],"readwrite");
+
+                //4. 获取指定的集合 
+                var store =  t.objectStore("chart");
+                
+                // CRUD
+                store.add()
+                store.delete()
+                store.put()
+                store.get()
+                store.getAll()
+
+                // 获取数据数量
+                store.count()
+            ```
+### 知识点
+* 组件通讯
+    * 利用组件层级结构
+    * 父->子: props
+        > 传入的数据不可修改
+        1. 父组件操作：给子组件添加属性并传递值
+        2. 子组件操作：props配置参数接收传入属性
+            > props中的属性会自动写入组件实例

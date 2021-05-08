@@ -5,16 +5,19 @@
     <!-- <HelloWorld msg="Welcome to Your Vue.js App"/> -->
     <!-- <hello-world></hello-world> -->
     Hello H5 2101
+    <Parent/>
   </div>
 </template>
 
 <script>
 // import HelloWorld from './components/HelloWorld.vue'
+import Parent from './components/Parent.vue'
 
 export default {
   name: 'App',
   components: {
-    // HelloWorld
+    // HelloWorld,
+    Parent
   },
   // template:'<div>test</div>',
   // render(createElement){
