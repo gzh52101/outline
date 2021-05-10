@@ -973,3 +973,80 @@
         * RemoteSigned: 在本地创建的脚本可以运行，网上下载的脚本无法运行(拥有数字证书签名例外)
         * AllSigned: 仅当脚本由受信任的发布者签名时才能运行
         * Unrestricted: 允许所有脚本运行
+
+## day2-5
+
+### 面试题
+* 事件绑定方式
+    * on+事件类型=事件处理函数
+    * addEventListener(事件类型,事件处理函数,是否捕获)
+* Promise的理解
+    * 状态
+        * Pending   初始状态
+        * Fulfilled 解决/完成状态
+        * Rejected  失败状态
+    ```js
+        $.ajax()
+        function request(url,callback){
+            let result
+            return new Promise((resolve,reject)=>{
+                const xhr = new XMLHttpRequest()
+                xhr.onload = function(){
+                    // xhr.responseText
+                    result = xhr.responseText
+                    // callback(xhr.responseText)
+                    resolve(xhr.responseText)
+                    reject()
+                }
+                xhr.open('get',url,true)
+                xhr.send()
+
+            })
+        }
+
+        const result = request('xxx.php',function(){})
+        const result = request('xxx.php').then(()=>{})
+        (async ()=>{
+            const result = await request('xxx.php')
+            console.log('result',result);
+        })()
+    ```
+
+### 复习
+* 组件通讯
+    * 父->子：props
+    * 子->父：自定义事件
+    * 兄弟->兄弟：状态提升
+    * 深层级组件：
+        * 逐层传递
+        * 事件总线Bus
+            * $on()
+            * $emit()
+            * $off()
+    * 插槽slot
+        > 标签内容与组件间的通讯，让用户可定制组件内容
+        * 组件外->组件内：插槽
+            * 默认插槽：显示**组件标签**的内容
+                ```js
+                    <slot/>
+                ```
+            * 具名插槽：给`<slot/>`命名
+                ```js
+                    <slot name="xxx" />
+
+                    // 定义传入命名插槽的内容：v-slot
+                    <template v-slot:xxx>
+
+                    </template>
+                ```
+        * 组件内->组件外：作用域插槽
+            ```js
+                <slot name="footer" a="10" :b="20" />
+
+                // #组件外
+                <template v-slot:footer="scope"></template>
+                <template v-slot:default="scope"></template>
+            ```
+
+    
+    
