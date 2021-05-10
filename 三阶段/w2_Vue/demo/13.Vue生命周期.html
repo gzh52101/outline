@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>13.Vue生命周期</title>
+</head>
+<body>
+    <h1>13.Vue生命周期</h1>
+    <div id="app">
+        <p>{{count}}</p>
+        <button @click="destroy">销毁</button>
+    </div>
+
+    <script src="js/vue.js"></script>
+    <script>
+        const vm = new Vue({
+            el:'#app',
+            data:{
+                count:1
+            },
+
+            // 生命周期函数
+            // 1. 创建阶段
+            beforeCreate(){
+                console.log('beforeCreate',this.count)
+            },
+            created(){
+                console.log('created',this.count)
+            },
+
+            // template:`<div id="myapp">
+            //     count:{{count}}
+            // </div>`,
+
+            // render(createElement){
+            //     return createElement()
+            // },
+
+            // 2. 挂载阶段
+            beforeMount(){
+                console.log('beforeMount',this.$el)
+            },
+            mounted(){
+                console.log('mounted',this.$el)
+            },
+
+            // 更新阶段
+            // 利用diff算法进行虚拟DOM对比：{}->{} ,得到差异项，更新差异项
+            // 
+            beforeUpdate(){
+                console.log('beforeUpdate',this.$el.outerHTML)
+            },
+            updated(){
+                console.log('updated',this.$el.outerHTML)
+            },
+
+            // 销毁阶段
+            beforeDestroy(){
+                console.log('beforeDestroy',this.count)
+            },
+            destroyed(){
+                console.log('destroyed',this.count)
+            },
+
+            methods:{
+                destroy(){
+                    this.$destroy();
+                    console.log('销毁成功')
+                }
+            }
+        })
+
+        // vm.$mount('#app')
+    </script>
+</body>
+</html>

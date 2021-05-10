@@ -1011,6 +1011,23 @@
             console.log('result',result);
         })()
     ```
+* 如何调试js代码
+    > 如何提高查找问题、解决问题的能力
+    * `can not read the property b of undefined`
+    * `can not resovle module xxx`
+        * 重装: npm install xxx
+        * 卸载: npm uninstall xxx
+        * 清缓存：npm cache clean -f
+        * 指定版本安装：npm install xxx@版本
+    ```js
+        list.b.x
+    ```
+    * 断点调试
+* 版本：2.6.11
+    * 大版本
+    * 小版本
+    * 补丁
+
 
 ### 复习
 * 组件通讯
@@ -1047,6 +1064,26 @@
                 <template v-slot:footer="scope"></template>
                 <template v-slot:default="scope"></template>
             ```
-
+* 组件生命周期
+    > 组件在创建到销毁的过程，在这个过程中会自动执行一些钩子函数（生命周期函数）
+    * 创建阶段
+        * beforeCreate()
+        * **设置响应式属性并写入实例**
+        * created()
+    * 挂载阶段
+        * beforeMount()
+        * **数据挂载到视图**
+        * mounted()
+    * 更新阶段
+        * beforeUpdate()
+        * **diff算法&key** 
+        * updated()
+    * 销毁阶段
+        * beforeDestroy()
+        * **清理它与其它实例的连接，解绑它的全部指令及事件监听器**
+        * destroyed()
     
+    * 搞懂两个问题
+        1. 每个生命周期函数的执行过程
+        2. 每个生命周期函数适合做什么操作
     

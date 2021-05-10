@@ -78,7 +78,7 @@ export default {
                 checked:false,
                 addtime: Date.now()
             }
-
+            
             this.list.unshift(item);
         },
         removeItem(idx){
