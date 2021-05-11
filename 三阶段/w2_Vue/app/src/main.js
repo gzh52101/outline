@@ -16,6 +16,35 @@ console.log('App=',App)
 
 // console.log('username=',myname);
 
+// 定义全局指令
+Vue.directive('baseurl',function(){
+  // 这个函数= bind() + update()
+})
+Vue.directive('baseurl',{
+  bind(el,binding,vNode){
+    // el: 指令所在的节点
+    // binding: 指令信息
+    console.log('bind',el,binding);
+    let {arg,value:url,modifiers} = binding
+    if(arg){
+      if(modifiers.ssl){
+        arg = arg + 's';
+      }
+      if(!url.startsWith('http')){
+        url = arg + '://' + url
+
+      }
+    }
+    el.value = url
+  },
+  inserted(el,binding,vNode){
+    console.log('inserted',)
+  },
+  update(){},
+  componentUpdated(){},
+  unbind(){}
+})
+
 new Vue({
   // el,
   // template,

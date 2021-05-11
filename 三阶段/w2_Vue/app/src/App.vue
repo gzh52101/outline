@@ -5,8 +5,9 @@
     <!-- <HelloWorld msg="Welcome to Your Vue.js App"/> -->
     <!-- <hello-world></hello-world> -->
     Hello H5 2101
-    <!-- <Parent/> -->
+    <Parent/>
     <TodoList/>
+    <input v-baseurl:http="'jingjing.com'" />
   </div>
 </template>
 

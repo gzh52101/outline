@@ -4,6 +4,7 @@
         <p>myname:{{cname}}</p>
         <!-- <Child :componentCount="count" :qty="qty" v-on:changeqty="changeQty"></Child> -->
         <Child :componentCount="count" :qty.sync="qty"></Child>
+        <input v-baseurl:http.ssl.abc="url" v-focus />
     </div>
 </template>
 <script>
@@ -15,7 +16,8 @@ export default {
         return {
             cname:'Parent',
             count:10,
-            qty:1
+            qty:1,
+            url:'http://laoxie.com'
         }
     },
     components:{
@@ -25,6 +27,16 @@ export default {
         changeQty(qty){
             console.log('6666',qty)
             this.qty = qty;
+        }
+    },
+    directives:{
+        focus:{
+            bind(el){
+                // el.focus();
+            },
+            inserted(el){
+                el.focus();
+            }
         }
     }
 }

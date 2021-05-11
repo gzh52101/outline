@@ -1087,3 +1087,75 @@
         1. 每个生命周期函数的执行过程
         2. 每个生命周期函数适合做什么操作
     
+## day3-1
+
+### 面试题
+* 父子组件生命周期执行过程
+
+### 复习
+* 插槽：`<slot/>`
+    * 默认插槽
+        > 默认插槽的名字为default
+        ```js
+            <slot/>
+        ```
+    * 命名插槽: `v-slot:name`
+        ```js
+            // 组件<mytable/>内部代码
+            <slot name="footer"/>
+            <tr v-for="(item,idx) in datalist">
+                <slot name="tr" :item="item" :idx="idx" />
+            </tr>
+
+            // 使用组件
+            <mytable :data="datalist">
+                <h1>插槽内容</h1>
+                <template v-slot:footer>
+                    <h2>命名插槽内容</h2>
+                </template>
+            </mytable>
+        ```
+    * 作用域插槽: `v-slot:name="scope"`
+        ```js
+            <mytable :data="datalist">
+                <template v-slot:tr="scope">
+                   <td>{{item.xxx}}</td>
+                   <td>{{item.xxx}}</td>
+                   <td>{{scope.idx}}</td>
+                </template>
+            </mytable>
+        ```
+
+* 组件生命周期
+    > 搞懂Vue在每个阶段做了什么
+    * 创建阶段
+    * 挂载阶段
+    * 更新阶段
+        * 虚拟DOM
+        * diff算法：对比前后虚拟DOM，找出差异项
+        * key
+    * 销毁阶段
+
+### 知识点
+* 自定义组件：创建一个标签、
+    * 全局组件：Vue.component()
+    * 局部组件: components
+* 自定义指令：创建一个属性
+    * 定义
+        * 全局指令：Vue.directive(name,options)
+        * 局部指令: directives
+        ```js
+            Vue.directive('baseurl',{
+                bind(el,binding,vNode){},   //初始化时执行（默认）
+                inserted(){},   // 指令所在的元素插入页面时执行
+                update(){},     // 所在模板更新时执行
+                componentUpdated(){}, //所在模板完成一次更新周期时调用
+                unbind(){}, //指令与元素解绑时执行
+            })
+
+        ```
+    * 使用
+        > 指令完整格式：v-name:参数.修饰符="值"
+        ```js
+            <div v-baseurl="http://laoxie.com" />
+        ```
