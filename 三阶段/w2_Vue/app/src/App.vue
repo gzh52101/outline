@@ -5,9 +5,10 @@
     <!-- <HelloWorld msg="Welcome to Your Vue.js App"/> -->
     <!-- <hello-world></hello-world> -->
     Hello H5 2101
-    <Parent/>
-    <TodoList/>
-    <input v-baseurl:http="'jingjing.com'" />
+    <!-- <Parent/> -->
+    <!-- <TodoList/> -->
+    <!-- <input v-baseurl:http="'jingjing.com'" /> -->
+    <Test />
   </div>
 </template>
 
@@ -15,13 +16,23 @@
 // import HelloWorld from './components/HelloWorld.vue'
 import Parent from './components/Parent.vue'
 import TodoList from './components/TodoList/TodoList.vue'
+import Test from './components/Test.vue'
 
 export default {
   name: 'App',
+
+  // 父组件共享数据：provide
+  provide:{
+    money:10000000,
+    house:10,
+    qq:666688,
+    company:'alimama'
+  },
   components: {
     // HelloWorld,
     Parent,
-    TodoList
+    TodoList,
+    Test,
   },
   // template:'<div>test</div>',
   // render(createElement){

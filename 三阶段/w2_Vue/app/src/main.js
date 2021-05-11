@@ -5,6 +5,8 @@ import Vue from 'vue'
 import App from './App.vue'
 console.log('App=',App)
 
+import myPlugin from './plugins/myPlugin'
+
 // 导入模块对象中所有属性并赋值给all变量
 // import * as all from './module/a';
 // console.log('all=',all);
@@ -16,10 +18,10 @@ console.log('App=',App)
 
 // console.log('username=',myname);
 
-// 定义全局指令
-Vue.directive('baseurl',function(){
-  // 这个函数= bind() + update()
-})
+// 2. 定义全局指令
+// Vue.directive('baseurl',function(){
+//   // 这个函数= bind() + update()
+// })
 Vue.directive('baseurl',{
   bind(el,binding,vNode){
     // el: 指令所在的节点
@@ -44,6 +46,33 @@ Vue.directive('baseurl',{
   componentUpdated(){},
   unbind(){}
 })
+
+// 3. 全局过滤器
+Vue.filter('uppercase',function(value){
+  // value: 过滤器前面的数据
+  // console.log('value=',value)
+  return value.toUpperCase();
+});
+
+// 4. mixin
+Vue.mixin({
+  data(){
+    return {
+      id:123
+    }
+  },
+  methods:{
+    getData(){
+      return 100;
+    }
+  },
+  created(){
+    console.log('全局mixin.created')
+  }
+});
+
+// 5. 安装插件
+Vue.use(myPlugin)
 
 new Vue({
   // el,

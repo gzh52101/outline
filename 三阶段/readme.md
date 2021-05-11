@@ -1159,3 +1159,34 @@
         ```js
             <div v-baseurl="http://laoxie.com" />
         ```
+* 过滤器
+    * 定义
+        * 全局过滤器: Vue.filter(name,definition)
+        * 局部过滤器: filters:{name:definition}
+            ```js
+                Vue.filter('uppercase',function(value){})
+            ```
+    * 使用: |
+        > 过滤器可以用在: 双花括号，v-bind
+        ```js
+            <p v-bind:username="username | uppercase">{{username | uppercase}}
+        ```
+
+* 正则零宽断言
+    > 正则表达式分先行断言(lookahead)和后行断言(lookbehind)，先行断言和后行断言个2种，一共有4种形式
+    * (?=pattern) ：零宽正向先行断言
+        > 如果某个字符后面能匹配pattern，则匹配该字符
+    * (?!pattern) ： 零宽负向先行断言
+        > 如果某个字符后面不能匹配pattern，则匹配该字符
+    * (?<=pattern)： 零宽正向后行断言
+        > 如果某个字符前面能匹配pattern，则匹配该字符
+    * (?<!pattern) ：零宽负向后行断言
+        > 如果某个字符前面不能匹配pattern，则匹配该字符
+
+* mixin混入
+    > 提取组件的公共配置
+    * 定义
+        * 全局: Vue.mixin(options)
+            > 由于全局组件影响太大，在实际开发中不常用
+        * 局部: `mixins:[]`
+    
