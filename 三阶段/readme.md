@@ -1190,3 +1190,59 @@
             > 由于全局组件影响太大，在实际开发中不常用
         * 局部: `mixins:[]`
     
+## day3-2
+
+### 面试题
+* 如何实现点击图片不同的位置跳转到不同的页面
+    * 利用定位在图片上覆盖标签
+    * event.offsetX,event.offsetY
+    * map area
+        * 网页三剑客：dreamweaver+flash+firwork
+        * AS: action script
+### 复习
+* 组件Component
+* 指令Directive
+* 过滤器Filter
+* 混入Mixin
+* 依赖注入Provide/Inject
+* 插件Plugin
+    * 定义
+        * 对象：提供install方法，自动传入Vue作为函数参数
+        * 函数
+        ```js
+            const myPlugin = function(Vue){
+                // 在这插件可以扩展任何东西，比如：自定义组件，指令，过滤器，混入等等
+            }
+        ```
+    * 使用
+        Vue.use()
+### 知识点
+* VueRouter
+    > 作为插件增Vue的功能，路由：根据不同的浏览器地址显示不同的内容（单页面应用：根据hash值的不同显然不同的内容，页面不会刷新与跳转）
+    * 安装
+        ```bash
+            # 传统方式
+            npm i vue-router
+
+            # vueCLI（自动配置和引用）
+            vue add router
+        ```
+    * 使用
+        1. 安装并引入vue-router
+        2. 安装插件vue-router
+        3. 实例化router并配置参数
+            > routes
+        4. 把router实例注入到vue实例中
+        5. 在组件中使用
+
+    * 路由配置
+        * routes    路由规则
+        * mode      路由模式
+            * hash(默认)    hash路由（特点：url地址有一个#）
+            * history       
+    * 路由显示: `<router-view/>`
+    * 路由跳转（导航）
+        * `<router-link/>`
+* 单页面应用：SPA（Single Page Application）
+* 多页面应用：MPA（Multiple Page Application）
+
