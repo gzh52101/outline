@@ -1199,6 +1199,15 @@
     * map area
         * 网页三剑客：dreamweaver+flash+firwork
         * AS: action script
+* rem/vh/vw布局的缺陷
+    > 缩放布局
+    * 如何做适配
+        * 弹性盒
+        * 百分比
+        * 媒体查询
+        * 设备判断
+        * ...
+    
 ### 复习
 * 组件Component
 * 指令Directive
@@ -1242,7 +1251,24 @@
             * history       
     * 路由显示: `<router-view/>`
     * 路由跳转（导航）
-        * `<router-link/>`
+        > 通过name或path进行跳转
+        * 声明式导航：`<router-link/>`
+        * 编程式导航：利用js代码实现跳转
+            * $route    当前路由信息对象
+            * $router   路由实例
+                * push()    跳转并生成浏览记录
+                * replace() 跳转但不生产浏览记录
+                * back()
+                * forward()
+                * go()
+
 * 单页面应用：SPA（Single Page Application）
 * 多页面应用：MPA（Multiple Page Application）
 
+* UI框架（组件库）
+    > UI组件库都是通过插件的形式实现的
+    * Element            饿了么出品
+    * Ant Design of Vue  阿里出品
+    * iView              腾讯出品        
+    * VantUI             有赞出品
+    * ...

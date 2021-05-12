@@ -7,6 +7,8 @@ import Home from '../views/Home.vue'
 import Reg from '../views/Reg.vue'
 import Login from '../views/Login.vue'
 import Mine from '../views/Mine.vue'
+import Discover from '../views/Discover.vue'
+import Cart from '../views/Cart.vue'
 
 
 // 2. 安装插件
@@ -23,8 +25,17 @@ const router = new VueRouter({
     {path:'/',redirect:'/home'},  
     {
       // 当浏览器地址为/home时，显然Home组件内容
+      name:'home', // 命名路由：给路由起个名字，可以通过路由名称进行跳转
       path:'/home',
       component:Home
+    },
+    {
+      path:'/discover',
+      component:Discover
+    },
+    {
+      path:'/cart',
+      component:Cart
     },
     {
       path:'/login',
