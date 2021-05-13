@@ -1272,3 +1272,28 @@
     * iView              腾讯出品        
     * VantUI             有赞出品
     * ...
+
+
+
+## day3-3
+
+### 复习
+* 路由：vue-router
+    * 使用步骤
+        1. 安装与引入
+        2. 使用（安装）
+        3. 实例化并配置参数（路由规则）
+            * routes
+        4. 注入根实例
+        5. 使用
+            * 如何显示内容：`<router-view/>`
+            * 如何跳转
+                * 声明式导航：`<router-link/>`
+                    * to
+                    * tag
+                    * active-class
+                    * replace
+                    * event
+                * 编程式导航
+* 动态组件
+    * `<router-view/>`
