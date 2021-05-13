@@ -39,14 +39,20 @@
           :md="8"
           style="padding-right:10px;text-align:right;line-height:60px;"
         >
-          <el-button
-            type="text"
-            @click="goto('/reg')"
-          >注册</el-button>
-          <el-button
-            type="text"
-            @click="goto('/login')"
-          >登录</el-button>
+          <template v-if="isLogin">
+            <strong style="color:#fff;margin-right:5px;">{{userInfo.username}}</strong>
+            <el-button type="text" @click="logout">退出</el-button>
+          </template>
+          <template v-else>
+            <el-button
+              type="text"
+              @click="goto('/reg')"
+            >注册</el-button>
+            <el-button
+              type="text"
+              @click="goto('/login')"
+            >登录</el-button>
+          </template>
         </el-col>
       </el-row>
 
@@ -103,8 +109,14 @@ export default {
           text: "我的"
         }
       ],
-      currentPath: "/home"
+      currentPath: "/home",
+      userInfo:null,
     };
+  },
+  computed:{
+    isLogin(){
+      return !!this.userInfo;
+    }
   },
   components: {
     // HelloWorld
@@ -127,6 +139,10 @@ export default {
       }
 
       this.currentPath = item.path;
+    },
+    logout(){
+      this.userInfo = null;
+      localStorage.removeItem('userInfo')
     }
   },
   created() {
@@ -134,6 +150,12 @@ export default {
 
     const { path } = this.$route;
     this.currentPath = path;
+
+    // 判断用户是否登录
+    const userInfo = JSON.parse(localStorage.getItem('userInfo'))
+    if(userInfo){
+      this.userInfo = userInfo;
+    }
   }
 };
 </script>
@@ -150,4 +172,9 @@ nav span {
   color: #f00;
   font-weight: bold;
 }
+.price span::before,.price del::before{
+  content:'￥'
+}
+.price del{color:#666;margin-right:5px;}
+.price span{color:#f00}
 </style>

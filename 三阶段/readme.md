@@ -1295,5 +1295,20 @@
                     * replace
                     * event
                 * 编程式导航
+                    * $route
+                    * $router
+                        * push()
+                        * replace()
+                        * back()
+                        * forward()
+                        * go()
 * 动态组件
     * `<router-view/>`
+
+### 知识点
+* scoped局部样式
+    > 原理：给当前组件添加data-v-[hash]属性，然后通过属性选择器实现局部样式
+* 路由传参
+    * 动态路由
+        1. 配置动态路由
+        2. 接收：$route.params

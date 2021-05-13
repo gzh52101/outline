@@ -9,6 +9,7 @@ import Login from '../views/Login.vue'
 import Mine from '../views/Mine.vue'
 import Discover from '../views/Discover.vue'
 import Cart from '../views/Cart.vue'
+import Goods from '../views/Goods.vue'
 
 
 // 2. 安装插件
@@ -49,6 +50,10 @@ const router = new VueRouter({
       path:'/mine',
       component:Mine
     },
+    {
+        path:'/goods/:id',
+        component:Goods
+      },
   ]
 })
 

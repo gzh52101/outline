@@ -12,6 +12,8 @@
     "axios": "^0.21.1",
     "core-js": "^3.6.5",
     "element-ui": "^2.15.1",
+    "sass": "^1.32.13",
+    "sass-loader": "^11.1.0",
     "vue": "^2.6.11"
   },
   "devDependencies": {
