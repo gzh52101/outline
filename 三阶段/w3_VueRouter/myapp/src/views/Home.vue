@@ -32,7 +32,27 @@ export default {
   },
   methods:{
       goto(id){
-          this.$router.push('/goods/'+id)
+        // /goods/xxx
+        // this.$router.push('/goods/'+id)
+        // this.$router.push({
+        //     path:'/goods/'+id,
+        //     params:{
+        //         id
+        //     }
+        // })
+        this.$router.push({
+            // path:'/goods/'+id
+            name:'goods',
+            params:{
+                id,
+                username:'test',
+                age:18
+            },
+            query:{
+                id,
+                from:'home'
+            }
+        })
       }
   },
   async created() {

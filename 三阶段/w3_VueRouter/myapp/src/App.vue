@@ -57,7 +57,7 @@
       </el-row>
 
     </el-header>
-    <el-main>
+    <el-main style="overflow:hidden;">
       <router-view></router-view>
     </el-main>
   </el-container>

@@ -1312,3 +1312,63 @@
     * 动态路由
         1. 配置动态路由
         2. 接收：$route.params
+
+
+## day3-4
+
+### 面试题 
+* RESTful接口规范的理解
+* Vue实例化时对el,template,render几个配置参数的处理过程
+* attr与prop的区别
+    > attr: attribute为html属性，prop: property为节点属性
+    * jquery：
+        * attr()    设置html属性
+        * prop()    设置节点属性
+    * 原生：
+        * setAttribute() 设置html属性
+        * 点语法：设置节点属性
+    * 公共属性与私有属性会相互影响
+* 如何监听一个属性是否被修改
+    > getter&setter
+    * 原生：
+        ```js
+            const user = {
+                // 值属性
+                username:'jingjing',
+
+                // 存储器属性
+                get age(){
+                    
+                },
+                set age(){
+
+                }
+            }
+            Object.defineProperty(target,key,descriptor);// discriptor属性特性
+            Object.defineProperties()
+            user.age;
+            user.age = 20;
+        ```
+    * Vue中如何设置响应式属性
+        * 数据初始化
+        * Vue.set(target,key,val)/vm.$set()
+           > target不能是vm实例，也不能是数据根对象(vm.$data)
+        * 数组变更方法
+
+### 知识点
+* 路由传参
+    * params
+        > 获取方式：$route.params，刷新页面后参数消失（动态路由例外）
+        * 动态路由
+            > params方式给动态路由传参，只支持name方式跳转
+    * query: url参数
+        > 获取方式：$route.query，刷新页面后不会消失
+    * props: 定义时传参
+        * Object
+        * Function
+        * Boolean   把route.params作为组件的props属性
+* 数据持久化
+    > 刷新后参数依然存在
+* 监听动态路由变化
+    * watch监听$route属性
+    * 路由守卫（路由钩子函数）: beforeRouteUpdate

@@ -50,8 +50,18 @@ const router = new VueRouter({
       path:'/mine',
       component:Mine
     },
+
+    // 动态路由：路径可变的路由
     {
         path:'/goods/:id',
+        name:'goods',
+        // 定义路由时传参
+        // props:{a:10,b:20}, // 等效于: <Goods :a='10' :b='20' /> 或 <Goods v-bind="{a:10,b:20}"/>
+        // props:function(route){
+        //     // route: 当前路由信息（与实例中的$route一致）
+        //     return route.params
+        // },
+        props:true, // 如果 props 被设置为 true，内部会自动把route.params设置为组件属性
         component:Goods
       },
   ]
