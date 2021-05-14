@@ -1354,6 +1354,13 @@
         * Vue.set(target,key,val)/vm.$set()
            > target不能是vm实例，也不能是数据根对象(vm.$data)
         * 数组变更方法
+* 如何确认数组中是否包含某个值
+    * indexOf()
+    * includes()
+    * find()
+    * findIndex()
+* 在不改变源码的基础上如何在一个点击事件之前执行你的代码
+    * 利用事件捕获
 
 ### 知识点
 * 路由传参
@@ -1372,3 +1379,49 @@
 * 监听动态路由变化
     * watch监听$route属性
     * 路由守卫（路由钩子函数）: beforeRouteUpdate
+* 路由守卫
+    * 分类
+        * 全局守卫
+            > 是路由实例的方法，写在路由配置文件中
+            * router.beforeEach(fn)
+            * router.afterEach(fn)
+                * to
+                * from
+            * router.resolve(fn)
+        * 路由独享的守卫
+            > 写在路由配
+            * beforeEnter()
+        * 组件内的守卫
+            > 写在组件中
+            * beforeRouteEnter()
+            * beforeRouteUpdate()
+            * beforeRouteLeave()
+    * 路由守卫参数
+        * to        目标路由信息（$route）
+        * from      来源路由信息（$route）
+        * next      是一个函数，用于进入下一个步骤
+    * 路由执行步骤
+        1. 导航被触发
+        2. 在**失活组件**里调用beforeRouteLeave离开守卫。
+        3. 调用全局的 beforeEach 守卫。
+            4. 在**重用的组件**里调用 beforeRouteUpdate 守卫 (2.2+)。
+                > 重用组件路由切换进入到这步后，直接执行第7步（忽略2、4、5、6）
+        4. 在路由配置里调用 beforeEnter。
+        5. 解析异步路由组件。
+        6. 在被**激活组件**里调用 beforeRouteEnter。
+        7. 调用全局的 beforeResolve 守卫 (2.5+)。
+        8. 导航被确认。
+        9. 调用全局的 afterEach 钩子。
+        10. 触发 DOM 更新。
+    * 应用
+        * 利用路由守卫+token实现页面访问权限控制
+        * 动态配置路由实现页面访问权限控制
+            * router.addRoute()
+            * router.addRoutes()
+* 嵌套路由
+    * 配置
+        * children
+    * 使用
+        * 嵌套<router-view/>
+* 命名视图
+    > 给<router-view/>组件添加name属性，定义路由时要使用`components`配置

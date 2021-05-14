@@ -61,14 +61,10 @@ export default {
       },
       rules: {
         username: [
-          { required: true, message: "请输入用户名", trigger: "blur" },
+          { required: true, message: "请输入用户名", trigger: "blur" }
         ],
-        password: [
-          { required: true, message: "请输入密码", trigger: "blur" },
-        ],
-        vcode: [
-          { required: true, message: "请求输入验证码", trigger: "blur" },
-        ],
+        password: [{ required: true, message: "请输入密码", trigger: "blur" }],
+        vcode: [{ required: true, message: "请求输入验证码", trigger: "blur" }]
       }
     };
   },
@@ -80,18 +76,18 @@ export default {
         if (valid) {
           const { username, password, vcode } = this.formData;
           this.$request
-            .post(
-              "/login",
-              {
-                username,
-                password,
-                vcode
-              }
-            )
-            .then((data) => {
+            .post("/login", {
+              username,
+              password,
+              vcode
+            })
+            .then(data => {
               if (data.code === 200) {
-                this.$router.push("/mine");
-                localStorage.setItem('userInfo',JSON.stringify(data.data))
+                const { targetUrl = "/mine" } = this.$route.query;
+
+                localStorage.setItem("userInfo", JSON.stringify(data.data));
+
+                this.$router.push(targetUrl);
               } else if (data.code === 401) {
                 this.$message.error("验证码错误");
               }
@@ -100,11 +96,9 @@ export default {
       });
     },
     getVcode() {
-      this.$request
-        .get("/vcode/picture")
-        .then((data) => {
-          this.imgvcode = data.data;
-        });
+      this.$request.get("/vcode/picture").then(data => {
+        this.imgvcode = data.data;
+      });
     }
   },
   created() {

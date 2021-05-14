@@ -70,6 +70,13 @@ export default {
       total: false
     });
     this.newList = newList
+  },
+
+  // 路由守卫
+  beforeRouteLeave(to,from,next){
+      // 离开当前页面时触发
+      console.log('Home.beforeRouteLeave')
+      next();
   }
 };
 </script>

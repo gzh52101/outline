@@ -58,7 +58,9 @@
 
     </el-header>
     <el-main style="overflow:hidden;">
-      <router-view></router-view>
+      <router-view/>
+      <router-view name="main"></router-view>
+      <router-view name="footer"></router-view>
     </el-main>
   </el-container>
   <!-- </div> -->

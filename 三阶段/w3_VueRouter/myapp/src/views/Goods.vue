@@ -37,8 +37,19 @@ export default {
     //     }
     // },
     beforeRouteUpdate(to, from, next){
-        console.log('beforeRouteUpdate=',to, from);
+        console.log('Goods.beforeRouteUpdate=',to, from);
         this.getData(to.params.id);
+        next();
+    },
+    beforeRouteEnter(to, from,next){
+        console.log('Goods.beforeRouteEnter');
+        // 只有从首页进入才能访问当前页面
+        if(['/home','/discover'].includes(from.path)){
+            next();
+        }
+    },
+    beforeRouteLeave(to, from,next){
+        console.log('Goods.beforeRouteLeave');
         next();
     },
     async created(){
