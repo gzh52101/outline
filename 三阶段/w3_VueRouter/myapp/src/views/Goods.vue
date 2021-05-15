@@ -4,8 +4,8 @@
         <h1>{{goods.goods_name}}</h1>
         <p class="price"><del>{{goods.price.toFixed(2)}}</del><span>{{goods.sales_price.toFixed(2)}}</span></p>
         <p>销量：{{goods.sales_qty}}</p>
-        <el-button type="warning" icon="el-icon-shopping-cart-full" :disabled="goods.inventory<1">添加购物车</el-button>
-        <el-button type="danger" icon="el-icon-shopping-bag-2" :disabled="goods.inventory<1">立即购买</el-button>
+        <el-button type="warning" icon="el-icon-shopping-cart-full" :disabled="goods.inventory<1" @click="add2cart">添加购物车</el-button>
+        <el-button type="danger" icon="el-icon-shopping-bag-2" :disabled="goods.inventory<1" @click="buynow">立即购买</el-button>
 
         <h3>最新商品</h3>
         <el-row :gutter="20">
@@ -36,15 +36,20 @@ export default {
     //         this.getData();
     //     }
     // },
+    computed:{
+        cartlist(){
+            return this.$store.state.cartlist;
+        }
+    },
     beforeRouteUpdate(to, from, next){
         console.log('Goods.beforeRouteUpdate=',to, from);
         this.getData(to.params.id);
         next();
     },
     beforeRouteEnter(to, from,next){
-        console.log('Goods.beforeRouteEnter');
+        console.log('Goods.beforeRouteEnter',to, from);
         // 只有从首页进入才能访问当前页面
-        if(['/home','/discover'].includes(from.path)){
+        if(['/home','/discover','/','/cart'].includes(from.path)){
             next();
         }
     },
@@ -53,7 +58,7 @@ export default {
         next();
     },
     async created(){
-        console.log('Goods',this);
+        console.log('Goods=',this);
         this.getData();
 
         // 获取热门商品
@@ -63,6 +68,7 @@ export default {
         });
 
         this.hotList = hotList;
+
     },
     methods:{
         goto(id){
@@ -77,6 +83,27 @@ export default {
             data.img_url = this.baseUrl + data.img_url;
             data.big_img_url = this.baseUrl + data.big_img_url;
             this.goods = data;
+        },
+        add2cart(){
+            // 判断当前商品在购物车中是否已经存在
+            // 存在：数量+1
+            // 不存在：添加到购物车
+            const {_id} = this.goods;
+            const currentGoods = this.cartlist.find(item=>item._id === _id);
+            if(currentGoods){
+                this.$store.commit('changeGoodsQty',{id:_id,qty:currentGoods.qty+1})
+            }else{
+                const goods = {
+                    ...this.goods,
+                    qty:1
+                }
+                this.$store.commit('addToCart',goods);
+            }
+
+        },
+        buynow(){
+            this.add2cart();
+            this.$router.push('/cart');
         }
     }
 }

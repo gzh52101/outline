@@ -1425,3 +1425,33 @@
         * 嵌套<router-view/>
 * 命名视图
     > 给<router-view/>组件添加name属性，定义路由时要使用`components`配置
+    * compnents与component不能同时使用
+
+## day3-5
+
+### 面试题
+* 动态路由面嵌套路由的区别
+
+### 知识点
+* VueX使用步骤
+    1. 安装模块并引入
+        ```bash
+            npm install vuex
+        ```
+    2. 安装插件
+        ```js
+            Vue.use(Vuex);
+        ```
+    3. 实例化
+        ```js
+            const store = new Vuex.Store()
+        ```
+    4. 注入跟实例
+    5. 组件中使用
+        > this.$store
+* VueX核心配置
+    * state
+    * getters
+    * mutations
+        > 调用方式：store.commit(mutation,args)
+

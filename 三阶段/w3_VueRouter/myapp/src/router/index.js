@@ -142,6 +142,9 @@ router.beforeEach(function (to, from, next) {
                             targetUrl:to.fullPath
                         }
                     });
+
+                    // 清除本地存储数据
+                    localStorage.removeItem('userInfo')
                 }
             })
         } else {

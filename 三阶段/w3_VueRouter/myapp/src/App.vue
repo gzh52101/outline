@@ -24,12 +24,19 @@
             router
             :default-active="currentPath"
           >
+            
             <el-menu-item
               :index="item.path"
               v-for="item in menu"
               :key="item.path"
-            ><i :class="item.icon"></i> {{item.text}}</el-menu-item>
-
+            >
+            <el-badge :value="$store.getters.count" class="cart-badge" v-if="item.name === 'cart'">
+              <i :class="item.icon"></i> {{item.text}}
+            </el-badge>
+            <template v-else>
+              <i :class="item.icon"></i> {{item.text}}
+            </template>
+            </el-menu-item>
           </el-menu>
         </el-col>
         <!-- <el-col :span="6"  -->
@@ -179,4 +186,7 @@ nav span {
 }
 .price del{color:#666;margin-right:5px;}
 .price span{color:#f00}
+.cart-badge .el-badge__content.is-fixed{
+  top:12px;
+}
 </style>

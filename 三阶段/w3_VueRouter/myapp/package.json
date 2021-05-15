@@ -14,7 +14,8 @@
     "element-ui": "^2.15.1",
     "sass": "^1.32.13",
     "sass-loader": "^11.1.0",
-    "vue": "^2.6.11"
+    "vue": "^2.6.11",
+    "vuex": "^3.6.2"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.0",
