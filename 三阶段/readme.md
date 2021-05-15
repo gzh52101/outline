@@ -1453,5 +1453,18 @@
     * state
     * getters
     * mutations
-        > 调用方式：store.commit(mutation,args)
+        > 修改state的唯一方式(必须遵循的原则)，
+        * 调用方式：`store.commit(mutation,arg)`
+    * actions
+        > 类似于 mutations，负责异步操作（actions中可以包含异步操作, mutations中绝对不允许出现异步）
+        * 调用方式：`store.dispatch(action,arg) `
 
+* 模块化store：`modules`配置参数
+    > 设置模块化后，默认只影响state的获取，getters,mutations,actions的操作不受影响（他们公用命名空间）
+    ```js
+        // 模块化前 -> 模块化后
+        $store.state.xxx -> $store.state.[module].xxx
+        $store.getters.xxx -> $store.getters.xxx
+        $store.commit(mutaition)
+        $store.dispatch(action)
+    ```

@@ -38,7 +38,7 @@ export default {
     // },
     computed:{
         cartlist(){
-            return this.$store.state.cartlist;
+            return this.$store.state.cart.cartlist;
         }
     },
     beforeRouteUpdate(to, from, next){
@@ -47,7 +47,7 @@ export default {
         next();
     },
     beforeRouteEnter(to, from,next){
-        console.log('Goods.beforeRouteEnter',to, from);
+       
         // 只有从首页进入才能访问当前页面
         if(['/home','/discover','/','/cart'].includes(from.path)){
             next();
@@ -69,6 +69,11 @@ export default {
 
         this.hotList = hotList;
 
+        // 隐藏头部菜单
+         this.$store.commit('displayNav',false);
+    },
+    destroyed(){
+        this.$store.commit('displayNav',true);
     },
     methods:{
         goto(id){

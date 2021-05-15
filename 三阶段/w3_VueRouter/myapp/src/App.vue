@@ -8,7 +8,7 @@
   <!-- </ul> -->
   <!-- <nav><span v-for="item in menu" :class="{current:item.path===currentPath}" :key="item.path" @click="goto(item)">{{item.text}}</span> </nav>-->
   <el-container>
-    <el-header style="padding:0;background-color:#545c64">
+    <el-header style="padding:0;background-color:#545c64" v-show="showNav">
       <el-row>
         <!-- <el-col :span="18"> -->
         <el-col
@@ -30,7 +30,7 @@
               v-for="item in menu"
               :key="item.path"
             >
-            <el-badge :value="$store.getters.count" class="cart-badge" v-if="item.name === 'cart'">
+            <el-badge :value="cartCount" class="cart-badge" v-if="item.name === 'cart'">
               <i :class="item.icon"></i> {{item.text}}
             </el-badge>
             <template v-else>
@@ -63,6 +63,9 @@
         </el-col>
       </el-row>
 
+    </el-header>
+    <el-header v-show="!showNav">
+      <el-button icon="el-icon-arrow-left" circle @click="goBack"></el-button>
     </el-header>
     <el-main style="overflow:hidden;">
       <router-view/>
@@ -119,12 +122,21 @@ export default {
         }
       ],
       currentPath: "/home",
-      userInfo:null,
+      // userInfo:null,
     };
   },
   computed:{
     isLogin(){
-      return !!this.userInfo;
+      return this.$store.getters.isLogin;
+    },
+    cartCount(){
+      return this.$store.getters.count;
+    },
+    userInfo(){
+      return this.$store.state.user.userInfo;
+    },
+    showNav(){
+      return this.$store.state.common.showNav;
     }
   },
   components: {
@@ -149,9 +161,13 @@ export default {
 
       this.currentPath = item.path;
     },
+    goBack(){
+      this.$router.back();
+    },
     logout(){
-      this.userInfo = null;
-      localStorage.removeItem('userInfo')
+      // this.userInfo = null;
+      // localStorage.removeItem('userInfo')
+      this.$store.commit('logout');
     }
   },
   created() {
@@ -160,11 +176,11 @@ export default {
     const { path } = this.$route;
     this.currentPath = path;
 
-    // 判断用户是否登录
-    const userInfo = JSON.parse(localStorage.getItem('userInfo'))
-    if(userInfo){
-      this.userInfo = userInfo;
-    }
+    // // 判断用户是否登录
+    // const userInfo = JSON.parse(localStorage.getItem('userInfo'))
+    // if(userInfo){
+    //   this.userInfo = userInfo;
+    // }
   }
 };
 </script>

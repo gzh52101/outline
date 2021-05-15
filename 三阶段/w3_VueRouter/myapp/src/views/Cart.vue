@@ -105,13 +105,18 @@ export default {
           return this.$store.getters.totalPrice.toFixed(2);
       },
       goodslist(){
-        return this.$store.state.cartlist
+        return this.$store.state.cart.cartlist
       }
   },
   methods:{
       changeQty(id,qty){
           console.log('changeQty',id,qty)
-          this.$store.commit('changeGoodsQty',{id,qty})
+          // this.$request.get('/goods/'+id).then(({data})=>{
+          //   if(qty <= data.inventory){
+          //     this.$store.commit('changeGoodsQty',{id,qty})
+          //   }
+          // })
+          this.$store.dispatch('changeGoodsQtyAsync',{id,qty})
       },
       remove(id){
         this.$store.commit('removeCart',id)

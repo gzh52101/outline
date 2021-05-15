@@ -17,6 +17,7 @@ import Man from '../views/discover/Man.vue'
 import Girl from '../views/discover/Girl.vue'
 import Boy from '../views/discover/Boy.vue'
 
+import store from '../store'
 
 // 2. 安装插件
 Vue.use(VueRouter);
@@ -124,7 +125,9 @@ router.beforeEach(function (to, from, next) {
     console.log('beforeEach', to)
     // 判断用户登录后才可访问购物车，我的
     if (to.meta.requiresAuth) {
-        let userInfo = JSON.parse(localStorage.getItem('userInfo'));
+        // let userInfo = JSON.parse(localStorage.getItem('userInfo'));
+
+        let {userInfo} = store.state.user;
         console.log('userInfo=', userInfo);
         if (userInfo) {
             next();
@@ -144,7 +147,8 @@ router.beforeEach(function (to, from, next) {
                     });
 
                     // 清除本地存储数据
-                    localStorage.removeItem('userInfo')
+                    // localStorage.removeItem('userInfo')
+                    store.commit('logout');
                 }
             })
         } else {
