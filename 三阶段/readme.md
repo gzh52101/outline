@@ -1458,6 +1458,7 @@
     * actions
         > 类似于 mutations，负责异步操作（actions中可以包含异步操作, mutations中绝对不允许出现异步）
         * 调用方式：`store.dispatch(action,arg) `
+    * modules
 
 * 模块化store：`modules`配置参数
     > 设置模块化后，默认只影响state的获取，getters,mutations,actions的操作不受影响（他们公用命名空间）
@@ -1468,3 +1469,16 @@
         $store.commit(mutaition)
         $store.dispatch(action)
     ```
+
+## day4-1
+
+### 知识点
+* Vuex模块命名空间
+    > 在模块中设置`namespaced:true`
+
+* 映射Vuex
+    > 简化vuex在组件中的操作
+    * mapState([namespaced],state)      映射到组件的computed
+    * mapGetters([namespaced],state)    映射到组件的computed
+    * mapMutations()                    映射到组件的methods
+    * mapActions()                      映射到组件的methods

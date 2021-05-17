@@ -148,7 +148,10 @@ router.beforeEach(function (to, from, next) {
 
                     // 清除本地存储数据
                     // localStorage.removeItem('userInfo')
-                    store.commit('logout');
+                    // store.commit('logout');
+
+                    // 设置命名空间后的写法：
+                    store.commit('user/logout');
                 }
             })
         } else {

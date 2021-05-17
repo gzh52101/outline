@@ -86,7 +86,10 @@ export default {
                 const { targetUrl = "/mine" } = this.$route.query;
 
                 // localStorage.setItem("userInfo", JSON.stringify(data.data));
-                this.$store.commit("login", data.data);
+                // this.$store.commit("login", data.data);
+
+                // 设置命名空间后的写法：
+                this.$store.commit("user/login", data.data);
                 
                 this.$router.push(targetUrl);
               } else if (data.code === 401) {

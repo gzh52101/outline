@@ -78,6 +78,10 @@
 
 <script>
 // import HelloWorld from './components/HelloWorld.vue'
+import {mapState,mapGetters,mapMutations, mapActions} from 'vuex'
+
+const res = mapGetters(['count']);
+console.log('res=',res)
 
 export default {
   name: "App",
@@ -126,18 +130,43 @@ export default {
     };
   },
   computed:{
-    isLogin(){
-      return this.$store.getters.isLogin;
-    },
-    cartCount(){
-      return this.$store.getters.count;
-    },
-    userInfo(){
-      return this.$store.state.user.userInfo;
-    },
-    showNav(){
-      return this.$store.state.common.showNav;
-    }
+    // isLogin(){
+    //   // return this.$store.getters.isLogin;
+
+    //   // 使用命名空间后写法：
+    //   return this.$store.getters['user/isLogin'];
+    // },
+    // cartCount(){
+    //   return this.$store.getters.count;
+    // },
+    // userInfo(){
+    //   return this.$store.state.user.userInfo;
+    // },
+    // showNav(){
+    //   return this.$store.state.common.showNav;
+    // },
+
+    // 映射vuex数据到computed属性
+    // ...mapGetters(['count']), // 等效于 count(){return this.$store.getters.count}
+    ...mapGetters({cartCount:'count'}), // 等效于 cartCount(){return this.$store.getters.count}
+    ...mapGetters('user',['isLogin']),
+    // ...mapState(['a']), // a(){return this.$store.state.a}
+    ...mapState({
+      // userInfo:function(state){
+      //   return state.user.userInfo;
+      // },
+      showNav(state){
+        console.log('showNav.state=',state);
+        return state.common.showNav;
+      }
+    }),
+
+    // 命名空间映射写法
+    ...mapState('user',{
+      userInfo(state){
+        return state.userInfo;
+      }
+    })
   },
   components: {
     // HelloWorld
@@ -164,11 +193,24 @@ export default {
     goBack(){
       this.$router.back();
     },
-    logout(){
-      // this.userInfo = null;
-      // localStorage.removeItem('userInfo')
-      this.$store.commit('logout');
-    }
+    // logout(){
+    //   // this.userInfo = null;
+    //   // localStorage.removeItem('userInfo')
+    //   this.$store.commit('user/logout');
+    // }
+
+    // 映射Mutation到组件
+    // ...mapMutations('user',['logout']),
+    ...mapMutations('user',{logout:function(commit,payload){
+        commit('logout')
+    }}),
+
+    // 映射Action到组件
+    ...mapActions({
+      mytest(dispatch,payload){
+        dispatch('test')
+      }
+    })
   },
   created() {
     console.log("App.created", this);
@@ -181,6 +223,9 @@ export default {
     // if(userInfo){
     //   this.userInfo = userInfo;
     // }
+
+    // 测试带命名空间的action
+    // this.$store.dispatch('user/test')
   }
 };
 </script>

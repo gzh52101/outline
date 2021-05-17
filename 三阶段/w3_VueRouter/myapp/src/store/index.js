@@ -8,6 +8,22 @@ import common from './modules/common'
 Vue.use(Vuex);
 
 const store = new Vuex.Store({
+    // 全局
+    state:{
+        a:10,
+    },
+    getters:{
+        sum(state){
+            return state.a*state.a;
+        }
+    },
+    mutations:{
+        add(state){
+            state.a++;
+        }
+    },
+    actions:{},
+
     // 模块化store
     modules:{
         cart,
