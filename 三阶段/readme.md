@@ -1459,13 +1459,16 @@
         > 类似于 mutations，负责异步操作（actions中可以包含异步操作, mutations中绝对不允许出现异步）
         * 调用方式：`store.dispatch(action,arg) `
     * modules
+    * namespaced
 
 * 模块化store：`modules`配置参数
     > 设置模块化后，默认只影响state的获取，getters,mutations,actions的操作不受影响（他们公用命名空间）
     ```js
         // 模块化前 -> 模块化后
         $store.state.xxx -> $store.state.[module].xxx
-        $store.getters.xxx -> $store.getters.xxx
+
+        // 以下操作没有变化
+        $store.getters.xxx
         $store.commit(mutaition)
         $store.dispatch(action)
     ```
@@ -1475,6 +1478,30 @@
 ### 知识点
 * Vuex模块命名空间
     > 在模块中设置`namespaced:true`
+    ```js
+        $store.getters.xxx -> $store.getters['module/xxx']
+        $store.commit(mutaition) -> $store.commit('module/mutaition')
+        $store.dispatch(action) -> $store.dispatch('module/action')
+    ```
+    * 在具有命名空间的模块中操作全局命名空间
+        ```js
+            // getters
+            getters:{
+                myget(state,getters,rootState,rootGetters){
+
+                }
+            },
+            actions:{
+                myaction(ctx,payload){
+                    // ctx.dispatch()
+                    // ctx.commit()
+                    // ctx.state
+                    // ctx.getters
+                    // ctx.rootState
+                    // ctx.rootGetters
+                }
+            }
+        ```
 
 * 映射Vuex
     > 简化vuex在组件中的操作
@@ -1482,3 +1509,32 @@
     * mapGetters([namespaced],state)    映射到组件的computed
     * mapMutations()                    映射到组件的methods
     * mapActions()                      映射到组件的methods
+
+
+## day4-2
+
+### 面试题
+* 如何监听动态路由变化
+    * beforeRouteUpdate
+    * watch
+* 验证码验证过程
+    > 目的：防止程序恶意注册
+    * 类型
+        * 图形验证码
+        * 手机验证码
+    * 实现步骤
+        1. 客户端请求验证码
+        2. 服务器生成验证码，并返回给前端(图片)，并在服务器保存一份（文本）
+            > 第一次请求，服务器需要通过`set-cookie`响应sessiongid到客户端
+            * 保存数据到sesssiong: `req.session.xxx = xxx`
+        3. 客户端发送验证码到服务器
+        4. 服务器校验前端发送的验证码是否与服务器的一致
+            > 请求参数与session数据进行对比
+            * 相同：放行
+            * 不同：阻止
+    * 依赖模块
+        * express-session   用于识别用户与保存验证码
+            > 原理：利用cookie来识别用户身份
+            1. 第一次请求响应`Set-Cookie`，把sessionid保存在本地
+            2. 以后的每次请求自动携带sessionid
+        * svg-captcha       生成验证码

@@ -8,7 +8,19 @@ const router = express.Router();
 // 登录
 router.get('/',async (req,res)=>{
     // 获取前端传入的用户名和密码，查询数据库是否能匹配
-    let {username,password} = req.query;
+    let {username,password,vcode} = req.query;
+
+    // 校验验证码
+    vcode = vcode.toLocaleLowerCase();
+    console.log('vcode=',vcode,req.session.vcode)
+    if(vcode != req.session.vcode){
+        res.send(formatData({
+            code:401,
+            msg:'vcode is incorrect'
+        }))
+        return;
+    }
+    console.log('放行')
 
     password = formatPassword(password)
 
