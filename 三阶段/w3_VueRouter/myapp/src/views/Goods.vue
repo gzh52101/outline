@@ -49,9 +49,9 @@ export default {
     beforeRouteEnter(to, from,next){
        
         // 只有从首页进入才能访问当前页面
-        if(['/home','/discover','/','/cart'].includes(from.path)){
+        // if(['/home','/discover','/','/cart'].includes(from.path)){
             next();
-        }
+        // }
     },
     beforeRouteLeave(to, from,next){
         console.log('Goods.beforeRouteLeave');
@@ -73,6 +73,7 @@ export default {
          this.$store.commit('displayNav',false);
     },
     destroyed(){
+        console.log('Goods.destroyed')
         this.$store.commit('displayNav',true);
     },
     methods:{

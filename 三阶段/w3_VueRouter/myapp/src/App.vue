@@ -68,9 +68,11 @@
       <el-button icon="el-icon-arrow-left" circle @click="goBack"></el-button>
     </el-header>
     <el-main style="overflow:hidden;">
-      <router-view/>
-      <router-view name="main"></router-view>
-      <router-view name="footer"></router-view>
+      <keep-alive include="Discover,Search">
+        <router-view/>
+      </keep-alive>
+      <!-- <router-view name="main"></router-view>
+      <router-view name="footer"></router-view> -->
     </el-main>
   </el-container>
   <!-- </div> -->

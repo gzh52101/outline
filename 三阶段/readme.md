@@ -1538,3 +1538,11 @@
             1. 第一次请求响应`Set-Cookie`，把sessionid保存在本地
             2. 以后的每次请求自动携带sessionid
         * svg-captcha       生成验证码
+    
+## day4-3
+
+### 知识点
+* 缓存组件 `<keep-alive/>`
+    * include
+    * exclude
+    * max

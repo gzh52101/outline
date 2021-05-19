@@ -12,6 +12,7 @@ import Cart from '../views/Cart.vue'
 import Goods from '../views/Goods.vue'
 import Footer from '../views/Footer.vue'
 import NotFound from '../views/NotFound.vue'
+import Search from '../views/Search.vue'
 
 import Man from '../views/discover/Man.vue'
 import Girl from '../views/discover/Girl.vue'
@@ -41,27 +42,28 @@ const router = new VueRouter({
                 footer:Footer
             }
         },
+        { path: '/discover', redirect: '/discover/man' },
         {
-            path: '/discover',
+            path: '/discover/:cat',
             component: Discover,
             // 嵌套路由
-            children:[
-                // {path:'',redirect:{name:'man'}},
-                {path:'',redirect:'man'},
-                {
-                    path:'man', // /discover/man
-                    name:'man',
-                    component:Man
-                },
-                {
-                    path:'girl', // /discover/girl
-                    component:Girl
-                },
-                {
-                    path:'boy',  // /discover/boy
-                    component:Boy
-                }
-            ],
+            // children:[
+            //     // {path:'',redirect:{name:'man'}},
+            //     {path:'',redirect:'man'},
+            //     {
+            //         path:'man', // /discover/man
+            //         name:'man',
+            //         component:Man
+            //     },
+            //     {
+            //         path:'girl', // /discover/girl
+            //         component:Girl
+            //     },
+            //     {
+            //         path:'boy',  // /discover/boy
+            //         component:Boy
+            //     }
+            // ],
         },
         {
             path: '/cart',
@@ -85,6 +87,10 @@ const router = new VueRouter({
             meta: {
                 requiresAuth: true
             }
+        },
+        {
+            path: '/search',
+            component: Search,
         },
 
         // 动态路由：路径可变的路由
