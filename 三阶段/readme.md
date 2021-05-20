@@ -1541,8 +1541,112 @@
     
 ## day4-3
 
+### 面试题
+* js中的严格模式
+    > 'use strict'
+    * 为什么会有严格模式
+* ES6中的扩展运算符 `...`
+    ```js
+        arr = [10,20,30]
+        obj = {a:10,b:20,c:30}
+
+        // 用法一：扩展操作
+        [...arr]
+        {...obj}
+        rest(...arr); // 等效于rest(10,20,30)
+
+        // 用法二：剩余操作
+        function rest(a,...b){}
+        rest(10,20,30)
+        rest(10,20,30,40,50)
+
+        const {a,...b} = {a:1,b:2,c:3}; // a:1,b:{b:2,c:3}
+        const [a,...b] = [10,20,30,40];// a:10,b:[20,30,40]
+
+        var obj = {a:10,b:20,c:30,d:{d1:41,d2:{d1:1,d2:2}}}
+        var obj2 = obj;
+        var a = 'jingjing'
+        var b = a;
+
+        // 浅拷贝：只拷贝最外层数据
+        // 深拷贝：拷贝全部数据
+    ```
+
 ### 知识点
 * 缓存组件 `<keep-alive/>`
-    * include
-    * exclude
-    * max
+    * 属性
+        * include       String/RegExp
+        * exclude       String/RegExp
+        * max       
+    * 钩子函数
+        * activated     keep-alive包裹的组件激活时执行
+        * deactivated   keep-alive包裹的组件失活时执行
+
+    ```js
+        <keep-alive>
+            <router-view/>
+            <component :is="xxx"/>
+        </keep-alive>
+    ```
+* 动态组件
+    * `<component/>`
+        > 根据is属性显示不同的内容
+        ```html
+            <component is="Home"></component>
+            <component :is="{}"></component>
+        ```
+    * `<router-view/>`
+        > 根据url地址显示不同的内容
+
+* 动画组件
+    * transition            单个元素动画 
+    * transition-group      多个元素动画
+    ```js
+        <transition>
+            <div v-show="show"></div>
+        </transition>
+
+        <transition-group>
+            <div></div>
+            <span></span>
+        </transition-group>
+
+        <transition>
+            <router-view/>
+        </transition>
+
+        <transition name="fade">
+            <component is="xxx"/>
+        </transition>
+    ```
+    * 类名
+        * 修改类型前缀：利用属性name控制，默认：v
+            * v-enter   -> fade-enter
+            * v-enter-active    -> fade-enter-active
+            * v-enter-to
+            * v-leave
+            * v-leave-active
+            * v-leave-to
+        * 修改整个类名: 利用以下transition属性，一般结合动画库实现过渡效果（animate.css）
+            * enter-class
+            * enter-active-class
+            * enter-to-class
+            * leave-class
+            * leave-active-class
+            * leave-to-class
+            ```js
+                <transition enter-class="myenter">
+                    <router-view/>
+                </transition>
+            ```
+
+        ```css
+            .v-enter{opacity:0}
+            .v-enter-active{transition:opacity 0.5s;}
+            .v-enter-to{opacity:1}
+
+
+            .myenter{
+
+            }
+        ```

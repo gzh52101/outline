@@ -106,7 +106,6 @@ const router = new VueRouter({
             props: true, // 如果 props 被设置为 true，内部会自动把route.params设置为组件属性
             component: Goods,
             beforeEnter(to, from, next) {
-                console.log('Goods.beforeEnter')
                 next();
             }
         },
@@ -124,17 +123,14 @@ const router = new VueRouter({
     ]
 })
 
-console.log('router',router);
 
 // 全局路由首尾
 router.beforeEach(function (to, from, next) {
-    console.log('beforeEach', to)
     // 判断用户登录后才可访问购物车，我的
     if (to.meta.requiresAuth) {
         // let userInfo = JSON.parse(localStorage.getItem('userInfo'));
 
         let {userInfo} = store.state.user;
-        console.log('userInfo=', userInfo);
         if (userInfo) {
             next();
 
@@ -173,11 +169,10 @@ router.beforeEach(function (to, from, next) {
     }
 })
 router.beforeResolve(function (to, from, next) {
-    console.log('beforeResolve')
     next();
 })
 router.afterEach(function (to, from) {
-    console.log('afterEach')
+    // console.log('afterEach')
 })
 
 

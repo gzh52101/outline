@@ -83,7 +83,6 @@
 import {mapState,mapGetters,mapMutations, mapActions} from 'vuex'
 
 const res = mapGetters(['count']);
-console.log('res=',res)
 
 export default {
   name: "App",
@@ -158,7 +157,6 @@ export default {
       //   return state.user.userInfo;
       // },
       showNav(state){
-        console.log('showNav.state=',state);
         return state.common.showNav;
       }
     }),
@@ -215,7 +213,6 @@ export default {
     })
   },
   created() {
-    console.log("App.created", this);
 
     const { path } = this.$route;
     this.currentPath = path;

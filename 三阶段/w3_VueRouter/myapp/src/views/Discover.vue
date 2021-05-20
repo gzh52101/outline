@@ -105,7 +105,7 @@ export default {
     }
   },
   async created() {
-    //   console.log('created',this.$route);
+      console.log('Discover.created');
     //   this.baseUrl = this.$route.path;
     //   this.currentPath = this.baseUrl + '/man'
 
@@ -118,6 +118,17 @@ export default {
     this.menu = categories;
 
     this.getData();
+  },
+  destroyed(){
+    console.log('Discover.destroyed')
+  },
+  activated(){
+    
+    console.log('Discover.activated')
+  },
+  deactivated(){
+    console.log('Discover.deactivated')
+
   }
 };
 </script>

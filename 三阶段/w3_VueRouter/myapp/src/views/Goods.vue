@@ -42,7 +42,6 @@ export default {
         }
     },
     beforeRouteUpdate(to, from, next){
-        console.log('Goods.beforeRouteUpdate=',to, from);
         this.getData(to.params.id);
         next();
     },
@@ -54,11 +53,9 @@ export default {
         // }
     },
     beforeRouteLeave(to, from,next){
-        console.log('Goods.beforeRouteLeave');
         next();
     },
     async created(){
-        console.log('Goods=',this);
         this.getData();
 
         // 获取热门商品
@@ -73,7 +70,6 @@ export default {
          this.$store.commit('displayNav',false);
     },
     destroyed(){
-        console.log('Goods.destroyed')
         this.$store.commit('displayNav',true);
     },
     methods:{
@@ -82,10 +78,8 @@ export default {
         },
         async getData(id){
             id = id || this.$route.params.id;
-            console.log('id=',id)
 
             const {data} = await this.$request.get('/goods/'+id);
-            console.log('data',data)
             data.img_url = this.baseUrl + data.img_url;
             data.big_img_url = this.baseUrl + data.big_img_url;
             this.goods = data;

@@ -20,7 +20,6 @@ export default {
             // getters: 当前模块getters
             // rootState: 全局state
             // rootGetters: 全局getters
-            console.log('getters.isLogin',state,getters,rootState,rootGetters)
             return !!state.userInfo._id;
         }
     },
@@ -39,7 +38,6 @@ export default {
     },
     actions:{
         test(context,payload){
-            console.log('action.test.context=',context)
             // context： 一个类似与store的对象
             //  * dispatch()
             //  * commit()
