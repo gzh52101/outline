@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>14.key的作用</title>
+    <script src="js/vue.js"></script>
+    <style>
+        #box{background-color: #f00;}
+    </style>
+</head>
+<body>
+    <div id="app">
+       <div id="box" ref="box" :style="mystyle"></div>
+    </div>
+   
+    <script>
+        /**
+            
+        */
+       
+        let vm = new Vue({
+            el:'#app',
+            data:{
+                mystyle:{
+                    width:'100px',
+                    height:'100px'
+                }
+            },
+            methods:{
+                
+            },
+            async mounted(){
+               await this.$nextTick()
+               console.log('mounted.nextTick后',box.style.width)
+            }
+        })
+
+        vm.mystyle.width = '200px';
+
+        // 因为视图渲染是异步的，所以在修改数据后不能立即得到最新值
+        console.log('数据修改后=',box.style.width);
+
+        // 但有时候我们的需求是在修改数据后进行节点操作
+        // setTimeout是一个不准确的操作
+        // setTimeout(function(){
+        //     // 这里的代码虽然延迟时间为0，但需要等待执行栈空闲且队列中没有其他任务时执行
+        //     console.log('setTimeout=',box.style.width)
+        // },0)
+        
+        // Vue.nextTick() / vm.$nextTick()
+        Vue.nextTick(()=>{
+            // 这里的代码在视图更新后执行
+            console.log('nextTick=',box.style.width);
+        })
+
+        // await Vue.nextTick();
+        // console.log('nextTick后=',box.style.width);
+        
+    </script>
+</body>
+</html>

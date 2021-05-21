@@ -1,24 +1,19 @@
-# myapp
+## 项目名称：xxx
 
-## Project setup
-```
-npm install
-```
+## 演示
+* 官网: https://www.jd.com
+* 上线网址
+    * webApp: http://10.1.2.3:8080
+    * 后台管理系统: http://10.1.2.3:2101
+## git仓库地址
+    * https://github.com/gzh52101/gdou
+## 数据库说明
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+## 团队与分工
+    * 负责人：xxx，团队成员：xxx,xxx
+    * 负责模块说明
+## 项目页面截图
+> 截有代表性的页面，不少于3张
 
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+* !['title'](./img/1.png 'alt')
+* <img src="./img/1.png" style="" />

@@ -1635,7 +1635,7 @@
             * leave-active-class
             * leave-to-class
             ```js
-                <transition enter-class="myenter">
+                <transition enter-active-class="animated fadeInUp">
                     <router-view/>
                 </transition>
             ```
@@ -1649,4 +1649,48 @@
             .myenter{
 
             }
+        ```
+
+## 4-5
+
+### 知识点
+* props数据类型校验
+    > 对传入的数据进行类型限制
+    * 单个类型校验
+        * Number
+        * String
+        * Boolean
+        * Object
+        * Array
+    * 多个类型校验: []
+    * 默认值: default
+    * 必填：required
+    * 自定义校验类型: validator
+
+* 路径别名
+    * `@`   在VueCLI中代表`src`目录
+
+* nextTick()
+    * 数据修改 -> 监听到修改（getter&setter）-> 
+        ```js
+            <div id="box" :style="mystyle">{{msg}}</div>
+            vm = new Vue({
+                data:{
+                    msg:'hello',
+                    mystyle:{
+                        width:'100px',
+                        height:'100px'
+                    }
+                }
+            })
+
+            vm.msg = 'hi1';
+            vm.msg = 'hi2';
+            vm.msg = 'hi3';
+            vm.msg = 'hello';
+
+            // 视图的更新是异步的
+            box.innerText; // hello
+
+            vm.mystyle.width = '200px';
         ```
