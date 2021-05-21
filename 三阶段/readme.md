@@ -1693,4 +1693,22 @@
             box.innerText; // hello
 
             vm.mystyle.width = '200px';
+
+            box.style.width;// 100px
         ```
+* 路由模式
+    * hash (默认) 
+        > 路径中有一个非常丑陋的#
+    * history
+        > 刷新后404，所以history路由需要服务器的支持（除静态资源和接口外的任何请求都响应index.html的内容）
+    * 原理
+        * history: HTML5对`window.history`对象的增强（增加了state状态和对应的方法pushState,replaceState）
+        * hash: 利用window下的hashchange事件监听hash值的改变
+
+* dataset: 自定义属性集合
+    > 符合W3C规范的自定义属性：`data-*`
+    ```js
+        <div data-id="10" data-old-price="100" idx="1"></div>
+
+        div.dataset;// {id:'10',oldPrice:'100'}
+    ```

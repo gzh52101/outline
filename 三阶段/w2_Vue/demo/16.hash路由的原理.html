@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hash路由的原理</title>
+</head>
+
+<body>
+    <h1>Hash路由的原理</h1>
+    <div id="app">
+        <nav>
+            <ul id="nav">
+
+            </ul>
+        </nav>
+        <div id="routerView"></div>
+    </div>
+    <script>
+        const routerView = document.querySelector('#routerView')
+        const nav = document.querySelector('#nav')
+        // 路由配置
+        const routes = [{
+            path: '/home',
+            component: '<div>首页</div>'
+        }, {
+            path: '/cart',
+            component: '<div>购物车</div>'
+        }, {
+            path: '/login',
+            component: '<div>登录</div>'
+        }, {
+            path: '/reg',
+            component: '<div>注册</div>'
+        }];
+
+        // 生成导航
+        nav.innerHTML = routes.map(item=>{
+            return `<li data-path="${item.path}">${item.component}</li>`
+        }).join('');
+
+        nav.onclick = function(e){
+            let path;
+            if(e.target.tagName === 'DIV'){
+                path = e.target.parentElement.dataset.path;
+            }else if(e.target.tagName === 'LI'){
+                path = e.target.dataset.path;
+            }
+
+            window.location.hash = path;
+        }
+
+
+        render();
+
+        // hash路由的核心：监听hash值的变化，给对应的元素添加内容
+        // window的hashchange
+        window.onhashchange = render;
+
+        function render() {
+            // 获取当前hash
+            let { hash } = window.location;
+            hash = hash.slice(1);
+            const route = routes.find(item=>item.path === hash);
+
+            if(route){
+                routerView.innerHTML = route.component;
+
+            }
+        }
+    </script>
+</body>
+
+</html>

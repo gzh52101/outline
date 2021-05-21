@@ -27,7 +27,11 @@ Vue.use(VueRouter);
 // 3. 实例化路由并配置参数
 const router = new VueRouter({
     // 配置
-    // mode:'hash',
+    // mode:'history',// hash,history
+
+    // 环境变量实现路由模式的配置
+    mode: process.env.NODE_ENV==='production'? 'history' : 'hash',
+
     // 路由规则
     routes: [
         // 重定向
@@ -36,11 +40,11 @@ const router = new VueRouter({
             // 当浏览器地址为/home时，显然Home组件内容
             name: 'home', // 命名路由：给路由起个名字，可以通过路由名称进行跳转
             path: '/home',
-            // component: Home,
-            components:{
-                main:Home,
-                footer:Footer
-            }
+            component: Home,
+            // components:{
+            //     main:Home,
+            //     footer:Footer
+            // }
         },
         { path: '/discover', redirect: '/discover/man' },
         {
