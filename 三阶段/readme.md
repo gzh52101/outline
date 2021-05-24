@@ -1712,3 +1712,30 @@
 
         div.dataset;// {id:'10',oldPrice:'100'}
     ```
+
+## day5-1
+
+### 知识点
+* B端与C端
+* 模块化
+    * commonJS      cjs         NodeJS
+    * AMD                       require.js
+    * CMD                       sea.js
+    * ESModule                  ES6
+    * UMD           通用模块规范
+        > 支持commonJS,AMD,全局引入
+* React使用
+    1. 安装
+        * react     核心库
+        * react-dom
+    2. 渲染：ReactDOM.render(virtualDOM,target)
+        * virtualDOM: 虚拟DOM
+            > 通过React.createElement(type,props,children)创建虚拟节点
+            * type: 节点类型
+            * props: 节点属性
+            * children： 子节点
+        * target: 渲染位置
+* JSX
+    * 要求： script 标签都需要加上 type="text/babel"
+        > JSX代码会被babel编译成浏览器支持的js代码
+    * 语法

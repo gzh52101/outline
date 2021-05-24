@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>01.React的使用</title>
+</head>
+<body>
+    <h1>01.React的使用</h1>
+    <div id="app">
+        <!-- <div>虚拟节点</div> -->
+        <!-- <div id="box" class="test">
+            <h1>虚拟节点</h1>
+        </div> -->
+        <!-- <div id="box" class="test">
+            <h1>虚拟节点</h1>
+            <ul>
+                <li>data1</li>
+                <li>data2</li>
+                <li>data3</li>
+            </ul>
+        </div> -->
+    </div>
+    <script src="../node_modules/react/umd/react.development.js"></script>
+    <script src="../node_modules/react-dom/umd/react-dom.development.js"></script>
+    <script>
+
+        ReactDOM.render(
+            // 渲染内容：虚拟节点
+            // React.createElement('div',{id:'box',className:'test'},'虚拟节点')
+            // React.createElement(
+            //     'div',
+            //     {id:'box',className:'test'},
+            //     React.createElement('h2',null,'虚拟节点')
+            // )
+            React.createElement(
+                'div',
+                {id:'box',className:'test'},
+                [
+                    React.createElement('h2',null,'虚拟节点'),
+                    React.createElement('ul',null,[
+                        React.createElement('li',null,'data1'),
+                        React.createElement('li',null,'data2'),
+                        React.createElement('li',null,'data3'),
+                    ]),
+                ]
+            )
+            ,
+            // 渲染位置
+            document.querySelector('#app')
+        )
+    </script>
+</body>
+</html>

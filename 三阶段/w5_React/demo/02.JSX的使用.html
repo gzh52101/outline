@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>02.JSX的使用</title>
+</head>
+<body>
+    <h1>02.JSX的使用</h1>
+    <div id="app">
+        <!-- <div>虚拟节点</div> -->
+        <!-- <div id="box" class="test">
+            <h1>虚拟节点</h1>
+        </div> -->
+        <!-- <div id="box" class="test">
+            <h1>虚拟节点</h1>
+            <ul>
+                <li>data1</li>
+                <li>data2</li>
+                <li>data3</li>
+            </ul>
+        </div> -->
+    </div>
+    <script src="../node_modules/react/umd/react.development.js"></script>
+    <script src="../node_modules/react-dom/umd/react-dom.development.js"></script>
+    <script src="./js/browser.js"></script>
+    <script type="text/babel">
+    const hanleClick = function(){
+        console.log('click')
+    }
+    const mystyle = {color:'#f00'}
+        const username = 'laoxie';
+        const box = <div id="user" className="user" style={mystyle} onClick={()=>{console.log(666)}}>
+            Hello {username}
+            <input autoFocus onClick={hanleClick}  />
+        </div>; // React.createElement('div',{id:'box'},'hello')
+        console.log('box=',box);
+        ReactDOM.render(
+            // React.createElement(
+            //     'div',
+            //     {id:'box',className:'test'},
+            //     [
+            //         React.createElement('h2',null,'虚拟节点'),
+            //         React.createElement('ul',null,[
+            //             React.createElement('li',null,'data1'),
+            //             React.createElement('li',null,'data2'),
+            //             React.createElement('li',null,'data3'),
+            //         ]),
+            //     ]
+            // )
+
+            // 把下面的代码转成以上格式
+            <div id="box" className="test">
+                {
+                    //<h2>虚拟节点</h2>
+                }
+                <ul>
+                    {
+                        /*<li>data1</li>
+                        <li>data2</li>
+                        <li>data3</li>*/
+                    }
+                </ul>
+                {box}
+            </div>
+            ,
+            // 渲染位置
+            document.querySelector('#app')
+        )
+    </script>
+</body>
+</html>
