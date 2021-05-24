@@ -1715,6 +1715,21 @@
 
 ## day5-1
 
+### 面试题
+* 对xxx的理解
+    * 是什么
+    * 解决了什么问题
+    * 与其他的区别
+* 请求实如何设置请求头
+    ```js
+        xhr = new XMLHttpRequest()
+        xhr.open('post')
+        // xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded')
+        xhr.setRequestHeader('Content-Type','application/json')
+        // xhr.send(`a=10&b=20`)
+        xhr.send(`{"a":10,"b":20}`)
+    ```
+
 ### 知识点
 * B端与C端
 * 模块化
@@ -1727,15 +1742,102 @@
 * React使用
     1. 安装
         * react     核心库
-        * react-dom
-    2. 渲染：ReactDOM.render(virtualDOM,target)
+        * react-dom / react-native
+    2. 渲染：`ReactDOM.render(virtualDOM,target)`
         * virtualDOM: 虚拟DOM
-            > 通过React.createElement(type,props,children)创建虚拟节点
+            > 通过`React.createElement(type,props,children)`创建虚拟节点
             * type: 节点类型
             * props: 节点属性
             * children： 子节点
         * target: 渲染位置
 * JSX
     * 要求： script 标签都需要加上 type="text/babel"
-        > JSX代码会被babel编译成浏览器支持的js代码
+        > JSX代码会被babel编译成浏览器支持的js代码（React.createElement()）
     * 语法
+        * JSX中不能使用js中的关键字
+            * class -> className
+            * for   -> htmlFor
+            * ...
+        * JSX属性必须使用驼峰
+            * autofocus -> autoFocus
+            * onkeyup   -> onKeyUp
+            * ...
+        * 必须结束标签
+            ```html
+                <img src=""> -> <img src="" />
+                <input value=""> -> <input value="" />
+            ```
+        * style属性必须使用对象
+            ```js
+                <div style={{color:'#f00',fontSize:16}}></div>
+            ```
+        * js变量必须写在花括号{}内，但不允许出现 var,let,const 等声明关键字
+            ```js
+                <div>
+                    {
+                        <div>
+                            <h1>{test}</h1>
+                            {username}
+                        </div>
+                    }
+                </div>
+            ```
+* 组件
+    * 要求
+        * 组件名必须大写开头
+        * 只能包含一个顶层标签
+    * 分类
+        * 函数组件（无状态组件,UI组件）
+            > 必须有返回值
+        * 类组件（状态组件：状态改变组件会自动刷新）
+            > 必须包含render函数，且render中有返回值
+            * state
+                > 修改state：`this.setState()`
+            * this
+                > 默认只在render,contrutor,生命周期函数中有this指向
+            * 生命周期
+    * 组件通讯
+        * 父->子：props
+            * 函数组件：函数的第一个参数为props
+            * 类组件：
+                * construtor第一个参数为props
+                * this.props
+    
+* 数据挂载方式
+    * 单向绑定：{}
+    * 列表循环
+        * map
+    * 事件绑定
+        > 驼峰
+
+* 从0搭建基于webpack的React项目环境
+    1. 创建目录
+    2. 安装依赖
+    3. 配置webpack参数
+
+* webpack与gulp的区别
+    * gulp基于任务的构建工具
+        ```js
+            gulp.task('sass',(done)=>{
+                // 匹配文件
+                gulp.src()
+                // 处理文件
+                .pipe(sass())
+
+
+                // 输出文件
+                .pipe(gulp.dest())
+            })
+
+            exports.sass = function(){
+
+            }
+        ```
+    * webpack是基于配置的构建工具
+        * 核心配置
+            * entry: 入口（告诉webpack从哪开始分析项目）
+            * output: 出口（告诉webpack把编译的文件输出到哪里）
+            * devServer: 开发服务器
+            * loader:    加载器
+                > module.rules
+            * plugins:  插件

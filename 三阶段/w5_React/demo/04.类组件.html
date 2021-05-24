@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>03.React组件定义与使用</title>
+</head>
+<body>
+    <h1>03.React组件定义与使用</h1>
+    <div id="app">
+    </div>
+    <script src="../node_modules/react/umd/react.development.js"></script>
+    <script src="../node_modules/react-dom/umd/react-dom.development.js"></script>
+    <script src="js/browser.js"></script>
+    <script type="text/babel">
+        function Button(props){
+            console.log('Button=',this)
+            let qty = 10;
+            return (
+                <button onClick={()=>{
+                    qty = qty+1;
+                }}>按钮{qty}</button>
+            )
+        }
+
+        function FList({datalist}){
+            return <ul className="list">
+                {datalist.map(item=><li key={item}>{item}</li>)} 
+            </ul>
+        }
+
+        // 类组件(状态组件)
+        // state: 状态
+        class List extends React.Component{
+            constructor(props){
+                super();
+                
+                // 组件状态
+                this.state = {
+                    msg:'hello class component',
+                    qty:10,
+                }
+
+                // console.log('constructor.props',props);
+            }
+
+            render(){
+                // render中的this指向实例
+                const {qty} = this.state;
+                const {datalist} = this.props;
+                console.log('render.props',this.props);
+                return (
+                    <div>
+                        {/*
+                            <ul className="list">
+                                {datalist.map(item=><li key={item}>{item}</li>)} 
+                            </ul>
+                        */}
+                        <FList datalist={datalist}/>
+                        <button onClick={()=>{
+                            this.setState({
+                                qty:qty+1
+                            })
+                        }}>{qty}</button>
+                    </div>
+                )
+            }
+        }
+
+        ReactDOM.render(
+            <div>
+                <Button/>
+                <List datalist={['laoxie','jingjing','tiantian']}/>
+                <List datalist={['Vue','React','NodeJs','jQuery']}/>
+            </div>
+            ,
+            document.querySelector('#app')
+        )
+    </script>
+</body>
+</html>
