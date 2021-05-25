@@ -1841,3 +1841,97 @@
             * loader:    加载器
                 > module.rules
             * plugins:  插件
+
+
+## day5-2
+
+### 面试题
+* Vue中el,template,render配置参数的联系与执行过程
+* 过滤器用在哪些地方
+    * {{}}
+    * v-bind
+### 复习
+* 程序架构
+    * BS架构：web应用
+    * CS架构：本地应用
+* React
+    * 核心库
+        * react.js
+        * react-dom.js / react-native.js
+    * 渲染：ReactDOM.render(vNode,target)
+    * 虚拟节点：React.createElement()
+    * JSX
+    * 组件
+        > 创建一个自定义标签
+        * 要求
+            * 首字母大写
+            * 自能有一个根元素
+        * 分类
+            * 函数组件（UI组件，无状态组件，推荐）
+            * 类组件（状态组件）
+                * 定义
+                    * class
+                    * extends React.Component
+                * state
+                    > this.setState()
+                * this
+                    > contructor,render,生命周期函数中才有this指向
+                * 生命周期
+            * 通讯
+                * 父->子：props
+    * 数据挂载方式
+        * 单向绑定：{}
+        * 双向绑定：单向+onChange事件
+        * 事件绑定：驼峰
+        * 列表循环：
+            > react可以渲染数组到视图中
+            * map()
+            * filter()
+* Webpack
+    * **Webpack的工作原理**：把项目当做一个整体，通过入口文件（如：index.js）分析整个项目结构，找到所有依赖模块，并利用配置好的加载器、插件处理这些模块，最后打包为一个（或多个）浏览器可识别的文件。
+    * 练习
+        * 从零配置基于webpack的React项目环境
+            * react + react-dom
+            * webpack + webpack-cli + webpack-dev-server
+            * @babel/core + @babel/preset-react + babel-loader
+            * html-webpack-plugin
+        * 从零配置基于webpack的Vue项目环境
+    * 核心配置： `webpack.config.js`
+        * entry
+        * output
+        * devServer
+        * loader: module.rules
+        * plugins
+
+### 知识点
+
+* 组件通讯
+    * 父->子： props
+        1. 父组件操作：定义props属性并传递值
+        2. 子组件操作
+            * 函数组件：函数的第一个参数为props
+            * 类组件：
+                * constructor: 第一个参数为props
+                * this.props
+    * 子->父：把父组件的方法传到子组件中执行，并传回参数
+        1. 父组件操作：把方法通过props传入子组件
+        2. 子组件操作：执行父组件方法并传递参数
+    * 兄弟->兄弟：状态提升
+* 事件
+    * 事件处理函数中的this指向
+        > 默认this为undefined
+        * 改变this指向：bind
+            > 一个函数被bind改变了this指向后不能再次改变
+            * constructor（推荐）
+            * render
+    * 传参
+        > bind(this,...args)
+    * event
+        > 事件处理函数的最后一个参数
+
+* 受控组件与非受控组件
+    * 受控组件：表单元素受到state的控制
+    * 非受控组件：不受到组件state的控制，而是采用节点操作的方式控制它
+
+* ref
+    * 回调：`<div ref={el=>{this.ele = el}}>`
