@@ -10,7 +10,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 module.exports = {
-    // mode:'development',
+    mode:'development',
     // 入口文件
     entry:'./src/index.js',
 
@@ -51,7 +51,17 @@ module.exports = {
             },
 
             // 其他加载器
-            // {}
+            // css加载器: 加载器的执行顺序从后往前执行
+            {
+                test:/\.css$/,
+                use:['style-loader','css-loader']
+            },
+            
+            // sass加载器
+            {
+                test:/\.s[ac]ss$/,
+                use:['style-loader','css-loader','sass-loader']
+            }
         ]
     },
 

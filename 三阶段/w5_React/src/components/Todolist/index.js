@@ -3,6 +3,9 @@ import React, { Component } from 'react';
 import TodoForm from './TodoForm'
 import TodoContent from './TodoContent'
 
+import './style.scss';
+import ctx from './context';
+
 class Todolist extends Component {
     constructor(props) {
         super(props);
@@ -32,10 +35,13 @@ class Todolist extends Component {
 
         // 改变自定义函数的this指向
         this.addItem = this.addItem.bind(this);
+        this.completeItem = this.completeItem.bind(this);
+        this.removeItem = this.removeItem.bind(this);
     }
 
     // 自定义函数中的this指向为undefined
-    addItem(todo) {console.log('addItem',todo);
+    addItem(todo) {
+        console.log('addItem', todo);
         const { list } = this.state;
         const item = {
             id: Math.ceil(Math.random() * 10000),
@@ -44,26 +50,46 @@ class Todolist extends Component {
             checked: false,
             addtime: Date.now()
         }
-        
+
 
         this.setState({
             list: [item, ...list]
         })
     }
-    removeItem() {
-
+    removeItem(id) {
+        let { list } = this.state;
+        list = list.filter(item => item.id != id);
+        this.setState({
+            list
+        })
     }
-    completeItem() {
-
+    completeItem(id) {
+        let { list } = this.state;
+        list = list.map(item=>{
+            if(item.id === id){
+                item.complete = true;
+            }
+            return item;
+        })
+        this.setState({
+            list
+        })
     }
     render() {
         // this.props;
         const { list } = this.state;
         return (
             <div className="todolist">
-                <h4>TodoList</h4>
-                <TodoForm additem={this.addItem} />
-                <TodoContent datalist={list} />
+                <h4 style={{color:'#58bc58'}}>TodoList</h4>
+                <ctx.Provider value={{removeItem:this.removeItem,completeItem:this.completeItem}}>
+                    <TodoForm additem={this.addItem} />
+                    <TodoContent 
+                    datalist={list} 
+                    onComplete={this.completeItem}
+                    onRemove={this.removeItem}
+                    />
+
+                </ctx.Provider>
             </div>
         )
 

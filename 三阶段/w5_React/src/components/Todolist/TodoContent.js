@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
+import TodoItem from './TodoItem'
 
-function TodoContent({datalist}){
+function TodoContent({datalist,onComplete,onRemove}){
     return (
         <div className="todo-content">
             <table>
@@ -16,16 +17,13 @@ function TodoContent({datalist}){
                 <tbody>
                     {
                         datalist.map((item,idx)=>(
-                            <tr key={item.id}>
-                                <td><input type="checkbox" /></td>
-                                <td>{idx+1}</td>
-                                <td>{item.todo}</td>
-                                <td>{item.complete ? '是':'否'}</td>
-                                <td>
-                                    <button>完成</button>
-                                    <button>删除</button>
-                                </td>
-                            </tr>
+                            <TodoItem 
+                                key={item.id} 
+                                item={item} 
+                                idx={idx} 
+                                onComplete={onComplete}
+                                onRemove={onRemove}
+                            />
                         ))
                     }
                     

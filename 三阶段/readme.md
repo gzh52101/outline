@@ -1850,6 +1850,40 @@
 * 过滤器用在哪些地方
     * {{}}
     * v-bind
+* 如何判断一个对象是否为空对象（没有任何属性的对象）
+    ```js
+        let o = {};//{a:1}
+        if(Object.keys(o).length===0){
+
+        }
+    ```
+* 如何设置一个对象的私有属性
+    > Symbol
+    ```php
+        class Hello{
+            public $a = 10;
+            private $b = 20;
+        }
+
+        $h = new Hello();
+    ```
+    ```js
+        class Hello{
+            constructor(){
+                this.a = 10;
+                this._b = 20;
+
+                // 利用Symbol定义私有属性
+                const s = Symbol('c')
+                this[s] = 30;
+
+                console.log('symbol',this[s]);
+            }
+        }
+        const h = new Hello();
+        h.a;// 10;
+        h._b;// 20
+    ```
 ### 复习
 * 程序架构
     * BS架构：web应用
@@ -1915,23 +1949,65 @@
                 * this.props
     * 子->父：把父组件的方法传到子组件中执行，并传回参数
         1. 父组件操作：把方法通过props传入子组件
-        2. 子组件操作：执行父组件方法并传递参数
+        2. 子组件操作：执行父组件方法并传递参数  
     * 兄弟->兄弟：状态提升
-* 事件
-    * 事件处理函数中的this指向
+    * 深层级组件通讯
+        * 逐层传递（不推荐）
+        * Context
+            1. 创建 Context: `const ctx = React.createContext(defaultValue)`
+                > defaultValue: 默认共享数据，在缺少第二步时得到
+            2. 父组件共享数据：`Provider`
+                ```js
+                    <ctx.Provider value={}></ctx.Provider>
+                ```
+            3. 子组件获取数据：
+                * 函数组件
+                    * `Consumer`
+                        ```js
+                            <ctx.Consumer>
+                                {
+                                    (value)=>{
+                                        return ()
+                                    }
+                                }
+                            </ctx.Consumer>
+                        ```
+                    * Hook
+                * 类组件
+                    * `Consumer`
+                    * contextType
+                        > 给子组件添加`contextType`静态属性
+* 事件处理函数
+    * this指向
         > 默认this为undefined
         * 改变this指向：bind
             > 一个函数被bind改变了this指向后不能再次改变
             * constructor（推荐）
             * render
     * 传参
-        > bind(this,...args)
+        > fn.bind(this,...args)
     * event
         > 事件处理函数的最后一个参数
 
 * 受控组件与非受控组件
     * 受控组件：表单元素受到state的控制
+        > 需要提供修改事件（onChange）
     * 非受控组件：不受到组件state的控制，而是采用节点操作的方式控制它
 
 * ref
-    * 回调：`<div ref={el=>{this.ele = el}}>`
+    * 回调：`<div ref={el=>this.ele = el}>`
+
+* props.chidlren
+    * String    父组件传递字符
+    * Object    父组件传递一个虚拟节点
+    * Array     父组件传递多个虚拟节点
+
+* React样式
+    * 内联样式
+    * 样式文件
+        > 需要配置相应的加载器：css-loader + style-loader
+    * sass: sass-loader + sass
+
+* React.Fragment
+    > 类似于原生js中的`document.createDocumentFragment()`
+    * 简写：`<></>`
