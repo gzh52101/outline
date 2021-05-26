@@ -1976,7 +1976,8 @@
                 * 类组件
                     * `Consumer`
                     * contextType
-                        > 给子组件添加`contextType`静态属性
+                        > 给子组件添加`contextType`静态属性，值为创建的context
+                        * 通过`this.context`获取共享数据
 * 事件处理函数
     * this指向
         > 默认this为undefined
@@ -1995,12 +1996,17 @@
     * 非受控组件：不受到组件state的控制，而是采用节点操作的方式控制它
 
 * ref
+    > 用在元素上得到元素节点，用在组件上，返回的是组件实例
     * 回调：`<div ref={el=>this.ele = el}>`
 
-* props.chidlren
-    * String    父组件传递字符
-    * Object    父组件传递一个虚拟节点
-    * Array     父组件传递多个虚拟节点
+* props
+    * Render Props
+        <div render={(value)=><button>{value}</button>}>
+    * chidlren
+        * String    父组件传递字符
+        * Object    父组件传递一个虚拟节点
+        * Array     父组件传递多个虚拟节点
+        * Function  传递函数到子组件执行
 
 * React样式
     * 内联样式
@@ -2011,3 +2017,128 @@
 * React.Fragment
     > 类似于原生js中的`document.createDocumentFragment()`
     * 简写：`<></>`
+
+## day5-3
+
+### 面试题
+* 左侧固定宽度，右侧自适应
+    * flex
+    * 浮动+js计算
+    * 定位
+* 项目成员架构与任务分配
+* 如何解决vuex数据刷新后丢失的问题
+    > 本地存储
+* Vue中的nextTick()方法的理解
+    ```js
+        Vue.nextTick(function(){
+            // 这里的代码在下一次DOM更新完成后执行
+        })
+
+        await Vue.nextTick();
+        // 这里的代码在下一次DOM更新完成后执行
+    ```
+
+### 知识点
+* babel插件：@babel/plugin-proposal-class-properties
+    * 在类中使用箭头函数
+    * 静态属性
+    * 静态方法
+* 组件生命周期
+    > 只有类组件才有生命周期
+    * 搞懂以下问题
+        * 执行过程
+            * 初始阶段
+                1. constructor()
+                2. componentWillMount()
+                3. render()
+                4. componentDidMount()
+            * 更新阶段： 
+                * state修改
+                    1. shouldComponentUpdate()
+                    2. componentWillMount()
+                    3. render()
+                    4. componentDidMount()
+                * props修改
+                    1. componentWillReceiveProps
+                    2. shouldComponentUpdate()
+                    3. componentWillMount()
+                    4. render()
+                    5. componentDidMount()
+        * 每个生命周期函数适合做什么操作
+            * ajax/定时器/延迟器/dom操作：componentDidMount()
+            * 取消：componentWillUnmount()
+            * 优化：shouldComponentUpdate() / PureComponent
+    * 阶段
+        * Initial: 初始化阶段
+            * constructor
+        * Mounting：挂载阶段
+            * componentWillMount（不推荐）-> UNSAFE_componentWillMount()
+            * componentDidMount
+        * Updating：更新阶段
+            * componentWillUpdate（不推荐）-> UNSAFE_componentWillUpdate()
+            * componentDidUpdate
+        * Unmounting：卸载阶段
+            * componentWillUnmount
+    * 特殊生命周期函数
+        * shouldComponentUpdate
+            > 改钩子函数必须返回true才能让组件渲染，一般用户性能优化
+        * componentWillReceiveProps（不推荐）
+
+* 组件更新条件
+    > 一个组件在什么场景下会刷新
+    * state修改：自身数据被修改
+    * props修改：父组件数据被修改
+    * 父组件刷新：当前组件依赖的数据没有修改
+    * 强制刷新：this.forceUpdate()
+* setState(newState,callback)
+    ```js
+        // 假设 qyt=1
+        // this.state.qty = 10;
+        // this.state.qty++;
+        this.setState({
+            // qty:10,
+            qty:this.state.qty+1
+        })
+        this.setState({
+            // qty:10,
+            qty:this.state.qty+5
+        })
+        console.log(this.state.qty);//1
+    ```
+* PureComponent
+    > 一个做了shouldComponentUpdate性能优化的组件
+
+
+* ReactRouter
+    > 一切皆组件
+    * 安装
+        * react-router
+        * react-router-dom
+    * 引入
+        > 引入各种组件实现相应的功能
+    * 常用组件
+        * 路由类型
+            * HashRouter
+            * BrowserRouter
+        * 路由配置
+            * Route
+            * Switch
+            * Redirect
+        * 路由跳转
+            * Link
+            * NavLink
+        ```js
+            // Vue-router
+            new VueRouter({
+                mode:'hash',// hisotry
+                routes:[
+                    {
+                        path:'/home',
+                        component:Home
+                    }
+                ]
+            });
+
+            // react-router: 一切皆组件
+
+        ```

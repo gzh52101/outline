@@ -44,7 +44,10 @@ module.exports = {
                     loader:'babel-loader',
                     // 对加载器的细节配置
                     options:{
-                        plugins:[], //插件
+                        //babel插件
+                        plugins:[
+                            '@babel/plugin-proposal-class-properties'
+                        ], 
                         presets:['@babel/preset-react'], // 插件集
                     }
                 }]

@@ -1,13 +1,14 @@
 import React, { Component } from 'react'
 import TodoItem from './TodoItem'
 
-function TodoContent({datalist,onComplete,onRemove}){
+function TodoContent({datalist,onSelectAll}){
+    const checkedAll = datalist.every(item=>item.checked);
     return (
         <div className="todo-content">
             <table>
                 <thead>
                     <tr>
-                        <th><input type="checkbox" /></th>
+                        <th><input type="checkbox" checked={checkedAll} onChange={onSelectAll} /></th>
                         <th>#</th>
                         <th>待办事项</th>
                         <th>是否完成</th>
@@ -21,8 +22,8 @@ function TodoContent({datalist,onComplete,onRemove}){
                                 key={item.id} 
                                 item={item} 
                                 idx={idx} 
-                                onComplete={onComplete}
-                                onRemove={onRemove}
+                                // onComplete={onComplete}
+                                // onRemove={onRemove}
                             />
                         ))
                     }

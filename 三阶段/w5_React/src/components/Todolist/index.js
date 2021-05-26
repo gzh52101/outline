@@ -22,7 +22,7 @@ class Todolist extends Component {
                 id: 2,
                 todo: '赚他一个亿津巴布韦币',
                 complete: false,
-                checked: true,
+                checked: false,
                 addtime: Date.now() + 3600
             }, {
                 id: 3,
@@ -37,6 +37,8 @@ class Todolist extends Component {
         this.addItem = this.addItem.bind(this);
         this.completeItem = this.completeItem.bind(this);
         this.removeItem = this.removeItem.bind(this);
+        this.selectAll = this.selectAll.bind(this);
+        // this.selectItem = this.selectItem.bind(this);
     }
 
     // 自定义函数中的this指向为undefined
@@ -75,18 +77,41 @@ class Todolist extends Component {
             list
         })
     }
+    selectAll(e){
+        let { list } = this.state;
+        list = list.map(item=>{
+            item.checked = e.currentTarget.checked
+            return item;
+        })
+        this.setState({
+            list
+        })
+    }
+    selectItem = (id)=>{
+        let { list } = this.state;
+        list = list.map(item=>{
+            if(item.id===id){
+                item.checked = !item.checked
+            }
+            return item;
+        })
+        this.setState({
+            list
+        })
+    }
     render() {
         // this.props;
         const { list } = this.state;
         return (
             <div className="todolist">
                 <h4 style={{color:'#58bc58'}}>TodoList</h4>
-                <ctx.Provider value={{removeItem:this.removeItem,completeItem:this.completeItem}}>
+                <ctx.Provider value={{removeItem:this.removeItem,completeItem:this.completeItem,selectItem:this.selectItem}}>
                     <TodoForm additem={this.addItem} />
                     <TodoContent 
-                    datalist={list} 
-                    onComplete={this.completeItem}
-                    onRemove={this.removeItem}
+                    datalist={list}
+                    onSelectAll={this.selectAll}
+                    // onComplete={this.completeItem}
+                    // onRemove={this.removeItem}
                     />
 
                 </ctx.Provider>

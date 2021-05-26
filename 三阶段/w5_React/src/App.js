@@ -1,13 +1,15 @@
 import React from 'react';
 
-import Todolist from './components/Todolist'
-
+// import Todolist from './components/Todolist'
+import Lifecycle from './components/Lifecycle'
 function App(){
     return (
         <div>
             App
 
-            <Todolist/>
+            {/* <Todolist/> */}
+
+            <Lifecycle/>
         </div>
     )
 }
