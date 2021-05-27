@@ -1,11 +1,19 @@
 import React from 'react'
-function Reg(props) {
-    console.log('Reg.props',props);
-    return (
-        <div>
-            Reg
-        </div>
-    )
+import {withAuth} from '@/utils/hoc'
+
+@withAuth
+class Reg extends React.Component{
+    render(props) {
+        console.log('Reg.props',props);
+        return (
+            <div>
+                Reg
+            </div>
+        )
+    }
+
 }
+
+// Reg = withAuth(Reg);
 
 export default Reg;

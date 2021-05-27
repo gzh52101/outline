@@ -5,6 +5,7 @@ import { HashRouter, BrowserRouter, Route, Link, NavLink, Redirect, Switch,withR
 import Home from './views/Home';
 import Login from './views/Login';
 import Reg from './views/Reg';
+import Class from './views/Class';
 
 import 'antd/dist/antd.css';
 import './style.scss'
@@ -16,6 +17,8 @@ import { HomeOutlined, LoginOutlined, UserAddOutlined, UserOutlined, LaptopOutli
 const { Header, Content, Sider } = Layout;
 const { SubMenu } = Menu;
 
+@withRouter
+@withUser
 class App extends React.Component {
     constructor(props){
         super(props);
@@ -34,6 +37,38 @@ class App extends React.Component {
                 text: '注册',
                 icon: <UserAddOutlined />
             }],
+            mainMenu:[
+                {
+                    path: '/class',
+                    text: '班级管理',
+                    children:[
+                        {
+                            path:'/list',
+                            text:'班级列表'
+                        },
+                        {
+                            path:'/add',
+                            text:'添加班级'
+                        }
+                    ]
+                },
+                {
+                    path: '/student',
+                    text: '学生管理',
+                },
+                {
+                    path: '/category',
+                    text: '学科管理',
+                },
+                {
+                    path: '/school',
+                    text: '分校管理',
+                },
+                {
+                    path: '/project',
+                    text: '项目管理',
+                },
+            ],
             current: props.location.pathname || '/home'
         }
     }
@@ -72,7 +107,7 @@ class App extends React.Component {
         // })
     }
     render() {
-        const { current, menu } = this.state;
+        const { current, menu,mainMenu } = this.state;
         return (
             <Layout>
                 <Header className="header">
@@ -101,25 +136,23 @@ class App extends React.Component {
                             defaultSelectedKeys={['1']}
                             defaultOpenKeys={['sub1']}
                             style={{ height: '100%', borderRight: 0 }}
+                            onSelect={this.changeMenu}
                         >
-                            <SubMenu key="sub1" icon={<UserOutlined />} title="subnav 1">
-                                <Menu.Item key="1">option1</Menu.Item>
-                                <Menu.Item key="2">option2</Menu.Item>
-                                <Menu.Item key="3">option3</Menu.Item>
-                                <Menu.Item key="4">option4</Menu.Item>
-                            </SubMenu>
-                            <SubMenu key="sub2" icon={<LaptopOutlined />} title="subnav 2">
-                                <Menu.Item key="5">option5</Menu.Item>
-                                <Menu.Item key="6">option6</Menu.Item>
-                                <Menu.Item key="7">option7</Menu.Item>
-                                <Menu.Item key="8">option8</Menu.Item>
-                            </SubMenu>
-                            <SubMenu key="sub3" icon={<NotificationOutlined />} title="subnav 3">
-                                <Menu.Item key="9">option9</Menu.Item>
-                                <Menu.Item key="10">option10</Menu.Item>
-                                <Menu.Item key="11">option11</Menu.Item>
-                                <Menu.Item key="12">option12</Menu.Item>
-                            </SubMenu>
+                            {
+                                mainMenu.map(item=>(
+                                    <SubMenu key={item.path} title={item.text}>
+                                        {
+                                             item.children ? 
+                                             item.children.map(it=>(
+                                                <Menu.Item key={item.path + it.path}>{it.text}</Menu.Item>
+                                            ))
+                                            :
+                                            <Menu.Item key={item.path + "nodata"}>暂无数据</Menu.Item>
+                                        }
+                                    </SubMenu>
+                                ))
+                            }
+                            
                         </Menu>
                     </Sider>
                     <Layout style={{ padding: '0 24px 24px' }}>
@@ -138,6 +171,7 @@ class App extends React.Component {
                         >
                             <Switch>
                                 <Route path="/home" component={Home} />
+                                <Route path="/class" component={Class} />
                                 <Route path="/login" component={Login} />
                                 {/* <Route path="/reg" component={Reg} /> */}
                                 <Route path="/reg">
@@ -159,8 +193,8 @@ class App extends React.Component {
 }
 
 // 本质：把App组件传入一个函数中并返回新的组件
-App = withUser(App)
-App = withRouter(App);
+// App = withUser(App)
+// App = withRouter(App);
 
 
 export default App;
