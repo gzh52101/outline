@@ -1,6 +1,6 @@
 import React from 'react'
-function Reg() {
-
+function Reg(props) {
+    console.log('Reg.props',props);
     return (
         <div>
             Reg

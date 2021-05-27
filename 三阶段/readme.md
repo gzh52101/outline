@@ -2060,14 +2060,15 @@
                     4. componentDidMount()
                 * props修改
                     1. componentWillReceiveProps
-                    2. shouldComponentUpdate()
-                    3. componentWillMount()
+                    2. shouldComponentUpdate(nextProps,nextState); //this.props/this.state
+                    3. componentWillMount(nextProps,nextState)
                     4. render()
-                    5. componentDidMount()
+                    5. componentDidMount(prevProps,prevState);// this.props/this.state
         * 每个生命周期函数适合做什么操作
             * ajax/定时器/延迟器/dom操作：componentDidMount()
             * 取消：componentWillUnmount()
             * 优化：shouldComponentUpdate() / PureComponent
+            * 监听数据修改：componentDidUpdate()
     * 阶段
         * Initial: 初始化阶段
             * constructor
@@ -2142,3 +2143,72 @@
             // react-router: 一切皆组件
 
         ```
+
+## day5-4
+
+### 面试题
+* 上传图片前如何预览图片
+    > 把图片转成base64
+    * <input type="file" /> -> File
+    * FileReader
+        > 通过FileReader读取File文件，然后转成base64编码
+    ```js
+        const reader = new FileReader();
+        reader.readAsDataURL(file)
+        reader.onload = function(){
+            reader.result;// 得到读取文件的信息
+        }
+    ```
+* 模块化开发规范的区别
+    * CommonJS  cjs     后端（同步），require/module.exports
+    * ESModule  esm     前端（同步，静态引入），import/export
+    * AMD               前端（异步），require/define
+    * CMD               前端（异步），require/define
+    * UMD       通用模块规范
+
+### 知识点
+* 热门ReactUI框架
+    * Ant-design
+    * Material-UI
+    * React-Bootstrap
+    * ElementUI
+* 路由导航
+    * 声明式导航
+        * Link
+        * NavLink
+    * 编程式导航：利用js实现路由跳转
+        > 需要获取history、location、match对象
+        * 如何获取history对象
+            * 通过Route.component属性渲染组件
+            * withRouter高阶组件
+        * 路由监听
+            ```js
+                history.listen((location)=>{
+                    // 路由发生变化会执行这里的代码，并传递location路由信息
+                })
+            ```
+* 高阶组件HOC（High Order Component）
+    > 高阶组件并不是真正的React组件，而是一个包装函数（纯函数）
+    * 纯函数
+        1. 不修改传入的参数
+        2. 固定的输入有固定的输出
+
+        ```js
+            function sum(a,b){
+                return a+b;
+            }
+            sum(1,2);//3
+            sum(1,2);//3
+
+            function randomNumber(min,max){
+                return (Math.random()*(max-min+1)+min)
+            }
+            randomNumber(10,20);//12
+            randomNumber(10,20);//18
+        ```
+    * 需求
+        * 封装一个高阶组件，用于获取本地存储中的用户信息
+
+    * 定义高阶组件
+        * 定义方式一： 属性代理
+            > 注意传递props到下一层组件
