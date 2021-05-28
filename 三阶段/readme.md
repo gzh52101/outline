@@ -2213,9 +2213,67 @@
     * 定义高阶组件
         * 定义方式一： 属性代理
             > 注意传递props到下一层组件
-        * 定义方式二： 反向代理
+        * 定义方式二： 反向继承
+            > 只适用于类组件
+    * 应用场景
+        * 代码复用
+        * 页面访问权限控制
+        * ...
 
 * ES7 装饰器: `@`
-    > 简化包装函数的写法，只适用于类组件
+    > 简化包装函数的写法，只适用于类组件，需要安装`@babel/plugin-proposal-decorators`
 
-* axios / fetch
+* 嵌套路由
+    ```js
+        // App.jsx
+        <Route path="/class" component={Class} />
+        <Route path="/student/:id" component={Student} />
+
+        // Class.jsx
+        <Route path={match.path + "/add}" component={AddClass} />
+    ```
+    * match.path 与 match.url
+        ```js
+            // 浏览器url地址：/stuent/10
+            // match.path -> /student/:id
+            // match.url -> /stuent/10
+        ```
+* 路由监听
+    ```js
+        // 一般写在跟组件中（App.jsx）
+        history.listen(location=>{
+            // 路由发生改变时触发这里的代码，location为当前路由信息对象
+        })
+    ```
+
+## day5-5
+
+### 面试题
+* 说说你所知道的数组遍历的方式
+    * for
+    * for...in
+    * for...of
+    * forEach()
+    * jQuery.each()
+    * lodash.each()/lodash.forEach
+    * underscore.each()/underscore.forEach
+* 有没有封装过Vue的组件
+    * 为什么要封装组件
+        * 复用
+        * 维护
+        * 简化操作（二次封装）
+    * 如何封装组件
+        * 全局：Vue.component()
+        * 局部: components
+    * 组件封装要注意的问题
+        * 通讯
+        * props类型校验
+        * mixin
+        * 插槽与作用域插槽
+
+### 知识点
+* ajax请求
+    * XMLHttpRequest
+    * axios
+    * fetch
+* 路由传参

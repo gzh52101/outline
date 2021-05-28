@@ -1,9 +1,13 @@
 import React from 'react'
 
 import { withStorage } from '@/utils/hoc'
+import request from '@/utils/request';
 
 function Home(props) {
     console.log('Home.props', props);
+    request.get('/class',{size:20,page:1,category: "HTML5"}).then(res=>{
+        console.log('res=',res);
+    })
     return (
         <div>
             Home

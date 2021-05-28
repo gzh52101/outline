@@ -27,11 +27,12 @@ module.exports = {
                         ],
                         presets:['@babel/preset-react']
                     }
-                }]
+                }],
+                exclude:path.join(__dirname,'../node_modules')
             },
             {
                 test:/\.css$/,
-                use:['style-loader','css-loader']
+                use:['style-loader','css-loader'],
             },
             {
                 test:/\.s[ca]ss$/,
