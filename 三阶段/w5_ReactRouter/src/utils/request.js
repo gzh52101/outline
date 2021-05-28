@@ -6,6 +6,10 @@ function request(url, data = {}, config = {}) {
     method = method.toLowerCase();
     config.method = method;
 
+    if (!config.headers) {
+        config.headers = {}
+    }
+
     if (['get', 'delete'].includes(method)) {
         const params = []; // ['a=1','b=2','c=3']
         for (let key in data) {
@@ -21,11 +25,10 @@ function request(url, data = {}, config = {}) {
         config.body = JSON.stringify(data);
 
         // 设置请求头content-type=application/json
-        if (!config.headers) {
-            config.headers = {}
-        }
         config.headers['Content-Type'] = 'application/json'
     }
+
+    config.headers.authorization = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Imxhb3hpZSIsImlhdCI6MTYyMjE4ODYxMSwiZXhwIjoxNjIyMTk1ODExfQ.RXcIxbO9izqSbVUtLpDU-VtxiW8YKv2Kdz0aVpqIl-s'
 
     return fetch(url, {
         ...config

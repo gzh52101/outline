@@ -2270,10 +2270,22 @@
         * props类型校验
         * mixin
         * 插槽与作用域插槽
+* 页面如何渲染1000条数据
+    * 同时渲染的数量
+    * 页面的节点数量
+    * 事件监听数量
+* v-for与v-if是否可以同时使用
+    ```js
+        // list:[{type:'a'},{type:'student'},{type:'student'}]
+        computed:{studentlist(){return this.list.filter(item=>item.type=='student')}}
+        <div v-for="item in list" v-if="item.type=='student'"/>
+        <div v-for="item in studentlist"/>
+    ```
 
 ### 知识点
 * ajax请求
     * XMLHttpRequest
     * axios
     * fetch
+        > fetch二次封装
 * 路由传参

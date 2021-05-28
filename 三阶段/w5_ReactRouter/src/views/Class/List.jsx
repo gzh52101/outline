@@ -1,12 +1,111 @@
 import React from 'react'
 import {withAuth} from '@/utils/hoc'
-import { Route } from 'react-router'
+import request from '@/utils/request'
+import {Table,Button,Row,Col} from 'antd'
+import {PlusOutlined,DeleteOutlined} from '@ant-design/icons'
 
 class ClassList extends React.Component{
+    state = {
+        page:1,
+        size:10,
+        list:[],
+        total:0,
+    }
+    getData = async ()=>{
+        const {page,size} = this.state;
+        const {data} = await request.get('/class',{page,size});
+        console.log('list',data)
+        this.setState({
+            list:data.result,
+            total:data.total
+        })
+    }
+    goto = (path)=>{
+        const {history} = this.props;
+        history.push({
+            pathname: path,
+            // search: '?id=123456',
+            // state: { price: 998 }
+        })
+    }
+    componentDidMount(){
+        this.getData()
+    }
     render() {
+        const {list,total} = this.state;
+        const columns = [{
+            title: '#',
+            width:10,
+            render(text, record, index){
+                return `${index+1}`
+            }
+          }, {
+            title: '班级名称',
+            dataIndex: 'name',
+          },{
+            title: '学科',
+            dataIndex: 'category',
+          },{
+            title: '城市',
+            dataIndex: 'city',
+          },{
+            title: '操作',
+            dataIndex:'_id',
+            width:30,
+            render(text, record, index){
+                return (
+                <>
+                    <Button.Group size="small">
+                        <Button type="primary" ghost>编辑</Button>
+                        <Button type="danger" ghost>删除</Button>
+
+                    </Button.Group>
+                </>
+                )
+            }
+          }]
+        const rowSelection = {
+            type:'checkbox',
+            onChange(selectedRowKeys, selectedRows){
+                console.log('selects=',selectedRowKeys, selectedRows)
+            }
+        }
+        const pagination = {
+            total,
+            showTotal:(total,range)=>{
+                console.log('total',total,range)
+                return `共${total}条`
+            },
+            onChange:(page,pageSize)=>{
+                this.setState({
+                    page
+                },()=>{
+                    this.getData()
+                })
+            }
+        }
         return (
             <div>
-                班级列表
+                <Row gutter={20}>
+                    <Col span={12}></Col>
+                    <Col span={12} style={{textAlign:'right'}}>
+                        <Button 
+                        type="primary" 
+                        style={{marginRight:5}} 
+                        icon={<PlusOutlined />}
+                        onClick={this.goto.bind(this,'/class/add')}
+                        >添加</Button>
+                        <Button type="danger" icon={<DeleteOutlined />}>批量删除</Button>
+                    </Col>
+                </Row>
+                <Table
+                style={{marginTop:10}}
+                rowKey="_id"
+                dataSource={list} 
+                columns={columns} 
+                rowSelection={rowSelection}
+                pagination={pagination}
+                ></Table>
             </div>
         )
     }
