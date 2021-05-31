@@ -1,6 +1,8 @@
 import React from 'react'
 import {Form,Input,Checkbox,Button,message} from 'antd'
 import request from '@/utils/request'
+import store from '@/store'
+
 const layout = {
     labelCol: { span: 6 },
     wrapperCol: { span: 16 },
@@ -22,7 +24,7 @@ function Login(props) {
             ...values
         })
         if(data.code === 200){
-            localStorage.setItem('userInfo',JSON.stringify(data.data));
+            store.dispatch({type:'login',user:data.data})
             props.history.replace('/home')
             message.success('登录成功')
         }

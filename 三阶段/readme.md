@@ -2330,3 +2330,52 @@
         ```
     * state: 通过`props.location.state`
         > 刷新后数据消失
+
+* redux
+    * 搞懂以下问题
+        1. redux是什么？
+            > 独立的状态管理工具，可以与任意的框架结合使用
+        2. redux能作什么
+            * 数据共享
+            * 组件刷新
+        3. redux如何使用
+            1. 安装
+                ```bash
+                    npm install redux
+                    yarn add redux
+                ```
+            2. 引用
+                ```js
+                    import {createStore} from 'redux'
+                ```
+            3. 创建store
+                ```js
+                    // 需要reducer与初始state
+                    const reducer = function(state,action){
+                        // 定义如何修改state：
+                    }
+
+                    // initState可选
+                    const store = createStore(reducer,initState)
+                ```
+            4. 使用
+                * 获取state: `store.getState()`
+                * 修改state: `store.dispatch()`
+                * 监听state修改：`store.subscribe()`
+    * redux核心
+        * store     数据仓库（用于存放共享的数据）
+            * 常用方法
+                * store.dispatch()  修改
+                * store.getState()  获取
+        * state     状态（数据）
+        * reducer   定义修改state的函数（纯函数）
+            > reducer必须为**纯函数**
+            * 接收state和action参数
+            * 必须返回一个新的state
+        * action    触发修改state的动作/命令
+            > 格式：`{type}`, 通过 `store.dispatch(action)`
+    * 实现组件刷新
+        * 组件state修改（不推荐）
+            > 把redux数据放到组件state中，并配合`store.subscribe()`事件redux数据监听
+        * props数据修改（父组件数据修改，推荐）
+            > 利用高阶组件往当前组件内传递redux数据

@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { HashRouter, BrowserRouter, Route, Link, NavLink, Redirect, Switch,withRouter } from 'react-router-dom'
+import { HashRouter, BrowserRouter, Route, Link, NavLink, Redirect, Switch, withRouter } from 'react-router-dom'
 
 import Home from './views/Home';
 import Login from './views/Login';
@@ -10,7 +10,8 @@ import Class from './views/Class';
 import 'antd/dist/antd.css';
 import './style.scss'
 
-import {withUser} from './utils/hoc'
+import { withUser,withRedux } from './utils/hoc'
+// import store from '@/store'
 
 import { Layout, Menu, Breadcrumb, Row, Col, Button } from 'antd';
 import { HomeOutlined, LoginOutlined, UserAddOutlined, UserOutlined, LaptopOutlined, NotificationOutlined, DingtalkOutlined } from '@ant-design/icons'
@@ -19,10 +20,10 @@ const { SubMenu } = Menu;
 
 @withRouter
 @withUser
+@withRedux
 class App extends React.Component {
-    constructor(props){
+    constructor(props) {
         super(props);
-        console.log('App.props=',props);
         this.state = {
             menu: [{
                 path: '/home',
@@ -37,18 +38,18 @@ class App extends React.Component {
                 text: '注册',
                 icon: <UserAddOutlined />
             }],
-            mainMenu:[
+            mainMenu: [
                 {
                     path: '/class',
                     text: '班级管理',
-                    children:[
+                    children: [
                         {
-                            path:'/list',
-                            text:'班级列表'
+                            path: '/list',
+                            text: '班级列表'
                         },
                         {
-                            path:'/add',
-                            text:'添加班级'
+                            path: '/add',
+                            text: '添加班级'
                         }
                     ]
                 },
@@ -69,12 +70,13 @@ class App extends React.Component {
                     text: '项目管理',
                 },
             ],
-            current: props.location.pathname || '/home'
+            current: props.location.pathname || '/home',
+            userInfo:null,
         }
     }
-    changeMenu = ({key}) => {
-        const {history} = this.props;
-        
+    changeMenu = ({ key }) => {
+        const { history } = this.props;
+
         history.push(key);
     }
     // UNSAFE_componentWillMount(){
@@ -82,17 +84,30 @@ class App extends React.Component {
     //     const {location} = this.props;
     //     this.state.current = location.pathname
     // }
-    componentDidMount(){
-        console.log('App.props',this.props);
-        const {history,location} = this.props;
-        
-        
+    componentDidMount() {
+        const { history, location } = this.props;
+
+
         // 监听路由变化，实现导航高亮
-        history.listen((location)=>{
+        history.listen((location) => {
             this.setState({
                 current: location.pathname
             })
         })
+
+        // 获取用户信息
+        // const {userInfo} = store.getState();
+        // this.setState({
+        //     userInfo
+        // })
+
+        // store.subscribe(()=>{
+        //     // state有修改时执行这里的代码
+        //     const {userInfo} = store.getState();console.log('state change',userInfo)
+        //     this.setState({
+        //         userInfo
+        //     })
+        // })
 
         // // 获取用户信息
         // let userInfo = localStorage.getItem('userInfo')
@@ -107,14 +122,15 @@ class App extends React.Component {
         // })
     }
     render() {
-        const { current, menu,mainMenu } = this.state;
+        const {userInfo,store} = this.props;
+        const { current, menu, mainMenu } = this.state;
         return (
             <Layout>
                 <Header className="header">
                     <Row gutter={20}>
                         <Col flex="190px">
                             <div className="logo">
-                                <DingtalkOutlined style={{color:'#ff0',fontSize:40}} /> 钉钉管理系统
+                                <DingtalkOutlined style={{ color: '#ff0', fontSize: 40 }} /> 钉钉管理系统
                             </div></Col>
                         <Col flex={1}>
                             <Menu onSelect={this.changeMenu} selectedKeys={[current]} mode="horizontal" theme="dark">
@@ -124,7 +140,21 @@ class App extends React.Component {
                                     </Menu.Item>)
                                 }
                             </Menu></Col>
-                        <Col flex="100px" className="txt-right"><Button type="link">退出</Button></Col>
+                        <Col flex="180px" className="txt-right">
+                            {
+                                userInfo ? 
+                                <>
+                                    <span style={{color:'#fff'}}>{userInfo.username}</span>
+                                    <Button type="link" onClick={()=>{
+                                        store.dispatch({type:'logout'})
+                                    }}>退出</Button>
+                                </>
+                                :
+                                <Button type="link" onClick={()=>{
+                                    this.props.history.push('/login')
+                                }}>登录</Button>
+                            }
+                        </Col>
                     </Row>
 
 
@@ -139,20 +169,20 @@ class App extends React.Component {
                             onSelect={this.changeMenu}
                         >
                             {
-                                mainMenu.map(item=>(
+                                mainMenu.map(item => (
                                     <SubMenu key={item.path} title={item.text}>
                                         {
-                                             item.children ? 
-                                             item.children.map(it=>(
-                                                <Menu.Item key={item.path + it.path}>{it.text}</Menu.Item>
-                                            ))
-                                            :
-                                            <Menu.Item key={item.path + "nodata"}>暂无数据</Menu.Item>
+                                            item.children ?
+                                                item.children.map(it => (
+                                                    <Menu.Item key={item.path + it.path}>{it.text}</Menu.Item>
+                                                ))
+                                                :
+                                                <Menu.Item key={item.path + "nodata"}>暂无数据</Menu.Item>
                                         }
                                     </SubMenu>
                                 ))
                             }
-                            
+
                         </Menu>
                     </Sider>
                     <Layout style={{ padding: '0 24px 24px' }}>
