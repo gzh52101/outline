@@ -10,7 +10,7 @@ function request(url, data = {}, config = {}) {
         config.headers = {}
     }
 
-    if (['get', 'delete'].includes(method)) {
+    if (['get'].includes(method)) {
         const params = []; // ['a=1','b=2','c=3']
         for (let key in data) {
             params.push(`${key}=${data[key]}`)
@@ -20,7 +20,7 @@ function request(url, data = {}, config = {}) {
             // '/api/class?username=lx'-> '/api/class?username=lx&a=1&b=2&c=3
             url = url + (url.includes('?') ? '&' : '?') + params.join('&'); //'a=1&b=2&c=3'
         }
-    } else if (['post', 'put', 'patch'].includes(method)) {
+    } else if (['post', 'put', 'patch','delete'].includes(method)) {
 
         config.body = JSON.stringify(data);
 
@@ -28,7 +28,7 @@ function request(url, data = {}, config = {}) {
         config.headers['Content-Type'] = 'application/json'
     }
 
-    config.headers.authorization = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Imxhb3hpZSIsImlhdCI6MTYyMjE4ODYxMSwiZXhwIjoxNjIyMTk1ODExfQ.RXcIxbO9izqSbVUtLpDU-VtxiW8YKv2Kdz0aVpqIl-s'
+    config.headers.authorization = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Imxhb3hpZSIsImlhdCI6MTYyMjQyNzI2NCwiZXhwIjoxNjIyNDM0NDY0fQ.bQtwxMBs65-4LY3i8H2YaZc8gh7BYMZF8w06YFsct38'
 
     return fetch(url, {
         ...config

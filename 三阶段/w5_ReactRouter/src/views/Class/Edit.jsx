@@ -15,16 +15,22 @@ import {
     message
 } from 'antd';
 
-class AddClass extends React.Component {
+const querystring = require('querystring');
+console.log('queryString',querystring)
+
+
+class EditClass extends React.Component {
     state = {
         categories: [],
-        cities: []
+        cities: [],
+        classData:{}
     }
     onFinish = async (values) => {
         console.log('onFinish', values);
-        const data = await request.post('/class',values);
+        const {_id} = this.state.classData
+        const data = await request.put('/class/'+_id,values);
         if(data.code === 201){
-            message.success('添加成功');
+            message.success('修改成功');
             this.props.history.push('/class/list');
         }
     }
@@ -40,40 +46,59 @@ class AddClass extends React.Component {
             cities: data
         })
     }
+    getData = async ()=>{
+        // 获取传入的班级id
+        const {id} = this.props.match.params;
+        const { data } = await request.get('/class/'+id)
+        this.setState({
+            classData: data
+        })
+    }
     componentDidMount() {
+        console.log('Eidt.props',this.props)
+        // console.log('qs.parse',querystring.decode(this.props.location.search.slice(1)))
+
+        // 根据id获取当前班级信息
         this.getCategory();
         this.getCity();
+        this.getData();
     }
     render() {
-        const { cities, categories } = this.state;
-        const initialValues = {
-            name:'',
-            city:'广州',
-            category:'HTML5'
-        }
+        const { cities, categories,classData } = this.state;
+        const fields = [{
+            name:'name',
+            value:classData.name
+        },{
+            name:'city',
+            value:classData.city
+        },{
+            name:'category',
+            value:classData.category
+        }]
         const rules = {
             name:[{
                 required:true,message:'请填写班级名称'
             }]
         }
+
         return (
             <div>
-                <h1>添加班级</h1>
+                <h1>修改班级信息</h1>
                 <Form
                     labelCol={{ span: 4 }}
                     wrapperCol={{ span: 14 }}
                     layout="horizontal"
                     onFinish={this.onFinish}
-                    initialValues={initialValues}
+                    fields={fields}
                 >
                     <Form.Item label="班级名称" name="name" rules={rules.name}>
-                        <Input />
+                        <Input value />
                     </Form.Item>
                     <Form.Item label="城市" name="city">
                         <Select>
                             {
                                 cities.map(item => (
-                                    <Select.Option key={item._id} value={item.name}>{item.name}</Select.Option>
+                                    <Select.Option key={item._id} value={item.code}>{item.name}</Select.Option>
                                 ))
                             }
                         </Select>
@@ -88,7 +113,7 @@ class AddClass extends React.Component {
                         </Select>
                     </Form.Item>
                     <Form.Item wrapperCol={{ offset: 4 }}>
-                        <Button type="primary" htmlType="submit">添加</Button>
+                        <Button type="primary" htmlType="submit">修改</Button>
                     </Form.Item>
                 </Form>
             </div>
@@ -98,4 +123,4 @@ class AddClass extends React.Component {
 }
 
 
-export default AddClass;
+export default EditClass;

@@ -2288,4 +2288,45 @@
     * axios
     * fetch
         > fetch二次封装
+* antd的使用
+
+
+## day6-1
+
+### 面试题
+* 如何实时显示用户位置
+    > geolocation
+* 兼容性问题
+    > 每个人至少背2~3题
+    * 浏览器兼容性
+    * 语言版本兼容性
+    * 平台兼容
+    * 设备兼容性问题
+* 自我介绍与项目介绍
+
+### 知识点
 * 路由传参
+    * 动态路由: 通过`props.match.params`获取参数
+    * url参数: 通过`props.location.search`获取参数，一般配合`querystring`模块实现格式化
+        > ?后的数据
+        ```js
+            // vue
+            this.$router.push('/class?a=10&b=20')
+            this.$router.push({
+                path:'/class',
+                query:{
+                    a:10,
+                    b:20
+                }
+            })
+
+            // React
+            history.push('/class?a=10&b=20')
+            history.push({
+                pathname:'/class',
+                // search:'a=10&b=10',
+                search:querystring.stringify({a:10,b:20})
+            })
+        ```
+    * state: 通过`props.location.state`
+        > 刷新后数据消失

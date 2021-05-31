@@ -4,6 +4,7 @@ import { Route } from 'react-router'
 
 import List from './List'
 import Add from './Add'
+import Edit from './Edit'
 
 class Class extends React.Component{
     render() {
@@ -14,6 +15,7 @@ class Class extends React.Component{
                 班级管理
                 <Route path={match.path + "/list"} component={List} />
                 <Route path={match.path + "/add"} component={Add} />
+                <Route path={match.path + "/edit/:id"} component={Edit} />
             </div>
         )
     }
