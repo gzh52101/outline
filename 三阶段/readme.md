@@ -2433,6 +2433,17 @@
             document.body.dispatchEvent(myEvent)
         ```
 
+* 父组件获取子组件的数据
+    * $parent
+    * $chilren
+    * $root
+    ```js
+        this.$children[0].xxx
+        // ref用在普通元素上，得到这个元素对应的DOM节点
+        // ref用在组件上，得到这个组件的实例
+        this.$refs.child.xxxx
+    ```
+
 ### 复习
 * redux -> flux
     * 是什么
@@ -2488,3 +2499,36 @@
     1. Provider共享store
     2. connect定义props
         > 把redux中的数据与方法映射到组件的props
+
+* 实现简易版Redux
+    ```js
+        import {createStore} from './utils/redux';
+
+        const initState = {}
+        const reducer = function(state=initState,action){
+            switch(action.type){
+                case 'login':
+                    return {}
+                case 'logout':
+                    return {}
+                default:
+                    return state;
+            }
+        }
+        const store = createStore(reducer,initState)
+        const state = store.getState();
+
+    ```
+* Redux设计和使用的三项基本原则
+    1. 数据唯一性：store是必须是唯一的
+    2. 只有store能改变自己的内容
+        > 只能通过 `store.dispatch()` 修改state（不能直接修改state）
+    3. Reducer必须是一个纯函数
+        > 纯函数: 给固定的输入，就一定会有固定的输出，而且不会有任何副作用
+        * reducer可以接受state，但是绝对不能修改state，只能返回一个新的state
+
+* redux模块化
+    > 利用combineReducers()方法把多个reducer合并成一个大的reducer
+* Action Creator
+    > 一个用于生成action的函数，主要用于简化操作
+    * `bindActionCreators()` 简化操作

@@ -7,7 +7,6 @@ import { Content } from 'antd/lib/layout/layout';
 import store from './store'
 const Router = process.env.NODE_ENV === 'development' ? HashRouter : BrowserRouter;
 
-
 ReactDOM.render(
     <Provider store={store}>
         <Router>

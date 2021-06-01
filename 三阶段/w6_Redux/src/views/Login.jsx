@@ -1,7 +1,9 @@
 import React from 'react'
 import {Form,Input,Checkbox,Button,message} from 'antd'
 import request from '@/utils/request'
-import store from '@/store'
+// import store from '@/store'
+import {connect} from 'react-redux';
+import userAction from '@/store/actions/user'
 
 const layout = {
     labelCol: { span: 6 },
@@ -12,6 +14,7 @@ const layout = {
   };
 
 function Login(props) {
+    console.log("Login.props=",props);
     const rules = {
         username:[{ required: true, message: '请输入用户名' }],
         password:[{ required: true, message: '请输入密码' }],
@@ -24,7 +27,8 @@ function Login(props) {
             ...values
         })
         if(data.code === 200){
-            store.dispatch({type:'login',user:data.data})
+            // store.dispatch({type:'login',user:data.data})
+            props.login(data.data);
             props.history.replace('/home')
             message.success('登录成功')
         }
@@ -74,5 +78,13 @@ function Login(props) {
         </div>
     )
 }
+// const mapStateToProps = ()=>({});
+const mapDispatchToProps = dispatch=>({
+    login(user){
+        // dispatch({type:'login',user})
+        dispatch(userAction.login(user))
+    }
+})
+Login = connect(null,mapDispatchToProps)(Login)
 
 export default Login;

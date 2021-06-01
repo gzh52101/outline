@@ -11,8 +11,9 @@ import 'antd/dist/antd.css';
 import './style.scss'
 
 import { withUser,withRedux } from './utils/hoc'
+import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
-// import store from '@/store'
+import userAction from './store/actions/user';
 
 import { Layout, Menu, Breadcrumb, Row, Col, Button } from 'antd';
 import { HomeOutlined, LoginOutlined, UserAddOutlined, UserOutlined, LaptopOutlined, NotificationOutlined, DingtalkOutlined } from '@ant-design/icons'
@@ -23,18 +24,29 @@ const mapStateToProps = function(state){
     // state: redux中的state
     // 必须返回一个对象（对象中的数据会自动传入组件props）
     return {
-        userInfo:state.userInfo
+        userInfo:state.user.userInfo
     }
 }
 
 // 用于定义修改redux数据的方法（默认返回dispatch）
 const mapDispatchToProps = function(dispatch){
     // dispath: store.dispatch
-    return {
-        logout(){
-            dispatch({type:'logout'})
-        }
-    }
+    // return {
+    //     logout(){
+    //         // dispatch({type:'logout'})
+    //         dispatch(userAction.logout())
+    //     }
+    // }
+    return bindActionCreators(userAction,dispatch);
+    // 以上代码等效于下面写法
+    // return {
+    //     logout(){
+    //         dispatch(userAction.logout())
+    //     },
+    //     login(data){
+    //         dispatch(userAction.login(data))
+    //     }
+    // }
 }
 
 @withRouter
