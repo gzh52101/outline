@@ -2379,3 +2379,112 @@
             > 把redux数据放到组件state中，并配合`store.subscribe()`事件redux数据监听
         * props数据修改（父组件数据修改，推荐）
             > 利用高阶组件往当前组件内传递redux数据
+
+
+## day6-2
+
+### 面试题
+* 项目相关问题
+    * 花费时间：3个月+
+    * 分支：master+develope+release+hotfix
+    * 技术栈： Vue+Vuerouter+Vuex+Vant/ElementUI+axios/fetch
+    * 难点
+    * 遇到的bug
+* 事件绑定方式
+    * on+事件类型
+    * addEventListener()
+* 自定义事件
+    * jquery
+        ```js
+            $ele.on('hello',()=>{
+
+            })
+            // 触发
+            $ele.trigger('hello')
+        ```
+    * Vue
+        ```js
+            <mycomponent v-on:hello="handle" ref="mc" />
+
+            this.$refs.mc.$on('hello',this.handle)
+
+            // 触发
+            this.$refs.mc.$emit('hello')
+        ```
+    * 原生
+        * 定义
+            * Event
+            * CumstomEvent
+        * 触发
+            * dispatchEvent
+        ```js
+            // 创建一个自定义事件
+            var myEvent = new Event('hello');
+
+            // 创建一个自定义事件并传参
+            var myEvent = new CustomEvent('event_name', { 
+                detail: { title: 'hello laoxie'},
+            }); 
+            document.body.addEventListener('hello',(e)=>{
+                // e.detail
+            })
+
+            // 触发
+            document.body.dispatchEvent(myEvent)
+        ```
+
+### 复习
+* redux -> flux
+    * 是什么
+    * 能做什么
+    * 如何使用
+* redux的使用步骤
+    1. 安装
+    2. 引用
+        ```js
+            import {createStore} from 'redux'
+        ```
+    3. 创建store
+        ```js
+            const initState = {
+
+            }
+            const reducer = function(state,action){
+
+            }
+            const store = createStore(reducer,initState)
+        ```
+    4. 在组件中使用
+        * 获取状态：store.getState()
+        * 修改状态：store.dispatch(action)
+        * 监听状态修改：store.subscribe(callback)
+
+* redux核心
+    * store     仓库
+        * dispatch()    触发修改state命令
+        * getState()    获取state
+    * state     状态
+        > 必须设置初始值
+    * reducer   修改状态的方法
+        > 是一个纯函数
+        * 参数为state,action
+        * 必须返回一个新的state
+    * action    命令/动作
+        > 格式：`{type}`
+        * 使用：store.dispatch(action)
+
+* 组件刷新场景
+    * state改变
+    * props改变（高阶组件）
+
+### 知识点
+* react-redux
+    > 原理：Context+高阶组件
+    * 组件：`<Provider/>`
+        > 利用Provider组件共享redux数据
+    * 高阶组件：`connect()`
+        > 利用connect高阶组件定义传入组件的数据
+* react-redux的使用步骤
+    1. Provider共享store
+    2. connect定义props
+        > 把redux中的数据与方法映射到组件的props

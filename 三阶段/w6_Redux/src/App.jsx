@@ -11,6 +11,7 @@ import 'antd/dist/antd.css';
 import './style.scss'
 
 import { withUser,withRedux } from './utils/hoc'
+import {connect} from 'react-redux'
 // import store from '@/store'
 
 import { Layout, Menu, Breadcrumb, Row, Col, Button } from 'antd';
@@ -18,9 +19,28 @@ import { HomeOutlined, LoginOutlined, UserAddOutlined, UserOutlined, LaptopOutli
 const { Header, Content, Sider } = Layout;
 const { SubMenu } = Menu;
 
+const mapStateToProps = function(state){
+    // state: redux中的state
+    // 必须返回一个对象（对象中的数据会自动传入组件props）
+    return {
+        userInfo:state.userInfo
+    }
+}
+
+// 用于定义修改redux数据的方法（默认返回dispatch）
+const mapDispatchToProps = function(dispatch){
+    // dispath: store.dispatch
+    return {
+        logout(){
+            dispatch({type:'logout'})
+        }
+    }
+}
+
 @withRouter
-@withUser
-@withRedux
+// @withUser
+// @withRedux
+@connect(mapStateToProps,mapDispatchToProps)
 class App extends React.Component {
     constructor(props) {
         super(props);
@@ -122,7 +142,8 @@ class App extends React.Component {
         // })
     }
     render() {
-        const {userInfo,store} = this.props;
+        console.log('App.props',this.props);
+        const {userInfo,logout} = this.props;
         const { current, menu, mainMenu } = this.state;
         return (
             <Layout>
@@ -145,9 +166,7 @@ class App extends React.Component {
                                 userInfo ? 
                                 <>
                                     <span style={{color:'#fff'}}>{userInfo.username}</span>
-                                    <Button type="link" onClick={()=>{
-                                        store.dispatch({type:'logout'})
-                                    }}>退出</Button>
+                                    <Button type="link" onClick={logout}>退出</Button>
                                 </>
                                 :
                                 <Button type="link" onClick={()=>{
@@ -225,6 +244,6 @@ class App extends React.Component {
 // 本质：把App组件传入一个函数中并返回新的组件
 // App = withUser(App)
 // App = withRouter(App);
-
+// App = connect(mapStateToProps,mapDispatchToProps)(App)
 
 export default App;
