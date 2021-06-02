@@ -2613,3 +2613,32 @@
 * redux中间件
     * redux-thunk
         > 增强dispatch功能，让它支持函数作为参数（并传递dispatch）
+* redux-saga
+    * Generator 生成器函数，返回一个迭代器
+        * yield     暂停并返回
+        * return    结束并返回
+    * Iterator  迭代器
+        * next()    返回格式为{value,done}的对象
+        * for..of
+    * 使用步骤
+        1. 安装并引入
+            ```js
+                import createSagaMiddleware from 'redux-saga';
+            ```
+        2. 创建中间件
+            ```js
+                const sagaMiddleware = createSagaMiddleware();
+            ```
+        3. 将 sagaMiddleware 连接至 Store
+            ```js
+                let enhancer = applyMiddleware(sagaMiddleware);
+                // 与其他中间件一起使用
+                // enhancer = compose(enhancer,elseMiddleware)
+                const store = createStore(reducer,enhancer)
+            ```
+        4. 引入并运行自定义Saga配置
+            ```js
+                // saga配置文件：mysaga.js
+                import mysaga from './store/saga/mysaga';
+                sagaMiddleware.run(mysaga);
+            ```

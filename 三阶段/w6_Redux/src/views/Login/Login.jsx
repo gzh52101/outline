@@ -4,6 +4,7 @@ import request from '@/utils/request'
 // import store from '@/store'
 import { connect } from 'react-redux';
 import userAction from '@/store/actions/user'
+import { Redirect } from 'react-router';
 
 const layout = {
     labelCol: { span: 6 },
@@ -32,14 +33,17 @@ function Login(props) {
         //     props.history.replace('/home')
         //     message.success('登录成功')
         // }
-        const result = await props.login(values);
-        if (result.code === 200) {
-            props.history.replace('/home')
-            message.success('登录成功')
-        }
+        props.login(values);
+        // if (result.code === 200) {
+        //     props.history.replace('/home')
+        //     message.success('登录成功')
+        // }
 
     }
     return (
+        props.isLogin ? 
+        <Redirect to="/home" />
+        :
         <div>
             <h1>用户登录</h1>
             <Form
@@ -84,14 +88,15 @@ function Login(props) {
         </div>
     )
 }
-// const mapStateToProps = ()=>({});
+const mapStateToProps = (state)=>({isLogin:!!state.user.userInfo});
 const mapDispatchToProps = dispatch => ({
     login(data) {
         // dispatch({type:'login',user})
         // dispatch(userAction.login(user))
-        return dispatch(userAction.loginAsync(data));
+        // return dispatch(userAction.loginAsync(data));
+        dispatch({ type: 'USER_LOGIN_ASYNC', user: data })
     }
 })
-Login = connect(null, mapDispatchToProps)(Login)
+Login = connect(mapStateToProps, mapDispatchToProps)(Login)
 
 export default Login;

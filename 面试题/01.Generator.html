@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generator生成器函数</title>
+</head>
+<body>
+    <h1>Generator生成器函数</h1>
+    <script>
+        /**
+            * Generator
+                * 在function关键字与函数名之间添加星号(*)
+                * 执行生成器函数返回一个迭代器
+                * yield     暂停并返回
+                * return    结束并返回
+            * Iterator
+                * next()    用以迭代数据，返回格式为{value,done}的对象
+                    * value: 迭代到当前位置时的值
+                    * done：迭代器是否迭代完毕
+         */
+        function hello(){
+
+        }
+        const res1 = hello(); // undefined
+        const res2 = new hello();// Object
+
+        async function hi(){
+            console.log('async')
+            return 123
+        }
+        const res3 = hi();// Promise
+
+        // Generator生成器函数：返回一个迭代器Iterator
+        function * hey(){
+            console.log('1')
+            yield 10
+            console.log('2')
+            yield 20
+            console.log('3')
+            yield 30
+            console.log('4')
+            return 100;
+            console.log('5')
+        }
+
+        // 执行生成器函数并不会执行内部的代码，而是返回一个状态为suspended的迭代器
+        // 只有执行迭代器的next()方法才会执行里面的代码，遇到yield代码会暂停执行
+        const res4 = hey();
+
+        // for...of: 能遍历具有迭代特性的数据
+        // 就是不断执行迭代器的next()方法的过程，直到结束
+        for(let val of res4){
+            console.log('val=',val);
+        }
+
+        // for..of不能遍历普通对象
+        let user = {username:'jingjing',password:123,role:'vip'}
+
+        // 解决方案：给对象添加迭代器
+        function* createIterator(o) {
+			for (var key in o) {
+				yield o[key];
+			}
+		}
+        Object.defineProperty(Object.prototype, Symbol.iterator, {
+			value: function () {
+				// this指向person
+				return createIterator(this);
+			}
+		})
+
+        for(let v of user){
+            console.log('v=',v);
+        }
+    </script>
+</body>
+</html>

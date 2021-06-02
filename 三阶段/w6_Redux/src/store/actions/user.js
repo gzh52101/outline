@@ -32,7 +32,6 @@ export function loginAsync(data) {
     }
 }
 
-
 export default {
     login,
     logout,

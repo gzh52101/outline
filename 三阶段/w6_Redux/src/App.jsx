@@ -233,17 +233,17 @@ class App extends React.Component {
                             <Switch>
                                 <Route path="/home" component={Home} />
                                 <Route path="/class" component={Class} />
-                                <Route path="/login" component={Login} />
+                                {/* <Route path="/login" component={Login} /> */}
                                 {/* <Route path="/reg" component={Reg} /> */}
                                 {/* <Route path="/reg">
                                     <Reg />
                                 </Route> */}
                                 {/* <Route path="/notfound" component={()=><div>404</div>} /> */}
-                                <Route path="/notfound" render={() => <div>404</div>} />
+                                {/* <Route path="/notfound" render={() => <div>404</div>} /> */}
                                 {/* 默认页面 */}
-                                <Redirect from="/" to="/home" exact />
+                                {/* <Redirect from="/" to="/home" exact /> */}
                                 {/* 404 */}
-                                <Redirect to="/notfound" />
+                                <Redirect to="/home" />
                             </Switch>
                         </Content>
                     </Layout>

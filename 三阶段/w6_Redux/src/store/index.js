@@ -3,15 +3,31 @@ import thunk from 'redux-thunk';
 import {composeWithDevTools } from 'redux-devtools-extension';
 import reducer from './reducers'
 import { logout } from './actions/user'
+import mysaga from './saga/mysaga'
+
+// 1. 安装并引入saga
+import createSagaMiddleware from 'redux-saga';
+
+// 2. 创建saga中间件
+const sagaMiddleware = createSagaMiddleware();
 
 // reducer: Function
 // inistate: Object
 // middleware: Function
-// let enhancer = compose(applyMiddleware(thunk),composeWithDevTools())
-let enhancer = composeWithDevTools(applyMiddleware(sagaMiddleware))
+
+// 3. 将 sagaMiddleware 连接至 Store
+// let enhancer = composeWithDevTools(applyMiddleware(thunk))
+let enhancer = compose(
+    // applyMiddleware(thunk),
+    applyMiddleware(sagaMiddleware),
+    composeWithDevTools()
+)
 
 // const store = createStore(reducer, applyMiddleware(thunk));
 const store = createStore(reducer, enhancer);
+
+// 4. 引入并运行自定义Saga配置
+sagaMiddleware.run(mysaga);
 
 export default store;
 
