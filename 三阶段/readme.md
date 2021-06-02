@@ -2532,3 +2532,84 @@
 * Action Creator
     > 一个用于生成action的函数，主要用于简化操作
     * `bindActionCreators()` 简化操作
+
+## day6-3
+
+### 面试题
+* mixin的作用
+* 父子组件生命周期钩子函数执行顺序
+    1. 父组件beforeCreate
+    2. 父组件created
+    3. 父组件beforeMount
+    4. 子组件beforeCreate
+    5. 子组件created
+    6. 子组件beforeMount
+    7. 子组件的mounted
+    8. 父组件mounted
+* 父子通讯中如何限定数据类型
+    ```js
+        // Vue 
+        {
+            ...
+            // props:['datalist','idx'],
+            props:{
+                datalist:Array,
+                datalist:{
+                    //required:true,
+                    default:[]
+                },
+                idx:{
+                    validator(){
+
+                    }
+                }
+            }
+        }
+
+        <div datalist="xxx" idx="xxx">{{datalist.map()}}</div>
+        this.datalist
+
+        // React
+        import PropTypes from 'prop-types'
+        class Datalist extends React.Component{
+            static propTypes = {}
+            static defaultProps = {}
+            render(){
+                return (<div></div>)
+            }
+        }
+
+        
+
+        // 添加静态属性
+        // props类型校验
+        Datalist.propTypes = {
+            data:PropTypes.array.isRequired,
+            idx:PropTypes.oneOfType([PropTypes.number,PropTypes.string])
+            age:function((props, propName, comName){
+                if(props[propName]<10 || props[propName]>20){
+                    return new Error(propName+'只能在10-20之间')
+                }
+            }
+        }
+
+        // props默认值
+        Datalist.defaultProps = {
+            data:[],
+            age:18
+        }
+
+        function MyList(){
+            return (<div></div>)
+        }
+
+        MyList.propTypes = {}
+        MyList.defaultProps = {}
+
+        <Datalist data={[10,20,30]} age={28} />
+    ```
+
+### 知识点
+* redux中间件
+    * redux-thunk
+        > 增强dispatch功能，让它支持函数作为参数（并传递dispatch）

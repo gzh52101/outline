@@ -10,9 +10,9 @@ import Class from './views/Class';
 import 'antd/dist/antd.css';
 import './style.scss'
 
-import { withUser,withRedux } from './utils/hoc'
-import {bindActionCreators} from 'redux'
-import {connect} from 'react-redux'
+import { withUser, withRedux } from './utils/hoc'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
 import userAction from './store/actions/user';
 
 import { Layout, Menu, Breadcrumb, Row, Col, Button } from 'antd';
@@ -20,16 +20,16 @@ import { HomeOutlined, LoginOutlined, UserAddOutlined, UserOutlined, LaptopOutli
 const { Header, Content, Sider } = Layout;
 const { SubMenu } = Menu;
 
-const mapStateToProps = function(state){
+const mapStateToProps = function (state) {
     // state: redux中的state
     // 必须返回一个对象（对象中的数据会自动传入组件props）
     return {
-        userInfo:state.user.userInfo
+        userInfo: state.user.userInfo
     }
 }
 
 // 用于定义修改redux数据的方法（默认返回dispatch）
-const mapDispatchToProps = function(dispatch){
+const mapDispatchToProps = function (dispatch) {
     // dispath: store.dispatch
     // return {
     //     logout(){
@@ -37,7 +37,7 @@ const mapDispatchToProps = function(dispatch){
     //         dispatch(userAction.logout())
     //     }
     // }
-    return bindActionCreators(userAction,dispatch);
+    return bindActionCreators(userAction, dispatch);
     // 以上代码等效于下面写法
     // return {
     //     logout(){
@@ -52,7 +52,7 @@ const mapDispatchToProps = function(dispatch){
 @withRouter
 // @withUser
 // @withRedux
-@connect(mapStateToProps,mapDispatchToProps)
+@connect(mapStateToProps, mapDispatchToProps)
 class App extends React.Component {
     constructor(props) {
         super(props);
@@ -103,7 +103,7 @@ class App extends React.Component {
                 },
             ],
             current: props.location.pathname || '/home',
-            userInfo:null,
+            userInfo: null,
         }
     }
     changeMenu = ({ key }) => {
@@ -154,8 +154,8 @@ class App extends React.Component {
         // })
     }
     render() {
-        console.log('App.props',this.props);
-        const {userInfo,logout} = this.props;
+        console.log('App.props', this.props);
+        const { userInfo, logout } = this.props;
         const { current, menu, mainMenu } = this.state;
         return (
             <Layout>
@@ -175,15 +175,15 @@ class App extends React.Component {
                             </Menu></Col>
                         <Col flex="180px" className="txt-right">
                             {
-                                userInfo ? 
-                                <>
-                                    <span style={{color:'#fff'}}>{userInfo.username}</span>
-                                    <Button type="link" onClick={logout}>退出</Button>
-                                </>
-                                :
-                                <Button type="link" onClick={()=>{
-                                    this.props.history.push('/login')
-                                }}>登录</Button>
+                                userInfo ?
+                                    <>
+                                        <span style={{ color: '#fff' }}>{userInfo.username}</span>
+                                        <Button type="link" onClick={logout}>退出</Button>
+                                    </>
+                                    :
+                                    <Button type="link" onClick={() => {
+                                        this.props.history.push('/login')
+                                    }}>登录</Button>
                             }
                         </Col>
                     </Row>
