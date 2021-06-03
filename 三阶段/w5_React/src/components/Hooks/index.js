@@ -3,6 +3,9 @@ import React,{useState} from 'react';
 import UseState from './UseState'
 import UseEffect from './UseEffect'
 import UseMemo from './UseMemo'
+import UseCallback from './UseCallback'
+import UseContext from './UseContext'
+import UseReducer from './UseReducer'
 
 function Hooks(){
     const [show,changeShow] = useState(true)
@@ -21,8 +24,11 @@ function Hooks(){
 
             <button onClick={()=>{
                 changeShow(!show)
-            }}>show:{show ? '显示' : '隐藏'}</button> */}
-            <UseMemo/>
+            }}>show:{show ? '显示' : '隐藏'}</button>
+            <UseMemo/> */}
+            <UseCallback/>
+            <UseContext/>
+            <UseReducer/>
         </div>
     )
 }

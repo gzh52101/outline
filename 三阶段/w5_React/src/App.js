@@ -1,18 +1,22 @@
 import React from 'react';
-
+import myCtx from './context'
 // import Todolist from './components/Todolist'
 import Lifecycle from './components/Lifecycle'
 import Hooks from './components/Hooks'
+
 function App(){
     return (
-        <div>
-            App
+        <myCtx.Provider value={{username:'jingjing',age:28}}>
+            <div>
+                App
 
-            {/* <Todolist/> */}
+                {/* <Todolist/> */}
 
-            {/* <Lifecycle/> */}
-            <Hooks/>
-        </div>
+                {/* <Lifecycle/> */}
+                <Hooks/>
+            </div>
+
+        </myCtx.Provider>
     )
 }
 

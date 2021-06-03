@@ -2701,6 +2701,32 @@
         * 冒泡阶段
     * target
     * currentTarget
+* js如何获取一个元素下的第一个和最后一个子元素
+    * firstElementChild/children[0]
+    * lastElementChild/children[children.length-1]
+* css与sass的区别，如何编译
+    * sass/node-sass
+    * gulp: gulp-sass
+    * webpack: sass-loader
+* vue中局部样式的原理
+    > 属性选择器
+    ```js
+        <style scoped></style>
+    ```
+* hash路由的原理
+    > hashchange事件
+* 如何根据不同的环境切换不同的路由模式
+    > process.env.NODE_ENV
+    * cross-env用于设置环境表示
+        ```js
+            "scripts":{
+                "dev":"webpack-dev-server",
+                "build":"webpack",
+                "test":"cross-env NODE_ENV=test webpack",
+                "test:uat":"cross-env NODE_ENV=uat webpack",
+            }
+        ```
+* UAT: 用户验收测试
 
 ### 知识点
 * Hook
@@ -2743,17 +2769,41 @@
                     return xxx
                 })
             ```
-        * 用法二：空依赖（）
+        * 用法二：空依赖
             ```js
                 const result = useMemo(function(){
                     // 这里的代码只有初始化时执行，之后每次刷新组件都得到缓存值
                     return xxx
                 },[])
             ```
-        * 用法三：指定依赖（）
+        * 用法三：指定依赖
             ```js
                 const result = useMemo(function(){
                     // 这里的代码在初始化和count修改时执行，否则得到缓存值
                     return xxx
                 },[count]);
             ```
+    * useCallback
+        * 用法一：不指定依赖（不推荐）
+            ```js
+                const handle = useCallback(function(){
+                    // 初始化和组件刷新handle都会得到一个新的函数
+                })
+            ```
+        * 用法二：空依赖
+            ```js
+                const handle = useCallback(function(){
+                    // 初始化时创建函数并缓存，组件刷新时得到缓存的函数（不创建）
+                },[])
+            ```
+
+        * 用法三：指定依赖（当依赖发生改变时会重新创建一个函数，否则获取之前缓存的函数）
+            ```js
+                const handle = useCallback(function(){
+                    // 初始化时和依赖更新时创建函数并缓存，否则handle得到缓存函数
+                },[qty])
+            ```
+    * useContext
+
+    * useReducer
+        > useState的增强版，实现复杂数据的操作
