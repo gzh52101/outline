@@ -2610,35 +2610,150 @@
     ```
 
 ### 知识点
+* vuex与redux对比
+                特点                    状态        修改state方式       异步操作
+    veux        只能配合vue使用         state       mutataion           actions
+    redux       可以与任意框架使用       state       reducer             中间件
+
 * redux中间件
     * redux-thunk
         > 增强dispatch功能，让它支持函数作为参数（并传递dispatch）
-* redux-saga
-    * Generator 生成器函数，返回一个迭代器
-        * yield     暂停并返回
-        * return    结束并返回
-    * Iterator  迭代器
-        * next()    返回格式为{value,done}的对象
-        * for..of
-    * 使用步骤
-        1. 安装并引入
+        ```js
+            // 同步操作
+            dispatch({type:'login',user})
+            // 异步操作
+            dispatch(function(dispatch){
+                // ajax请求并返回结果user
+                ajax().then(()=>{
+                    dispatch({
+                        type:'login',
+                        user
+                    })
+                })
+            })
+
+            // vuex
+            {
+                mutations:{},
+                actions:{
+                    login(ctx,payload){
+                        ajax.then(()=>{
+                            ctx.commit()
+                        })
+                    }
+                }
+            }
+        ```
+    * redux-saga
+        * Generator 生成器函数，返回一个迭代器
+            * yield     暂停并返回
+            * return    结束并返回
+        * Iterator  迭代器
+            * next()    返回格式为{value,done}的对象
+            * for..of
+        * 使用步骤
+            1. 安装并引入
+                ```js
+                    import createSagaMiddleware from 'redux-saga';
+                ```
+            2. 创建中间件
+                ```js
+                    const sagaMiddleware = createSagaMiddleware();
+                ```
+            3. 将 sagaMiddleware 连接至 Store
+                ```js
+                    let enhancer = applyMiddleware(sagaMiddleware);
+                    // 与其他中间件一起使用
+                    // enhancer = compose(enhancer,elseMiddleware)
+                    const store = createStore(reducer,enhancer)
+                ```
+            4. 引入并运行自定义Saga配置
+                ```js
+                    // saga配置文件：mysaga.js
+                    import mysaga from './store/saga/mysaga';
+                    sagaMiddleware.run(mysaga);
+                ```
+
+## day6-4
+
+### 面试题
+* 移动端点击事件穿透的bug
+    * click事件在移动端会延迟300ms左右执行
+        > 为什么要延迟300ms：因为移动端双击为放大
+    * touch
+        * touchstart
+        * touchmove
+        * touchend
+    * 手势
+        * 左滑动，右滑动
+        * 上滑动，下滑动
+        * ...
+    ```js
+        <button onclick="handle()">ddd</button>
+        <div class="popover">
+            遮罩层，点击遮罩层关闭弹窗与遮罩层
+        </div>
+    ```
+* 事件触发的过程
+    * 阶段
+        * 捕获阶段
+        * 触发阶段
+        * 冒泡阶段
+    * target
+    * currentTarget
+
+### 知识点
+* Hook
+    * 注意事项
+        * 只能在函数组件或其他hook中使用
+        * 不要在循环，条件或嵌套函数中调用 Hook， 确保总是在你的函数组件的最外层调用他们
+        * 函数组件每次刷新都会从上往下执行完内部所有的代码
+    * 分类
+        * 内置Hook
+        * 自定义Hook
+        * 第三方Hook
+    * useState: 实现类组件状态的功能
+        > 使用格式：`const [qty,changeQty] = useState(initValue)`
+    * useEffect: 实现类组件生命周期函数的功能
+        > useEffect在渲染结束后执行
+        * 用法一：默认用法（等效于componentDidMount + componentDidUpdate的效果）
             ```js
-                import createSagaMiddleware from 'redux-saga';
+                useEffect(function(){
+                    // 这里的代码在初始化与state更新都会执行
+                })
             ```
-        2. 创建中间件
+        * 用法二：空依赖（等效于componentDidMount）
             ```js
-                const sagaMiddleware = createSagaMiddleware();
+                useEffect(function(){
+                    // 这里的代码只有初始化时执行
+                },[])
             ```
-        3. 将 sagaMiddleware 连接至 Store
+        * 用法三：指定依赖（等效于comonentDidMount+shouldComponentUpdate的效果）
             ```js
-                let enhancer = applyMiddleware(sagaMiddleware);
-                // 与其他中间件一起使用
-                // enhancer = compose(enhancer,elseMiddleware)
-                const store = createStore(reducer,enhancer)
+                useEffect(function(){
+                    // 这里的代码在初始化和count修改时执行
+                },[count]);
             ```
-        4. 引入并运行自定义Saga配置
+    * useMemo：可以缓存之前的运算结果，一般用于性能优化（实现类似于vue中computed的效果）
+        > 格式：`const result = useMemo(fn)`，result得到fn的返回结果
+        * 用法一：默认用法（等效于传统用法，不推荐使用）
             ```js
-                // saga配置文件：mysaga.js
-                import mysaga from './store/saga/mysaga';
-                sagaMiddleware.run(mysaga);
+                const result = useMemo(function(){
+                    // 这里的代码在初始化与组件刷新时都会执行，每次刷新都会重新计算
+                    return xxx
+                })
+            ```
+        * 用法二：空依赖（）
+            ```js
+                const result = useMemo(function(){
+                    // 这里的代码只有初始化时执行，之后每次刷新组件都得到缓存值
+                    return xxx
+                },[])
+            ```
+        * 用法三：指定依赖（）
+            ```js
+                const result = useMemo(function(){
+                    // 这里的代码在初始化和count修改时执行，否则得到缓存值
+                    return xxx
+                },[count]);
             ```

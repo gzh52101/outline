@@ -18,7 +18,7 @@ function * login(action){
     //     ...action.user
     // }) 
     const result = yield call(request.post,'/login',{...action.user})
-
+    
     if(result.code === 200){
         yield put(userAction.login(result.data));
     }
