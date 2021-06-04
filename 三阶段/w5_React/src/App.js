@@ -3,6 +3,7 @@ import myCtx from './context'
 // import Todolist from './components/Todolist'
 import Lifecycle from './components/Lifecycle'
 import Hooks from './components/Hooks'
+import MyHook from './components/MyHook'
 
 function App(){
     return (
@@ -13,7 +14,9 @@ function App(){
                 {/* <Todolist/> */}
 
                 {/* <Lifecycle/> */}
-                <Hooks/>
+                {/* <Hooks/> */}
+
+                <MyHook/>
             </div>
 
         </myCtx.Provider>

@@ -2807,3 +2807,84 @@
 
     * useReducer
         > useState的增强版，实现复杂数据的操作
+
+## day6-5
+
+### 面试题
+* jQuery版本
+    > 工具库，擅长节点操作
+    * 1x        兼容低版本浏览器
+    * 2x        不兼容IE8-
+    * 3x        2版本的优化版本
+    * jQuery.mobile 移动端版本
+    * zepto.js
+* jQuery中链式调用的原理
+    > 在每个方法最后返回实例(this)
+    ```js
+        jQuery('button')
+        .addClass('btn')    -> addClass中返回jquery实例对象(this)
+        .on('click',function(){})   -> return this
+        .text('提交')        -> return this
+
+        jQuery('button').attr('type') -> 得到type属性值
+        .addClass() -> 报错
+        jQuery('button').attr('type','submit')  -> 设置type属性为submit，返回实例
+        .addClass()
+    ```
+* 如何编写jQuery插件
+    * 原型方法: jQuery.prototype
+        * addClass()
+        * attr()
+        * prop()
+        * on()
+        * ...
+    * 静态方法
+        * jQuery.ajax()
+        * jQuery.each()
+        * jQuery.extend()
+        * ...
+
+    ```js
+        jQuery.prototype.color = function(){
+            // this === $('button')
+
+            return this;
+        }
+
+        $('button').color().attr();
+
+        jQuery.map = function(){
+
+        }
+
+        jQuery.map()
+    ```
+
+### 复制
+* React Hooks
+    * useState(initState)
+    * useReducer(reducer,initState)
+    * useEffect(fn,[deps])
+    * useMemo(fn,[deps])
+    * useCallbacK(fn,[deps])
+    * useContext(context)
+### 知识点
+* useRef()
+    > 与`React.createRef()`的区别
+    * `React.createRef()`方式在组件更新时每次都会创建一个新的ref对象
+    * `useRef()`方式在组件更新时获取缓存值
+* useLayoutEffect
+    > useEffect的同步版本，在组件渲染前执行，等效于类组件中的componentWillMount+componentWillUpdate，一般用于节点操作（避免闪现的效果）
+* 自定义Hook
+* 第三方Hook
+    * react-router
+        > 编程式导航需要得到history,location,match，需要通过`withRouter`高阶组件实现获取
+        * useHistory
+        * useLocation
+        * useParams
+        * useRouteMatch
+    * react-redux
+        > react-redux 7.1新增功能
+        * useDispatch
+        * useStore
+        * useSelector

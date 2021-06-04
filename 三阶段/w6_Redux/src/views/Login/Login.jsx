@@ -2,7 +2,7 @@ import React from 'react'
 import { Form, Input, Checkbox, Button, message } from 'antd'
 import request from '@/utils/request'
 // import store from '@/store'
-import { connect } from 'react-redux';
+import { connect,useDispatch,useSelector } from 'react-redux';
 import userAction from '@/store/actions/user'
 import { Redirect } from 'react-router';
 
@@ -16,6 +16,9 @@ const tailLayout = {
 
 function Login(props) {
     console.log("Login.props=", props);
+    // const isLogin = useSelector(function(state){
+    //     return !!state.user.userInfo
+    // })
     const rules = {
         username: [{ required: true, message: '请输入用户名' }],
         password: [{ required: true, message: '请输入密码' }],

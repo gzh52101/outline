@@ -6,6 +6,7 @@ import UseMemo from './UseMemo'
 import UseCallback from './UseCallback'
 import UseContext from './UseContext'
 import UseReducer from './UseReducer'
+import UseRef from './UseRef'
 
 function Hooks(){
     const [show,changeShow] = useState(true)
@@ -25,10 +26,11 @@ function Hooks(){
             <button onClick={()=>{
                 changeShow(!show)
             }}>show:{show ? '显示' : '隐藏'}</button>
-            <UseMemo/> */}
+            <UseMemo/>
             <UseCallback/>
             <UseContext/>
-            <UseReducer/>
+            <UseReducer/> */}
+            <UseRef/>
         </div>
     )
 }
