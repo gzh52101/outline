@@ -2860,7 +2860,7 @@
         jQuery.map()
     ```
 
-### 复制
+### 复习
 * React Hooks
     * useState(initState)
     * useReducer(reducer,initState)
@@ -2888,3 +2888,42 @@
         * useDispatch
         * useStore
         * useSelector
+* hook的作用
+    * 增强功能
+    * 优化性能
+    * 简化操作
+* 利用useReducer+Context实现简化版redux
+    * 唯一数据源：只能使用一个useReducer
+    * 如何共享数据：Context实现跨组件共享(useContext)
+    ```js
+        const initData={}
+        const reducer = function(){}
+        export const ctx = React.createContext()
+        export function Provider(props){
+            const [goodslist,dispatch] = useReducer(initData)
+            return <ctx.Provider value={[goodslist,dispatch]}>
+                {props.children}
+            </ctx.Provider>
+        }
+
+        <Provider>
+            <App/>
+        </Provider>
+
+    ```
+    * 练习：使用自定义hook实现简单版redux
+
+* React项目
+    1. 组队
+    2. 选项目
+    3. 分配任务
+    4. 开发
+
+* create-react-app
+    * 创建项目：`create-react-app myapp`
+    * 需改webpack配置
+        * eject
+        * node_modules/react-srcipts
+        * react-app-rewired
+            1. 根目录创建`config-overrides.js`文件
+            2. 修改`package.json`的scripts命令

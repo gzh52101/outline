@@ -1,29 +1,29 @@
 import React, { useState, useEffect, useMemo, useCallback, useContext, useReducer } from 'react';
-
-const initState = [
-    { id: 1, name: "goods1", price: 98, qty: 2 },
-    { id: 2, name: "goods2", price: 198, qty: 2 },
-    { id: 3, name: "goods3", price: 998, qty: 1 },
-];
-const reducer = (state, action) => {
-    switch (action.type) {
-        case 'add':
-            return [action.goods, ...state];
-        case 'remove':
-            return state.filter(item => item.id != action.id);
-        case 'change':
-            return state.map(item => {
-                if (item.id === action.id) {
-                    item.qty = action.qty;
-                }
-                return item;
-            })
-        case 'clear':
-            return []
-        default:
-            throw new Error('type error');
-    }
-}
+import {ctx} from './store'
+// const initState = [
+//     { id: 1, name: "goods1", price: 98, qty: 2 },
+//     { id: 2, name: "goods2", price: 198, qty: 2 },
+//     { id: 3, name: "goods3", price: 998, qty: 1 },
+// ];
+// const reducer = (state, action) => {
+//     switch (action.type) {
+//         case 'add':
+//             return [action.goods, ...state];
+//         case 'remove':
+//             return state.filter(item => item.id != action.id);
+//         case 'change':
+//             return state.map(item => {
+//                 if (item.id === action.id) {
+//                     item.qty = action.qty;
+//                 }
+//                 return item;
+//             })
+//         case 'clear':
+//             return []
+//         default:
+//             throw new Error('type error');
+//     }
+// }
 // redux写法
 // const store = createStore(reducer,initState)
 // store.getState()
@@ -34,7 +34,9 @@ function UseReducer() {
     const [qty, setQty] = useState(1);
     const [count, setCount] = useState(10);
 
-    const [goodslist,dispatch] = useReducer(reducer,initState);
+    // const [goodslist,dispatch] = useReducer(reducer,initState);
+    const [goodslist,dispatch] = useContext(ctx);
+
     const totalPrice = useMemo(function(){
         return goodslist.reduce((prev,item)=>prev+item.price*item.qty,0)
     },[goodslist])

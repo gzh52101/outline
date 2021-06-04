@@ -28,9 +28,9 @@ function Hooks(){
             }}>show:{show ? '显示' : '隐藏'}</button>
             <UseMemo/>
             <UseCallback/>
-            <UseContext/>
-            <UseReducer/> */}
-            <UseRef/>
+            <UseContext/> */}
+            <UseReducer/>
+            {/* <UseRef/> */}
         </div>
     )
 }
