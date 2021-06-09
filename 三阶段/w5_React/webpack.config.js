@@ -9,6 +9,8 @@
 */
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 module.exports = {
     mode:'development',
     // 入口文件
@@ -64,17 +66,40 @@ module.exports = {
             {
                 test:/\.s[ac]ss$/,
                 use:['style-loader','css-loader','sass-loader']
+            },
+
+            // 图片
+            {
+                test:/\.(jpe?g|png|gif)$/,
+                use:[{
+                    loader:'url-loader',
+                    options:{
+                        limit:8192, // 图片小于等于8K，则以base64编码显示（减少http请求）
+                        // 图pain超过8k，使用file-loader处理，路径基于output与服务器根目录
+                        name: 'img/[name]-[hash:5].[ext]'
+                    }
+                }]
             }
         ]
     },
 
     // webpack插件
     plugins:[
+        new CleanWebpackPlugin(),
+        
         // 创建一个html文件
         new HtmlWebpackPlugin({
             // 以某个文件作为模板创建html文件
             template:'./public/template.html',
             // filename:'login.html'
+        }),
+
+        // 复制静态资源图片到编译目录dist
+        new CopyWebpackPlugin({
+            patterns: [
+                { from: "src/assets/img", to: "img" },
+                // { from: "other", to: "public" },
+            ],
         })
     ]
 }
