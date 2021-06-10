@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>echarts组件的使用</title>
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.1.2/dist/echarts.js"></script>
+    <style>
+        #main {
+            min-height: 600px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>echarts组件的使用</h1>
+    <div id="main"></div>
+    <script>
+        // 关联节点
+        var myChart = echarts.init(document.getElementById('main'));
+
+        var option = {
+
+            title: {
+                text: 'ECharts 入门示例',
+                left: 'center',
+                textStyle: {
+                    color: '#58bc58'
+                }
+            },
+            grid: [
+                {
+                    left: 0,
+                    right: '55%',
+                    bottom:'50%'
+                },
+                {
+                    left: '55%',
+                    right: 0,
+                    bottom:'50%'
+                }
+            ],
+
+            tooltip: {},
+            legend: {
+                show: false,
+                data: ['销量'],
+                right: 30,
+                top: 'center'
+            },
+            xAxis: [{
+                data: ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"]
+            }, {
+                gridIndex: 1,
+                data: ["HTML", "CSS", "JS", "Vue", "React", "NodeJS"]
+            }],
+            yAxis: [{}, { gridIndex: 1, }],
+            series: [{
+                name: '销量',
+                type: 'bar',
+                data: [5, 20, 36, 10, -10, 20]
+            },
+            {
+                xAxisIndex: 1,
+                yAxisIndex: 1,
+                name: '销量',
+                type: 'line',
+                data: [5, -20, 36, 10, 10, 20]
+            },
+            {
+                name: '访问来源',
+                type: 'pie',
+                radius: '80%',
+                left:0,
+                top:'50%',
+                roseType:true,
+                data: [
+                    { value: 1048, name: '搜索引擎' },
+                    { value: 735, name: '直接访问' },
+                    { value: 580, name: '邮件营销' },
+                    { value: 484, name: '联盟广告' },
+                    { value: 300, name: '视频广告' }
+                ],
+                emphasis: {
+                    itemStyle: {
+                        shadowBlur: 10,
+                        shadowOffsetX: 0,
+                        shadowColor: 'rgba(0, 0, 0, 0.5)'
+                    }
+                }
+            }
+            ]
+        };
+
+        myChart.setOption(option);
+
+        myChart.getDom()
+    </script>
+</body>
+
+</html>
