@@ -17,9 +17,11 @@
   "dependencies": {
     "@ant-design/icons": "^4.6.2",
     "@babel/core": "^7.14.3",
+    "@babel/plugin-syntax-dynamic-import": "^7.8.3",
     "@babel/preset-react": "^7.13.13",
     "antd": "^4.16.0",
     "babel-loader": "^8.2.2",
+    "babel-plugin-import": "^1.13.3",
     "css-loader": "^5.2.6",
     "html-webpack-plugin": "^5.3.1",
     "react": "^17.0.2",

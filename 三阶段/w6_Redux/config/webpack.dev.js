@@ -8,6 +8,8 @@ module.exports = {
         // contentBase:path.join(__dirname,'./public'),
         static:path.join(__dirname,'../public'),
         port:2101,
+        // 开启服务器压缩
+        compress:true,
         proxy:{
             '/api':{ // http://localhost:8080/api/class
                 target: 'http://120.76.247.5:2002', 

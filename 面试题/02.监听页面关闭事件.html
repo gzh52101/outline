@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>02.监听页面关闭事件</title>
+</head>
+<body>
+    <h1>02.监听页面关闭事件</h1>
+    <script>
+        /**
+            * 02.监听页面关闭事件
+                * load
+                * unload
+                * beforeunload
+                    > 必须包含return值
+                * pageshow
+                * pagehide
+         */
+        window.onload = function(){
+            console.log('onload')
+        }
+        window.onunload = function(){
+            console.log('unload')
+            return confirm("确定离开此页面吗？"); 
+        }
+        window.onbeforeunload = function(){
+            console.log('beforeunload')
+            return "确定离开此页面吗-----------？"; 
+        }
+        window.onpageshow = function(){
+            console.log('pageshow')
+        }
+        window.onpagehide = function(){
+            console.log('pagehide')
+            return confirm("pagehide确定离开此页面吗？"); 
+        }
+
+    </script>
+</body>
+</html>

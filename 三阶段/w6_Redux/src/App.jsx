@@ -1,13 +1,18 @@
-import React from 'react'
+import React, { Suspense, lazy } from 'react'
 
 import { HashRouter, BrowserRouter, Route, Link, NavLink, Redirect, Switch, withRouter } from 'react-router-dom'
 
-import Home from './views/Home';
-import Login from './views/Login';
-import Reg from './views/Reg';
-import Class from './views/Class';
+// import Home from './views/Home';
+// import Login from './views/Login';
+// import Reg from './views/Reg';
+// import Class from './views/Class';
 
-import 'antd/dist/antd.css';
+const Home = lazy(() => import('./views/Home'));
+const Login = lazy(() => import("./views/Login"));
+const Reg = lazy(() => import("./views/Reg"));
+const Class = lazy(() => import("./views/Class"));
+
+// import 'antd/dist/antd.css';
 import './style.scss'
 
 import { withUser, withRedux } from './utils/hoc'
@@ -230,21 +235,23 @@ class App extends React.Component {
                                 minHeight: 280,
                             }}
                         >
-                            <Switch>
-                                <Route path="/home" component={Home} />
-                                <Route path="/class" component={Class} />
-                                {/* <Route path="/login" component={Login} /> */}
-                                {/* <Route path="/reg" component={Reg} /> */}
-                                {/* <Route path="/reg">
+                            <Suspense fallback={<div>loading...</div>}>
+                                <Switch>
+                                    <Route path="/home" component={Home} />
+                                    <Route path="/class" component={Class} />
+                                    {/* <Route path="/login" component={Login} /> */}
+                                    {/* <Route path="/reg" component={Reg} /> */}
+                                    {/* <Route path="/reg">
                                     <Reg />
                                 </Route> */}
-                                {/* <Route path="/notfound" component={()=><div>404</div>} /> */}
-                                {/* <Route path="/notfound" render={() => <div>404</div>} /> */}
-                                {/* 默认页面 */}
-                                {/* <Redirect from="/" to="/home" exact /> */}
-                                {/* 404 */}
-                                <Redirect to="/home" />
-                            </Switch>
+                                    {/* <Route path="/notfound" component={()=><div>404</div>} /> */}
+                                    {/* <Route path="/notfound" render={() => <div>404</div>} /> */}
+                                    {/* 默认页面 */}
+                                    {/* <Redirect from="/" to="/home" exact /> */}
+                                    {/* 404 */}
+                                    <Redirect to="/home" />
+                                </Switch>
+                            </Suspense>
                         </Content>
                     </Layout>
                 </Layout>

