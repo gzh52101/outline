@@ -13,7 +13,9 @@ App({
       }
     })
   },
+
+  // 自定义数据
   globalData: {
     userInfo: null
-  }
+  },
 })

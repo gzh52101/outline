@@ -3069,3 +3069,44 @@
     * 路由懒加载
         > 优化首页访问速度，只有用户访问到某个页面时才加载这个路由
     * 服务器压缩
+
+
+## day8-1： 小程序
+
+### 知识点
+* 文件类型
+    * 根据后缀名分类
+        * .json 配置文件
+        * .js 逻辑文件
+        * .wxss 样式文件
+        * .wxml 布局文件
+        * .wxs 模块化脚本文件
+    * 根据作用范围分类
+        * 全局通用文件
+            > 根目录下
+        * 页面级别文件
+            > pages文件夹下
+    * project.config.json
+    * sitemap.json
+* 页面类型
+    * 普通页面
+    * tabbar页面
+        > 只有tabbar页面才能显示tabbar
+
+* wxml
+    * 数据绑定
+        * 单向：{{}}
+        * 双向：
+            * 单向+事件
+            * model
+    * 事件绑定
+        * 绑定方式
+            * bind:tap
+            * catch:tap
+        * event
+            * detail
+        * 传参
+            * dataset 符合W3C标准的自定义属性
+
+* js逻辑文件
+    * 修改页面数据：this.setData()

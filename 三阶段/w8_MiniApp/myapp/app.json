@@ -1,12 +1,36 @@
 {
-  "pages":[
+  "pages": [
     "pages/index/index",
-    "pages/logs/logs"
+    "pages/logs/logs",
+    "pages/add/add",
+    "pages/mine/mine"
   ],
-  "window":{
-    "backgroundTextStyle":"light",
+  "window": {
+    "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#58bc58",
-    "navigationBarTitleText": "面试宝典"
+    "navigationBarTitleText": "面试宝典",
+    "backgroundColor":"#00f",
+    "enablePullDownRefresh":true
+  },
+  "tabBar":{
+    "color":"#fff",
+    "selectedColor":"#ff0",
+    "backgroundColor":"#58bc58",
+    "position":"top",
+    "list":[
+      {
+        "pagePath":"pages/index/index",
+        "text":"首页",
+        "iconPath":"img/home.png",
+        "selectedIconPath":"img/home_active.png"
+      },
+      {
+        "pagePath":"pages/mine/mine",
+        "text":"我的",
+        "iconPath":"img/mine.png",
+        "selectedIconPath":"img/mine_active.png"
+      }
+    ]
   },
   "style": "v2",
   "sitemapLocation": "sitemap.json"

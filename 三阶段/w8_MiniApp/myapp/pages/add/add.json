@@ -1,0 +1,7 @@
+{
+  "usingComponents": {},
+  "navigationBarBackgroundColor":"#f60",
+  "navigationBarTitleText": "添加面试题",
+  "backgroundColor":"#f00",
+  "enablePullDownRefresh":true
+}

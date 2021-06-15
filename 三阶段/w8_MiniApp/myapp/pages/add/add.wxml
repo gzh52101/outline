@@ -1,0 +1,7 @@
+<text data-title="{{title}}">{{title}}</text>
+<view>add：{{item}}</view>
+<label for="item">标题：</label>
+<input value="{{item}}" id="item" bind:input="changeItem" data-idx="{{10}}" data-user="laoxie" />
+<label for="item">model双向绑定：</label>
+<input model:value="{{item}}" />
+<button bind:tap="changeItem">点我</button>
