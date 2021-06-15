@@ -56,7 +56,8 @@ module.exports = {
         //     filename:'login.html'
         // }),
         new HtmlWebpackPlugin({
-            template:path.join(__dirname,'../public/index.html')
+            template:path.join(__dirname,'../public/index.html'),
+            hash:true, // 给html代码中的静态资源添加随机hash值：a.jpg -> a.jpg?sdklfjsldkfj
         }),
     ]
 }

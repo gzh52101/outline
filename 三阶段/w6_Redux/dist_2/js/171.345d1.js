@@ -1,0 +1,1 @@
+(self.webpackChunkw5_reactrouter=self.webpackChunkw5_reactrouter||[]).push([[171],{2171:(e,r,t)=>{"use strict";t.r(r),t.d(r,{default:()=>c});var n,s=t(7294);const c=(0,t(5688).QO)(n=class extends s.Component{render(e){return console.log("Reg.props",e),s.createElement("div",null,"Reg")}})||n}}]);
