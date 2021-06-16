@@ -21,7 +21,13 @@
         {
           "name": "list",
           "pathName": "pages/list/list",
-          "query": "",
+          "query": "type=addtime",
+          "scene": null
+        },
+        {
+          "name": "iq",
+          "pathName": "pages/iq/iq",
+          "query": "id=5d7be4fbc994e53fe0f40f41",
           "scene": null
         }
       ]

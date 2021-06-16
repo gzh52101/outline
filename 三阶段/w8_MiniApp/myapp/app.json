@@ -4,14 +4,14 @@
     "pages/logs/logs",
     "pages/add/add",
     "pages/list/list",
+    "pages/iq/iq",
     "pages/mine/mine"
   ],
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#58bc58",
     "navigationBarTitleText": "面试宝典",
-    "backgroundColor":"#00f",
-    "enablePullDownRefresh":true
+    "backgroundColor":"#ccc"
   },
   "tabBar":{
     "color":"#fff",

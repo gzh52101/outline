@@ -20,4 +20,5 @@
   <view class="usermotto">
     <text class="user-motto">{{motto}}</text>
   </view>
+  <button type="primary" bind:tap="pullDown">下拉刷新</button>
 </view>

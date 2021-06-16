@@ -1,5 +1,9 @@
-<view>面试题列表</view>
-<view wx:for="{{iqlist.result}}" wx:key="_id" class="item">
-  <view class="title">{{item.question}}</view>
-  <view>{{item.hot}}浏览 - {{item.answer}}回答</view>
+<view>
+  <view>面试题列表</view>
+  <view wx:for="{{iqlist}}" wx:key="_id" class="item" bind:tap="gotoDetail" data-id="{{item._id}}">
+    <view class="title">{{item.question}}</view>
+    <view>{{item.hot}}浏览 - {{item.answer}}回答</view>
+  </view>
+  <view wx:if="{{hasMore}}">拼命加载中....</view>
+  <view wx:else>--------我是有底线的--------</view>
 </view>

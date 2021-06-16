@@ -3141,3 +3141,30 @@
         * wx:if         v-if
         * hidden        v-show
             * 不能用在block上，一般用户频繁的显示隐藏操作
+* 发起ajax请求
+    > wx.request()
+
+* 路由跳转
+    > tabbar页面与普通页面
+    * 组件跳转
+        > `<navigator/>`
+            * open-type
+    * 接口跳转
+        * wx.navigateTo
+        * 传参：url参数
+        * 在跳转的页面中接收参数
+
+* 生命周期函数
+    > 生命周周期执行过程与适合进行什么操作
+    * 应用生命周期
+        > app.js
+        * onLaunch
+        * onShow
+        * onHide
+    * 页面生命周期
+        > PAGE.js
+        * onLoad
+        * onShow
+        * onReady
+        * onHide
+    * 组件生命周期

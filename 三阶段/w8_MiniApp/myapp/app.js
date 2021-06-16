@@ -1,6 +1,6 @@
 // app.js
 App({
-  onLaunch() {
+  onLaunch() {console.log('app.onLaunch')
     // 展示本地存储能力
     const logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
@@ -13,9 +13,31 @@ App({
       }
     })
   },
+  onShow(options){
+    console.log('app.onShow',options)
+  },
+  onHide(){
+    console.log('app.onHide')
+  },
 
   // 自定义数据
   globalData: {
     userInfo: null
   },
+  baseUrl: 'http://120.76.247.5:2001',
+  fetch(url, data, config = {}) {
+    return new Promise((resolve, reject) => {
+      wx.request({
+        ...config,
+        url: this.baseUrl + '/api' + url,
+        data,
+        success: ({ data }) => {
+          resolve(data);
+        },
+        fail() {
+          reject()
+        }
+      })
+    })
+  }
 })

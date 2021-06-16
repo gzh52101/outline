@@ -1,7 +1,8 @@
+import request from '../../utils/request'
 // index.js
 // 获取应用实例
 const app = getApp()
-console.log('app=',app)
+// console.log('app=',app)
 Page({
   data: {
     motto: 'Hello World',
@@ -17,12 +18,27 @@ Page({
       url: '../logs/logs'
     })
   },
+  pullDown(){
+    wx.startPullDownRefresh(),
+    // ajax
+    setTimeout(()=>{
+      wx.stopPullDownRefresh()
+
+    },1000)
+  },
   onLoad() {
     if (wx.getUserProfile) {
       this.setData({
         canIUseGetUserProfile: true
       })
     }
+
+    // 获取数据
+    request.get('/iq',{
+      sort:'hot'
+    }).then((data)=>{
+      console.log('data=',data);
+    })
   },
   getUserProfile(e) {
     // 推荐使用wx.getUserProfile获取用户信息，开发者每次通过该接口获取用户个人信息均需用户确认，开发者妥善保管用户快速填写的头像昵称，避免重复弹窗
@@ -44,5 +60,8 @@ Page({
       userInfo: e.detail.userInfo,
       hasUserInfo: true
     })
+  },
+  onPullDownRefresh(){
+    console.log('onPullDownRefresh');
   }
 })

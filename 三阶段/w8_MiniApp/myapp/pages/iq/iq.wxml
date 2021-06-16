@@ -1,0 +1,6 @@
+<view>
+  <view class="title">{{iqData.question}}</view>
+  <view>{{iqData.hot}}浏览 - {{iqData.answer.length}}回答</view>
+
+  <button type="primary" bind:tap="gotoHome">首页</button>
+</view>
