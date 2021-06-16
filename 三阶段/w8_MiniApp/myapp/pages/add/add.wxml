@@ -5,3 +5,23 @@
 <label for="item">model双向绑定：</label>
 <input model:value="{{item}}" />
 <button bind:tap="changeItem">点我</button>
+
+<view>列表循环</view>
+<view wx:for="{{datalist}}" wx:key="*this">
+{{index}} - {{item}}
+</view>
+<view>嵌套循环</view>
+<view wx:for="{{datalist2}}" wx:for-item="value" wx:for-index="key" wx:key="*this">
+对象：{{key}} 
+    <view wx:for="{{value}}" wx:key="*this">
+        {{key}} - {{index}} -> {{item}}
+    </view>
+</view>
+
+<!--<block wx:if="{{count>5}}">-->
+
+<block hidden="{{count>5}}">
+    <view>{{count}}</view>
+    <button bind:tap="changeCount">-</button>
+</block>
+<!--<button wx:else>+</button>-->

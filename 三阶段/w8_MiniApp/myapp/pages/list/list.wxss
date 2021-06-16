@@ -1,0 +1,8 @@
+/* pages/list/list.wxss */
+.item{
+  padding:10rpx 20rpx;
+}
+.title{
+  margin-bottom:10rpx;
+  font-weight: bold;
+}

@@ -3110,3 +3110,34 @@
 
 * js逻辑文件
     * 修改页面数据：this.setData()
+
+
+## day8-2
+
+### 知识点
+* wxml+js
+    * 列表循环
+        * wx:for
+            * index
+            * item
+        * wx:for-item   用于修改item名称
+        * wx:for-index  用户修改index名称
+        * wx:key    设置唯一值对应的属性（键）
+            ```js
+                data = [{id:1,name:'g1'},{id:2,name:'g2'},{id:3,name:'g3'}]
+                data = [10,20,30,40]
+                // vue/react
+                :key="item.id" :key="item+index"
+                key={item.id} 
+
+                // 微信小程序
+                wx:key="id" wx:key="*this"
+            ```
+    * 条件循环
+        * wx:if
+        * wx:else
+        * wx:elif
+    * 隐藏/显示一个元素
+        * wx:if         v-if
+        * hidden        v-show
+            * 不能用在block上，一般用户频繁的显示隐藏操作

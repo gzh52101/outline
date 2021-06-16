@@ -1,28 +1,26 @@
-// pages/add/add.js
+// pages/list/list.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    title:'添加面试题',
-    item:'小程序的文件类型有哪些',
-    datalist:[10,20,30],
-    datalist2:{a:[11,12,13],b:[21,22,23],c:[31,32,33]},
-    count:10,
+    page:1,
+    iqlist:{}
   },
-  changeItem(e){
-    console.log(e);
-    // 修改页面数据
-    // this.item = e.detail.value;
-    this.setData({
-      item:e.detail.value
-    })
-  },
-
-  changeCount(){
-    this.setData({
-      count:this.data.count-1
+  getData(){
+    // http://120.76.247.5:2001
+    wx.request({
+      url:'http://120.76.247.5:2001/api/iq',
+      data:{
+        size:10
+      },
+      success:({data})=>{
+        console.log('data=',data);
+        this.setData({
+          iqlist:data.data
+        })
+      }
     })
   },
 
@@ -30,7 +28,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.getData();
   },
 
   /**
@@ -72,7 +70,8 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-
+    console.log('触底')
+    this.getData();
   },
 
   /**

@@ -17,6 +17,12 @@
           "pathName": "pages/add/add",
           "query": "",
           "scene": null
+        },
+        {
+          "name": "list",
+          "pathName": "pages/list/list",
+          "query": "",
+          "scene": null
         }
       ]
     }
