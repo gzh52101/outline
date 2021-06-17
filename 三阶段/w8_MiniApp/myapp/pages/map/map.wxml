@@ -1,0 +1,7 @@
+<map style="width:100vw;height:100vh"
+latitude="{{pos.latitude}}"
+longitude="{{pos.longitude}}"
+markers="{{markers}}"
+>
+
+</map>

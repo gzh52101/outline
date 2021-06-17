@@ -5,24 +5,47 @@ Page({
    * 页面的初始数据
    */
   data: {
-    player:null
+    player:null,
+    camera:null,
+    picture:'',
   },
   play(){
     const {player} = this.data;
     console.log('paused=',player.paused)
     if(player.paused){
-
       player.play();
     }else{
       player.pause()
     }
   },
+
+  takePhoto(){console.log('takePhoto')
+    const {camera} = this.data;
+    camera.takePhoto({
+      success:(res)=>{
+        console.log('res=',res);
+        this.setData({
+          picture:res.tempImagePath
+        })
+      }
+    })
+  },
+  scanSuccess(e){
+    console.log('e=',e);
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    let {player,camera} = this.data;
 
-    let {player} = this.data;
+    if(!camera){
+      camera =  wx.createCameraContext()
+      this.setData({
+        camera
+      })
+    }
+
     if(!player){
       player = wx.createInnerAudioContext()
       this.setData({

@@ -19,8 +19,8 @@
           "scene": null
         },
         {
-          "name": "pages/media/media",
-          "pathName": "pages/media/media",
+          "name": "pages/map/map",
+          "pathName": "pages/map/map",
           "query": "",
           "scene": null
         },
