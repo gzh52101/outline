@@ -19,9 +19,9 @@
           "scene": null
         },
         {
-          "name": "list",
-          "pathName": "pages/list/list",
-          "query": "type=addtime",
+          "name": "pages/media/media",
+          "pathName": "pages/media/media",
+          "query": "",
           "scene": null
         },
         {

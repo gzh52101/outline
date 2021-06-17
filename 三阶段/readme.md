@@ -3143,6 +3143,9 @@
             * 不能用在block上，一般用户频繁的显示隐藏操作
 * 发起ajax请求
     > wx.request()
+    * ajax请求封装
+        * app.js
+        * ESModule
 
 * 路由跳转
     > tabbar页面与普通页面
@@ -3150,7 +3153,7 @@
         > `<navigator/>`
             * open-type
     * 接口跳转
-        * wx.navigateTo
+        * wx.navigateTo()
         * 传参：url参数
         * 在跳转的页面中接收参数
 
@@ -3167,4 +3170,29 @@
         * onShow
         * onReady
         * onHide
+        * onUnload
     * 组件生命周期
+* 事件监听函数
+* 常用api
+
+## day8-3
+
+### 知识点
+* 开发接口
+    * 步骤
+        1. 获取授权
+        2. 获取开发接口数据
+    * 获取用户信息
+        ```js
+            // 自动获取授权
+            wx.authorize()
+
+            // 手动获取：让用户手动点击按钮实现获取
+            <button open-type="getUserInfo" bindgetuserinfo></button>
+
+            // 接口直接获取
+            wx.getUserInfo();
+            wx.getUserProfile();
+
+            <open-data>
+        ```

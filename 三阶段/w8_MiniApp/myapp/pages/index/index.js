@@ -26,6 +26,9 @@ Page({
 
     },1000)
   },
+  getUser(res){
+    console.log('res=',res);
+  },
   onLoad() {
     if (wx.getUserProfile) {
       this.setData({
@@ -38,6 +41,51 @@ Page({
       sort:'hot'
     }).then((data)=>{
       console.log('data=',data);
+    })
+
+    // 进入页面获取用于信息
+    // wx.getUserProfile({
+    //   desc: '需要获取您的微信信息，用于展示',
+    //   success(res){
+    //     console.log('userInfo',res)
+    //   },
+
+    //   fail(err){
+    //     console.log('fail',err)
+    //   }
+    // })
+
+    // 获取用户已授权信息
+    wx.getSetting({
+      success(res) {
+        console.log('authSetting=',res)
+        if (!res.authSetting['scope.userInfo']) {
+          wx.authorize({
+            scope: 'scope.userInfo',
+            success () {
+              console.log('用户允许授权')
+              wx.getUserInfo({
+                success(res){
+                  console.log('用户信息=',res);
+                }
+              })
+            }
+          })
+        }else{
+          // wx.getUserInfo({
+          //   success(res){
+          //     console.log('用户信息=',res);
+          //   }
+          // })
+          console.log('true')
+          wx.getUserInfo({
+            desc: 'desc',
+            success(res){
+              console.log('用户信息=',res);
+            }
+          })
+        }
+      }
     })
   },
   getUserProfile(e) {

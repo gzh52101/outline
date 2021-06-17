@@ -5,6 +5,7 @@
     "pages/add/add",
     "pages/list/list",
     "pages/iq/iq",
+    "pages/media/media",
     "pages/mine/mine"
   ],
   "window": {
