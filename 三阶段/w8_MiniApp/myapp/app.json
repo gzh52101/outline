@@ -16,6 +16,7 @@
     "backgroundColor":"#ccc"
   },
   "tabBar":{
+    "custom":true,
     "color":"#fff",
     "selectedColor":"#ff0",
     "backgroundColor":"#58bc58",
@@ -41,5 +42,12 @@
     "scope.userLocation": {
       "desc": "需要获取你的位置信息"
     }
+  },
+  "usingComponents": {
+    "mylist":"/components/list/list",
+    "mp-icon": "weui-miniprogram/icon/icon"
+  },
+  "useExtendedLib":{
+    "weui": true
   }
 }

@@ -1,0 +1,5 @@
+<view class="tabbar">
+    <text>首页</text>
+    <text>发现</text>
+    <text>我的</text>
+</view>

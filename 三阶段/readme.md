@@ -3196,3 +3196,34 @@
 
             <open-data>
         ```
+* 内置组件
+    * audio
+    * camera
+    * map
+        * 定位：wx.getLocation()
+            > navigator.geolocation
+                * getCurrentPosition()
+                * watchPosition()
+
+
+
+## day8-4
+
+### 知识点
+* 自定义组件
+    * 定义： `Component(options)`
+    * 使用: `usingComponents`
+        * 全局组件：在app.json中定义usingComponents
+        * 局部组件：在页面中定义usingComponents
+* 自定义tabbar
+    1. app.json中tabbar配置custom为true
+
+* 第三方组件库
+    * weui-miniprogram
+    * vant-weapp
+* 在小程序中使用npm模块
+    1. 生成package.json文件：`npm init`
+    2. 安装模块： `npm inistall`
+        > npm模块安装后不能直接使用，需要进行编译
+    3. 构建小程序模块
+        > 开发者工具->工具->构建npm

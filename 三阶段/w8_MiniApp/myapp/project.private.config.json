@@ -29,6 +29,12 @@
           "pathName": "pages/iq/iq",
           "query": "id=5d7be4fbc994e53fe0f40f41",
           "scene": null
+        },
+        {
+          "name": "pages/mine/mine",
+          "pathName": "pages/mine/mine",
+          "query": "",
+          "scene": null
         }
       ]
     }

@@ -1,0 +1,6 @@
+/* custom-tab-bar/index.wxss */
+.tabbar{
+    padding:10rpx;
+    display: flex;
+}
+.tabbar text{flex:1;display: inline-block;padding:20rpx;}

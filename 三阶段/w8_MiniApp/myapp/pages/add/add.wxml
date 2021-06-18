@@ -25,3 +25,5 @@
     <button bind:tap="changeCount">-</button>
 </block>
 <!--<button wx:else>+</button>-->
+
+<datalist list="{{['laoxie','tiantian','jingjing']}}"/>

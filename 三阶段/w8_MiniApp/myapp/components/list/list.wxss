@@ -1,0 +1,2 @@
+/* components/list/list.wxss */
+.title{font-weight: bold;text-decoration: underline;margin-bottom:10px;color:#58bc58;}

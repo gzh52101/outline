@@ -4,3 +4,5 @@
 
   <button type="primary" bind:tap="gotoHome">首页</button>
 </view>
+
+<mylist list="{{['面试题1','面试题2','面试题3']}}"/>

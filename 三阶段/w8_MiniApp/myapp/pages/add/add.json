@@ -1,5 +1,7 @@
 {
-  "usingComponents": {},
+  "usingComponents": {
+    "datalist":"/components/list/list"
+  },
   "navigationBarBackgroundColor":"#f60",
   "navigationBarTitleText": "添加面试题",
   "backgroundColor":"#f00",
