@@ -2,4 +2,5 @@
     <text>首页</text>
     <text>发现</text>
     <text>我的</text>
+    <text>{{sum(10,20)}}</text>
 </view>

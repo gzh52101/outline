@@ -1,0 +1,18 @@
+<view class="pageTitle">页面标题</view>
+<template name="list">
+  <view class="list">
+    <view class="tittle">{{title}}</view>
+    <view class="data" wx:for="{{datalist}}">
+      {{item}}
+    </view>
+  </view>
+</template>
+<template name="detail">
+  <view class="detail">
+    详情
+  </view>
+</template>
+<wxs module="tools">
+
+</wxs>
+<view>外面的世界</view>

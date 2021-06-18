@@ -1,0 +1,20 @@
+// wxs不能与js互通
+// const request = require('../utils/request');
+// console.log('rq=>',request);
+
+// 引人其他wxs文件
+var format = require('./format.wxs')
+
+function sum(a,b){
+    return a+b;
+}
+function formatDate(date){
+    console.log(Date.now(),Date.parse('2021-6-18'))
+    var d = date ? getDate(date) : getDate();
+    var year = d.getFullYear();
+    var month = d.getMonth()+1;
+    var da = d.getDate();
+    return year + '-' + month + '-' + da;
+}
+module.exports.sum = sum;
+module.exports.formatDate = formatDate;

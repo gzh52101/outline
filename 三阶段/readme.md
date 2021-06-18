@@ -3212,18 +3212,65 @@
 ### 知识点
 * 自定义组件
     * 定义： `Component(options)`
+        * js
+        * json
+        * wxml
+        * wxss
     * 使用: `usingComponents`
         * 全局组件：在app.json中定义usingComponents
         * 局部组件：在页面中定义usingComponents
 * 自定义tabbar
     1. app.json中tabbar配置custom为true
+    2. 在根目录下创建`custom-tab-bar`目录,并创建新`index`组件
 
 * 第三方组件库
-    * weui-miniprogram
-    * vant-weapp
+    * 常用组件
+        * weui-miniprogram
+        * vant-weapp
+    * 使用步骤
+        1. 下载安装： npm i 
+        2. 构建: 开发者工具->工具->构建npm
+        3. 配置: json文件中的usingComponents
 * 在小程序中使用npm模块
     1. 生成package.json文件：`npm init`
     2. 安装模块： `npm inistall`
         > npm模块安装后不能直接使用，需要进行编译
     3. 构建小程序模块
         > 开发者工具->工具->构建npm
+
+* 模块化
+    * 为什么要模块化
+        * 复用
+        * 分工
+        * 维护
+    * 规范
+        * commonJS      NodeJS
+        * ESModule      ES6
+        * AMD           require.js
+        * CMD           sea.js
+    * 微信小程序中的模块化
+        * js 模块化：支持commonJS与ESModule
+            * commonJS
+                * 导出：module.exports
+                * 引入: require()
+            * ESModule
+                * 导出: export
+                * 引入: import
+        * wxs 模块化
+* wxml模板
+    * 定义模板:`<template>`
+        ```js
+            <template name="list">
+                // 这里放置复用的wxml结构代码
+            </template>
+        ```
+    * 使用模板
+* 云开发
+    * 开通
+    * 创建环境
+        * 测试环境
+        * 正式环境
+    * 核心
+        * 数据库
+        * 存储空间
+        * 云函数

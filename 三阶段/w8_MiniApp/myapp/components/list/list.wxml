@@ -2,3 +2,4 @@
     <view class="title">列表</view>
     <view wx:for="{{list}}" wx:key="*this" class="list-item">{{item}}</view>
 </view>
+<view>{{count}}</view>

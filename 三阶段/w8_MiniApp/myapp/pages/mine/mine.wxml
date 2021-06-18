@@ -1,4 +1,29 @@
-<!--pages/mine/mine.wxml-->
-<text>pages/mine/mine.wxml</text>
+
+<import src="/app.wxml" />
+
+<text>Mine</text>
+
 <mp-icon type="field" icon="add" color="black" size="{{25}}"></mp-icon>
 <mp-icon icon="add" color="black" size="{{25}}"></mp-icon>
+
+<view>sum:{{tools.sum(10,20)}}</view>
+<view>date:{{t.formatDate()}}</view>
+<button type="primary" bind:tap="handleTap">点我</button>
+<button type="primary" bind:tap="{{tools.clickMe}}">点我</button>
+
+<wxs module="tools">
+    function sum(a,b){
+        return a+b;
+    }
+    function clickMe(){
+        console.log('clickMe')
+    }
+    module.exports.sum = sum;
+    module.exports.clickMe = clickMe;
+</wxs>
+<wxs src="/wxs/tools.wxs" module="t"></wxs>
+
+<template is="list" data="{{title:'标题2',datalist:['html','css','js']}}"></template>
+<template is="list" data="{{title:'标题',datalist:['laoxie','tiantian','jingjing']}}"></template>
+<template is="detail"></template>
+<include src="/app.wxml"/>

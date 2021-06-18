@@ -1,0 +1,1 @@
+"C:\Program Files (x86)\Tencent\微信web开发者工具\cli.bat" cloud functions deploy --e qf-52690b --n quickstartFunctions --r --project "F:\mydoc\kphone\class\gz_h5_2101\三阶段\w8_MiniApp\mycloud" && "C:\Program Files (x86)\Tencent\微信web开发者工具\cli.bat" cloud functions deploy --e test-0tcfp --n quickstartFunctions --r --project "F:\mydoc\kphone\class\gz_h5_2101\三阶段\w8_MiniApp\mycloud"

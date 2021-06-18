@@ -1,0 +1,7 @@
+function formatParams(){
+
+}
+module.exports = {
+    type:'format',
+    formatParams:formatParams,
+}

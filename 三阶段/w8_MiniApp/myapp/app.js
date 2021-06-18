@@ -1,4 +1,10 @@
-// app.js
+// 引入模块中的default属性，等效于require('./utils/request').default
+// import request from './utils/request';
+
+// 引入整个模块，等效于import * as request from './utils/request'
+const request = require( './utils/request');
+console.log('request=',request)
+
 App({
   onLaunch() {console.log('app.onLaunch')
     // 展示本地存储能力
