@@ -1,0 +1,27 @@
+// 这里的代码等效于微信小程序中的app.json
+{
+	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		{
+			"path": "pages/index/index",
+			"style": {
+				// 这里的代码等效于：index.json
+				"navigationBarTitleText": "首页",
+				"navigationBarBackgroundColor": "#58bc58"
+			}
+		},
+		{
+			"path": "pages/mine/mine",
+			"style": {
+				// 这里的代码等效于：index.json
+				"navigationBarTitleText": "我的",
+				"navigationBarBackgroundColor": "#f90"
+			}
+		}
+	],
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "uni-app",
+		"navigationBarBackgroundColor": "#F8F8F8",
+		"backgroundColor": "#F8F8F8"
+	}
+}
