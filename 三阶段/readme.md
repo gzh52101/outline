@@ -3292,3 +3292,18 @@
         * 了解npm script
         * mobx
             > mobx-react桥接工具（等效于react-redux）
+
+## day9-3
+
+### 知识点
+* webApp: html+css+js
+    > 通过浏览器访问
+* NativeApp
+    * ReactNative
+    * java
+    * OC/swift
+* HybridApp
+    >在native中利用webview中嵌入H5页面形成半Native半web开发模式
+
+* DCloud平台
+    * HTML5+App给我们提供了40w+的接口，通过window.plus对象给我们使用
