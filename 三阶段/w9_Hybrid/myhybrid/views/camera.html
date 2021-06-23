@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>摄像头操作</title>
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<link rel="stylesheet" href="../css/bootstrap.css">
+	</head>
+	<body>
+		<h1>摄像头操作</h1>
+		<div>
+			<button class="btn btn-outline-primary btnBack">返回</button>
+		</div>
+		<button class="btn btn-success btnPZ">拍照</button>
+		<button class="btn btn-warning btnLX">录像</button>
+		<div class="preview p-3">
+		
+		</div>
+		
+		<script type="text/javascript">
+			const btnBack = document.querySelector('.btnBack')
+			const btnPZ = document.querySelector('.btnPZ')
+			const btnLX = document.querySelector('.btnLX')
+			const preview = document.querySelector('.preview')
+			document.addEventListener('plusready', function() {
+				// 关闭页面
+				btnBack.onclick = function(){
+					const current = plus.webview.currentWebview();
+					plus.webview.close(current)
+				}
+				//console.log("所有plus api都应该在此事件发生后调用，否则会出现plus is undefined。")
+				// 获取摄像头
+				const cmr = plus.camera.getCamera(2)
+		
+				btnPZ.onclick = function() {
+					// 拍照
+					cmr.captureImage((path) => {
+						console.log(path);
+						// 存入相册
+						plus.gallery.save(path, () => {
+							// 提示消息
+							plus.nativeUI.toast('图片成功保存到相册');
+						})
+		
+						// 转换本地路径为平台路径
+						const realPath = plus.io.convertLocalFileSystemURL(path);
+						console.log(realPath)
+						
+						const img = document.createElement('img')
+						img.src = realPath;
+						preview.appendChild(img);
+					})
+		
+				}
+		
+				// 点击查看图片
+				preview.onclick = function(e) {
+					const imgs = Array.prototype.map.call(preview.children, img => img.src)
+		
+					if (e.target.tagName === 'IMG') {
+						const currentIndex = Array.prototype.findIndex.call(preview.children, img => img === e.target)
+						// 预览图片
+						plus.nativeUI.previewImage(imgs, {
+							current: currentIndex
+						});
+					}
+				}
+				
+				// 录像
+				btnLX.onclick = function(){
+					cmr.startVideoCapture((path)=>{
+						console.log(path);
+						// 存入相册
+						plus.gallery.save(path, () => {
+							// 提示消息
+							plus.nativeUI.toast('图片成功保存到相册');
+						})
+						
+						// 转换本地路径为平台路径
+						const realPath = plus.io.convertLocalFileSystemURL(path);
+						console.log(realPath)
+						
+						const video = document.createElement('video')
+						video.src = realPath;
+						video.controls = true;
+						video.autoplay = true;
+						
+						preview.appendChild(video);
+					})
+				}
+				
+			});
+		</script>
+	</body>
+</html>
