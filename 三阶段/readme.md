@@ -3325,3 +3325,60 @@
         * 缺点：需要把代码传到第三方服务器进行打包
 
     * 打包前配置
+
+## day 9-4
+
+### 知识点
+* 编译阶段
+* 运行阶段
+
+
+```js
+    let num = 10;
+
+    num = true;
+
+    if(typeof num === 'number'){
+        num.toFixed(2)
+    }
+
+    let box = document.querySelector('.box');// null
+    if(box){
+        box.onclick = function(){}
+
+    }
+```
+* 强类型与弱类型
+    > 针对类型校验来说，强类型在编译阶段校验，弱类型在运行阶段校验，javascript为弱类型语言
+* 动态类型与静态类型
+    > 针对与变量类型来说，javascript为动态类型语言
+    ```js
+        var username = 'laoxie'
+        username = 100;
+    ```
+* 类型校验
+    > 给变量声明类型，声明后，该变量只能存放这个类型的数据
+
+    ```js
+        // js
+        let username = 'laoxie'
+        username = 100;
+
+        // ts
+        let username:string = 'laoxie'
+        username = 100;
+    ```
+    * 类型
+        * string
+        * number
+        * boolean
+        * null
+        * undefined
+        * symbol
+        * enum
+        * void
+        * never
+        * any：任意类型，相当前关闭ts的类型检查（等效于js变量）
+        * 字面量
+* 类型推论
+    > 如声明变量时没有声明类型，则根据值推断数据类型
