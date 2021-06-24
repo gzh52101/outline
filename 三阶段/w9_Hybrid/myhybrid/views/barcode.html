@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>扫码操作</title>
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<link rel="stylesheet" href="../css/bootstrap.css">
+		<style>
+			.preview{
+				word-wrap: break-word;
+			}
+		</style>
+	</head>
+	<body>
+		<h1>扫码操作</h1>
+		<div>
+			<button class="btn btn-outline-primary btnBack">返回</button>
+		</div>
+		<button class="btn btn-success btnScan">扫码</button>
+		<button class="btn btn-warning btnSB">识别图片条码</button>
+		<div class="preview p-3">
+
+		</div>
+
+		<script type="text/javascript">
+			const btnBack = document.querySelector('.btnBack')
+			const btnScan = document.querySelector('.btnScan')
+			const btnSB = document.querySelector('.btnSB')
+			const preview = document.querySelector('.preview')
+			document.addEventListener('plusready', function() {
+				// 关闭页面
+				btnBack.onclick = function() {
+					const current = plus.webview.currentWebview();
+					plus.webview.close(current)
+				}
+				let barcode = null;
+
+				btnScan.onclick = function() {
+					console.log('click3')
+					const {
+						QR,
+						EAN8,
+						EAN13
+					} = plus.barcode
+					// 创建扫码控件
+					if(!barcode){
+						barcode = plus.barcode.create('barcode', [QR, EAN8, EAN13], {
+							top: '0',
+							left: '0px',
+							width: '100%',
+							height: '100%',
+							position: 'static'
+						});
+						
+						barcode.onmarked = function(type, result) {
+							console.log('marked')
+							// type: 条码类型
+							// result: 扫码结果
+							console.log(result);
+							const item = document.createElement('div');
+							item.className = 'item'
+							item.innerHTML = `
+							<h4>${type}</h4>
+							<div>${result}</div>
+							`
+							preview.appendChild(item);
+							
+							
+							barcode.close();
+							barcode = null;
+						}
+						plus.webview.currentWebview().append(barcode);
+					}
+					barcode.start();
+				}
+
+				// 点击查看图片
+				preview.onclick = function(e) {
+
+				}
+
+				// 识别图片中的条码
+				btnSB.onclick = function() {
+					plus.gallery.pick((path)=>{
+						plus.barcode.scan(path, (type, code, file, charse)=>{
+							const item = document.createElement('div');
+							item.className = 'item'
+							item.innerHTML = `
+							<h4>${type}</h4>
+							<div>${code}</div>
+							`
+							preview.appendChild(item);
+						},(err)=>{
+							plus.nativeUI.toast(`无法识别的条码：${err.message}`)
+						});
+						
+					});
+				}
+
+			});
+		</script>
+	</body>
+</html>
