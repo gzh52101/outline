@@ -3382,3 +3382,30 @@
         * 字面量
 * 类型推论
     > 如声明变量时没有声明类型，则根据值推断数据类型
+    ```js
+        let a; // any
+        function add(a,b){
+
+        }
+    ```
+* 函数类型注解
+    * 声明式
+    * 赋值式
+* 数组类型注解
+    * 元素类型[]
+    * Array<元素类型>
+* 元组
+    > 明确指定数量与类型的数组，函数返回值
+    ```js
+        function useState(initData:any):[{},()=>void]{
+            return [state,changeUser]
+        }
+    ```
+* 对象类型注解
+    * interface
+
+## day9-5
+
+### 知识点
+* typescript是js扩展
+    * typescript = javascript + 类型系统 + 新特性
