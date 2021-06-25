@@ -1,3 +1,4 @@
+"use strict";
 /**
  * 泛型编程
  */
@@ -42,8 +43,16 @@ class Person {
 const p = new Person('laoxie');
 /**
  * 类型断言
+ * 明确告诉TS编译器变量的类型，格式：xxx as 类型
  */
 let arr = [10, 20, 30];
 // 获取第一个大于10的数字
-let num:number = arr.find(item => item > 10);
+// let num = arr.find(item=>item>10); // number|undefined
+function getNumber(n) {
+    if (n > 5) {
+        return n + n;
+    }
+}
+var num = getNumber(15);
 let res = num + 5;
+//# sourceMappingURL=main.js.map

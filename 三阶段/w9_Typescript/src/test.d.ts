@@ -1,0 +1,11 @@
+declare let username: string;
+declare let num: number;
+declare let a: any;
+declare function show(visibility: boolean): void;
+declare let getData: (url: string, page: number, size: number) => void;
+declare let qty: 10;
+declare let index: number | string;
+declare let gender: '男' | '女' | '保密';
+declare type Gender = '男' | '女' | '保密';
+declare let xingbie: Gender;
+declare let xb: Gender;
